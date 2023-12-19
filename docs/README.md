@@ -12,5 +12,5 @@ Our clients are primarily in the healthcare sector, and our team has experience 
 
 ## Contact
 
-Email us at [contact [at] vaiyu.dev](mailto:contact@vaiyu.dev) for us to help you with your AI needs.
+Email us at [support [at] vaiyu.solutions](mailto:support@vaiyu.solutions) for us to help you with your AI needs.
 
