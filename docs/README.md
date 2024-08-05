@@ -14,3 +14,6 @@ Our clients are primarily in the healthcare sector, and our team has experience 
 
 Email us at [support [at] vaiyu.solutions](mailto:support@vaiyu.solutions) for us to help you with your AI needs.
 
+## Socials
+
+- LinkedIn: https://linkedin.com/company/vaiyu-solutions
