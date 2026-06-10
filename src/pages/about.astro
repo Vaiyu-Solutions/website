@@ -1,0 +1,141 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CTABand from '../components/CTABand.astro';
+import WindField from '../components/WindField.astro';
+import { SITE } from '../data/site';
+
+const VALUES = [
+  {
+    num: '01',
+    title: 'Rigor over hype',
+    desc: 'Every number on this site carries a citation. Client work gets the same discipline: measured, validated, reproducible.',
+  },
+  {
+    num: '02',
+    title: 'End-to-end ownership',
+    desc: 'We don’t hand off at the slide deck. Architecture, data, training, deployment, monitoring — one accountable team.',
+  },
+  {
+    num: '03',
+    title: 'Knowledge transfer',
+    desc: 'Engagements end with your team stronger. Documentation, training, and handover are deliverables, not afterthoughts.',
+  },
+  {
+    num: '04',
+    title: 'Built for regulated reality',
+    desc: 'Healthcare taught us to build for auditors, ethics boards, and six-year lifecycles. Every industry deserves that discipline.',
+  },
+];
+---
+
+<Base
+  title="About"
+  description="An interdisciplinary team of five engineers and scientists, founded 2023 in USA, led by a Ph.D. (summa cum laude, TU Munich) with 11+ years operationalizing AI."
+>
+  <!-- Page hero -->
+  <section class="relative overflow-hidden">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto max-w-6xl px-5 pb-14 pt-20 md:pt-24">
+      <Eyebrow label="About" class="reveal" />
+      <h1 class="h-display mt-5 max-w-3xl text-4xl md:text-6xl reveal reveal-2">
+        <em>Vaiyu</em> — <span lang="sa">वायु</span> — is Sanskrit for <em>wind</em>.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
+        Unseen, everywhere, load-bearing. That’s how we think about AI in serious organizations: not
+        the demo on stage, but the infrastructure underneath it — quiet, reliable, doing its work.
+        Vaiyu Solutions was founded to build exactly that.
+      </p>
+    </div>
+  </section>
+
+  <!-- Who we are -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto grid max-w-6xl gap-x-12 gap-y-8 px-5 py-16 md:py-20 lg:grid-cols-12">
+      <span class="ghost-num" aria-hidden="true">01</span>
+      <div class="lg:col-span-5">
+        <Eyebrow num="01" label="Who we are" />
+        <h2 class="h-display mt-4 text-3xl md:text-4xl">Small by design.</h2>
+      </div>
+      <div class="space-y-5 leading-relaxed text-ink-soft lg:col-span-7">
+        <p>
+          Founded in October 2023 and based in {SITE.location}, Vaiyu Solutions is an
+          interdisciplinary team of five engineers and scientists: machine learning, distributed
+          systems, data engineering, and domain specialists in medical imaging and regulated
+          deployment.
+        </p>
+        <p>
+          Senior people, end-to-end accountability, no bench. We work remote-first with clients
+          worldwide, and we stay small on purpose — the people who scope your problem are the people
+          who ship it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="border-t border-ink/10 bg-cream">
+    <div class="mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="02" label="How we work" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">Four commitments.</h2>
+      <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+        {
+          VALUES.map((v) => (
+            <div class="border-t-2 border-ink/80 pt-5">
+              <p class="font-mono text-[11px] text-slate">{v.num}</p>
+              <h3 class="font-display mt-3 text-2xl">{v.title}</h3>
+              <p class="mt-3 leading-relaxed text-ink-soft">{v.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto grid max-w-6xl gap-x-12 gap-y-10 px-5 py-16 md:py-20 lg:grid-cols-12">
+      <span class="ghost-num" aria-hidden="true">03</span>
+      <div class="lg:col-span-4">
+        <img
+          src="/img/sarthak-pati.jpg"
+          alt="Sarthak Pati, Founder and CEO of Vaiyu Solutions"
+          class="aspect-square w-full max-w-sm border border-ink/15 object-cover"
+          width="800"
+          height="800"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="lg:col-span-8">
+        <Eyebrow num="03" label="Leadership" />
+        <h2 class="h-display mt-4 text-3xl md:text-4xl">Sarthak Pati</h2>
+        <p class="label-mono mt-3 text-slate">Founder & CEO</p>
+        <div class="mt-6 max-w-2xl space-y-5 leading-relaxed text-ink-soft">
+          <p>
+            Sarthak holds a Ph.D. in Computer Science from the Technical University of Munich
+            (<em>summa cum laude</em>) and has spent 11+ years operationalizing AI in clinical
+            environments — eight of them at the University of Pennsylvania building imaging AI used
+            across hospital networks, then as software architect at Indiana University. Along the
+            way he has led more than $9M in NIH/NCI-funded R&D.
+          </p>
+          <p>
+            He serves as Vice Chair for Algorithmic Development of the
+            <a href={SITE.mlcommons} class="link-ink" rel="noopener">MLCommons Medical Working Group</a>,
+            created GaNDLF, co-led CaPTk, FeTS, and MedPerf, and has taught federated learning at
+            MICCAI, AAAI, ISBI, and RSNA. His research appears in Nature Communications and Nature
+            Machine Intelligence and has been covered by The Wall Street Journal.
+          </p>
+        </div>
+        <ul class="mt-8 flex flex-wrap gap-x-7 gap-y-3">
+          <li><a href={SITE.scholar} rel="noopener" class="link-ink label-mono text-ink-soft">Google Scholar ↗</a></li>
+          <li><a href="https://github.com/sarthakpati" rel="noopener" class="link-ink label-mono text-ink-soft">GitHub ↗</a></li>
+          <li><a href="https://www.linkedin.com/in/sarthakpati/" rel="noopener" class="link-ink label-mono text-ink-soft">LinkedIn ↗</a></li>
+          <li><a href="https://sarthakpati.github.io" rel="noopener" class="link-ink label-mono text-ink-soft">Personal site ↗</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <CTABand heading="Put the team to work." />
+</Base>

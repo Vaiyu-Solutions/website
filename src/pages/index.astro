@@ -1,0 +1,233 @@
+---
+import Base from '../layouts/Base.astro';
+import WindField from '../components/WindField.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CTABand from '../components/CTABand.astro';
+import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/site';
+---
+
+<Base
+  description="Vaiyu Solutions is an AI operationalization consultancy for regulated industries — healthcare & pharma, financial services, energy, manufacturing, and automotive. From architecture to production."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-16 pt-20 md:pb-24 md:pt-28 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <Eyebrow label="AI operationalization consultancy" class="reveal" />
+        <h1 class="h-display mt-5 text-[2.6rem] md:text-6xl reveal reveal-2">
+          AI that ships — in industries where it <em>has to be right</em>.
+        </h1>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
+          Vaiyu Solutions takes AI from architecture to production — data, training, deployment,
+          monitoring — for organizations where a wrong answer costs more than a headline.
+        </p>
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 reveal reveal-4">
+          <a
+            href="/contact/"
+            class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
+          >
+            <span class="label-mono">Start a discovery sprint</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="/services/" class="link-ink label-mono text-ink-soft">How we work</a>
+        </div>
+      </div>
+      <aside class="self-center lg:col-span-5 reveal reveal-5">
+        <div class="border border-ink/15 bg-paper/80 p-7">
+          <p class="label-mono text-slate">Where we work</p>
+          <ul class="mt-4 divide-y divide-ink/10">
+            {
+              INDUSTRIES.map((i) => (
+                <li class="flex items-baseline justify-between gap-4 py-3">
+                  <span class="font-display text-xl">{i.name}</span>
+                  <span class="hidden font-mono text-[11px] text-slate sm:block">{i.tag}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Proof bar -->
+  <section aria-label="Track record" class="border-y border-ink/10 bg-cream">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-5 py-12 md:grid-cols-5">
+      {
+        STATS.map((s) => (
+          <div>
+            <p class="font-display text-4xl leading-none md:text-[2.6rem]">
+              {s.prefix && <span class="mr-1 align-middle font-mono text-[11px] uppercase tracking-widest text-slate">{s.prefix}</span>}
+              {s.value}
+              {s.fn && (
+                <sup class="fn">
+                  <a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>{s.fn}</a>
+                </sup>
+              )}
+            </p>
+            <p class="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-slate">
+              {s.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="relative mx-auto max-w-6xl px-5 py-20 md:py-28">
+    <span class="ghost-num" aria-hidden="true">01</span>
+    <Eyebrow num="01" label="What we do" />
+    <h2 class="h-display mt-4 max-w-2xl text-4xl md:text-5xl">
+      Six ways in — one standard of delivery.
+    </h2>
+    <div class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        SERVICES.map((s) => (
+          <a
+            href={`/services/#${s.slug}`}
+            class="group border-t-2 border-ink/80 pt-5 transition-colors hover:border-saffron"
+          >
+            <p class="font-mono text-[11px] text-slate">{s.num}</p>
+            <h3 class="font-display mt-3 text-2xl transition-colors group-hover:text-saffron">
+              {s.title}
+            </h3>
+            <p class="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">{s.tag}</p>
+            <p class="label-mono mt-4 text-saffron opacity-0 transition-opacity group-hover:opacity-100">
+              Detail →
+            </p>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Credibility band -->
+  <section class="relative overflow-hidden bg-ink text-paper">
+    <WindField class="text-paper" />
+    <div class="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 md:py-24 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <Eyebrow num="02" label="Why teams trust us" tone="light" />
+        <h2 class="h-display mt-4 text-4xl md:text-5xl">
+          Published, cited, covered — <em>then</em> hired.
+        </h2>
+        <p class="mt-6 max-w-xl leading-relaxed text-paper/75">
+          Our team’s research has appeared in <strong class="text-paper">Nature Communications</strong>,
+          <strong class="text-paper">Nature Machine Intelligence</strong>,
+          <strong class="text-paper">The Lancet Oncology</strong>, and
+          <strong class="text-paper">Radiology</strong> — and been covered by
+          <strong class="text-paper">The Wall Street Journal</strong>. We hold the Vice Chair for
+          Algorithmic Development of the
+          <a href={SITE.mlcommons} class="link-paper" rel="noopener">MLCommons Medical Working Group</a>,
+          helping set the standards medical AI is measured against.
+        </p>
+      </div>
+      <div class="self-end lg:col-span-5">
+        <ul class="divide-y divide-paper/10 border-y border-paper/10">
+          <li class="flex items-baseline justify-between gap-6 py-4">
+            <span class="label-mono shrink-0 text-paper/50">Editor’s Choice</span>
+            <span class="text-right font-display text-lg">Communications Engineering (Nature)</span>
+          </li>
+          <li class="flex items-baseline justify-between gap-6 py-4">
+            <span class="label-mono shrink-0 text-paper/50">Top 25, 2022</span>
+            <span class="text-right font-display text-lg">Nature Communications, Health Sciences</span>
+          </li>
+          <li class="flex items-baseline justify-between gap-6 py-4">
+            <span class="label-mono shrink-0 text-paper/50">1st place, 2015</span>
+            <span class="text-right font-display text-lg">Brain Tumor Segmentation, MICCAI</span>
+          </li>
+          <li class="flex items-baseline justify-between gap-6 py-4">
+            <span class="label-mono shrink-0 text-paper/50">Press</span>
+            <span class="text-right font-display text-lg">The Wall Street Journal</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Open source -->
+  <section class="relative mx-auto max-w-6xl px-5 py-20 md:py-28">
+    <span class="ghost-num" aria-hidden="true">02</span>
+    <Eyebrow num="03" label="Built in the open" />
+    <h2 class="h-display mt-4 max-w-2xl text-4xl md:text-5xl">
+      Our frameworks run in research hospitals worldwide.
+    </h2>
+    <ul class="mt-14 divide-y divide-ink/10 border-y border-ink/10">
+      {
+        PROJECTS.map((p) => (
+          <li>
+            <a
+              href={p.href}
+              rel="noopener"
+              class="group grid gap-x-8 gap-y-2 py-6 transition-colors md:grid-cols-[9rem_1fr_auto]"
+            >
+              <span class="font-display text-xl transition-colors group-hover:text-saffron">
+                {p.name}
+              </span>
+              <span class="leading-relaxed text-ink-soft">
+                {p.desc}
+                <span class="mt-1.5 block font-mono text-[11px] uppercase tracking-[0.14em] text-slate">
+                  {p.meta}
+                </span>
+              </span>
+              <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
+                GitHub ↗
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-6 font-mono text-xs text-slate">
+      Plus 40+ conda-forge packages maintained for reproducible scientific computing.
+    </p>
+  </section>
+
+  <!-- Engagement models -->
+  <section class="border-t border-ink/10">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-24">
+      <Eyebrow num="04" label="How we engage" />
+      <h2 class="h-display mt-4 max-w-2xl text-4xl md:text-5xl">Four ways to bring us in.</h2>
+      <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          MODELS.map((m) => (
+            <div class="border-t-2 border-ink/80 pt-5">
+              <p class="font-mono text-[11px] text-slate">{m.num}</p>
+              <h3 class="font-display mt-3 text-xl">{m.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink-soft">{m.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTABand />
+
+  <!-- Footnotes -->
+  <section aria-label="Sources and attribution" class="mx-auto max-w-6xl px-5 py-12">
+    <p class="label-mono text-slate">Sources & attribution</p>
+    <ol class="mt-4 max-w-3xl space-y-2 font-mono text-xs leading-relaxed text-slate">
+      <li id="fn-1">
+        1 — Led by our founder across NIH/NCI-funded programs at the University of Pennsylvania and
+        Indiana University.
+      </li>
+      <li id="fn-2">
+        2 — Vaiyu client engagements: pre-training optimization with model accuracy maintained or
+        improved.
+      </li>
+      <li id="fn-3">
+        3 — Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
+        Nature Communications 13 (2022).
+        <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">
+          doi:10.1038/s41467-022-33407-5</a
+        > — 71 sites across 6 continents, the largest real-world federated learning study to date.
+      </li>
+      <li id="fn-4">
+        4 — Founder track record at Indiana University: inference latency reduced by up to 70%, compute
+        requirements by 10–50%, in clinical research environments.
+      </li>
+    </ol>
+  </section>
+</Base>

@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #faf7f2;
+  --color-cream: #f1ebdf;
+  --color-ink: #191c22;
+  --color-ink-soft: #353c49;
+  --color-slate: #4f5d6d;
+  --color-saffron: #b25415;
+  --color-saffron-bright: #e89b3c;
+
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+  --font-sans: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-saffron-bright) 45%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-saffron);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+}
+
+@layer components {
+  /* Editorial display headings — Fraunces with tightened metrics */
+  .h-display {
+    font-family: var(--font-display);
+    font-weight: 560;
+    letter-spacing: -0.018em;
+    line-height: 1.06;
+    text-wrap: balance;
+  }
+  .h-display em {
+    font-style: italic;
+    font-weight: 470;
+  }
+
+  /* Mono micro-labels (eyebrows, nav, stat captions) */
+  .label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* Quiet editorial links */
+  .link-ink {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--color-ink) 25%, transparent);
+    text-underline-offset: 0.24em;
+    transition: color 150ms ease, text-decoration-color 150ms ease;
+  }
+  .link-ink:hover {
+    color: var(--color-saffron);
+    text-decoration-color: var(--color-saffron);
+  }
+  .link-paper {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--color-paper) 30%, transparent);
+    text-underline-offset: 0.24em;
+    transition: color 150ms ease, text-decoration-color 150ms ease;
+  }
+  .link-paper:hover {
+    color: var(--color-saffron-bright);
+    text-decoration-color: var(--color-saffron-bright);
+  }
+
+  /* Oversized ghost numerals behind section headings */
+  .ghost-num {
+    position: absolute;
+    top: -1.5rem;
+    right: 0;
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 12vw, 9.5rem);
+    line-height: 1;
+    font-weight: 560;
+    color: color-mix(in oklab, var(--color-ink) 6%, transparent);
+    user-select: none;
+    pointer-events: none;
+  }
+}
+
+/* Footnote superscripts — claims carry citations */
+sup.fn {
+  font-family: var(--font-mono);
+  font-size: 0.55em;
+  color: var(--color-saffron);
+  margin-left: 0.15em;
+}
+sup.fn a {
+  text-decoration: none;
+}
+sup.fn a:hover {
+  text-decoration: underline;
+}
+
+/* Page-load reveal — staggered drift, like air settling */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal {
+  animation: rise 0.8s cubic-bezier(0.22, 0.61, 0.21, 1) both;
+}
+.reveal-2 {
+  animation-delay: 0.1s;
+}
+.reveal-3 {
+  animation-delay: 0.2s;
+}
+.reveal-4 {
+  animation-delay: 0.32s;
+}
+.reveal-5 {
+  animation-delay: 0.44s;
+}
+
+/* Wind streamline drift (decorative SVG) */
+@keyframes windDrift {
+  to {
+    stroke-dashoffset: -640;
+  }
+}
+.windline {
+  stroke-dasharray: 3 11;
+  animation: windDrift 48s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-2,
+  .reveal-3,
+  .reveal-4,
+  .reveal-5,
+  .windline {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

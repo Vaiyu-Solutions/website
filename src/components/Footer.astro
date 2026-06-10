@@ -1,0 +1,54 @@
+---
+import { SITE, NAV } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-ink text-paper/75">
+  <div class="mx-auto grid max-w-6xl gap-x-10 gap-y-12 px-5 py-16 md:grid-cols-[1.5fr_1fr_1fr]">
+    <div>
+      <p class="flex items-baseline gap-2.5">
+        <span class="font-display text-2xl tracking-tight text-paper">Vaiyu</span>
+        <span class="label-mono text-paper/50">Solutions</span>
+      </p>
+      <p class="mt-5 max-w-sm leading-relaxed">{SITE.tagline}</p>
+      <p class="mt-6 font-mono text-xs text-paper/45">
+        <span lang="sa">वायु</span> — Sanskrit for wind: unseen, everywhere, load-bearing.
+      </p>
+    </div>
+    <nav aria-label="Footer">
+      <p class="label-mono text-paper/45">Explore</p>
+      <ul class="mt-5 space-y-3">
+        {
+          NAV.map((l) => (
+            <li>
+              <a href={l.href} class="link-paper">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div>
+      <p class="label-mono text-paper/45">Connect</p>
+      <ul class="mt-5 space-y-3">
+        <li>
+          <a href={`mailto:${SITE.email}`} class="link-paper">Email</a>
+          <span class="ml-2 font-mono text-xs text-paper/40">{SITE.emailDisplay}</span>
+        </li>
+        <li><a href={SITE.linkedin} class="link-paper" rel="noopener">LinkedIn ↗</a></li>
+        <li><a href={SITE.github} class="link-paper" rel="noopener">GitHub ↗</a></li>
+        <li><a href={SITE.scholar} class="link-paper" rel="noopener">Google Scholar ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-paper/10">
+    <div
+      class="mx-auto flex max-w-6xl flex-wrap items-baseline justify-between gap-x-8 gap-y-2 px-5 py-6 font-mono text-xs text-paper/45"
+    >
+      <p>© {year} Vaiyu Solutions · {SITE.location}</p>
+      <p>AI from architecture to production.</p>
+    </div>
+  </div>
+</footer>

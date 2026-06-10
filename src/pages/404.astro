@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import WindField from '../components/WindField.astro';
+---
+
+<Base title="Page not found" description="This page drifted off with the wind.">
+  <section class="relative overflow-hidden">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto max-w-6xl px-5 py-32 text-center md:py-44">
+      <p class="label-mono text-saffron reveal">404</p>
+      <h1 class="h-display mt-5 text-4xl md:text-6xl reveal reveal-2">
+        This page drifted off with the wind.
+      </h1>
+      <a href="/" class="link-ink label-mono mt-10 inline-block text-ink-soft reveal reveal-3">
+        ← Back to base
+      </a>
+    </div>
+  </section>
+</Base>

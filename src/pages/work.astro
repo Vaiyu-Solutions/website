@@ -1,0 +1,190 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CTABand from '../components/CTABand.astro';
+import WindField from '../components/WindField.astro';
+import { SITE, INDUSTRIES, ENGAGEMENTS, PROJECTS, PUBS, COMMUNITY } from '../data/site';
+---
+
+<Base
+  title="Work & Expertise"
+  description="A public, citable track record: 71-site federated learning, Nature-published frameworks, MLCommons standards leadership — and the engagement shapes we deliver."
+>
+  <!-- Page hero -->
+  <section class="relative overflow-hidden">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto max-w-6xl px-5 pb-14 pt-20 md:pt-24">
+      <Eyebrow label="Work & expertise" class="reveal" />
+      <h1 class="h-display mt-5 max-w-3xl text-4xl md:text-6xl reveal reveal-2">
+        Proof, not promises.
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
+        Client work in regulated industries is mostly confidential. Our research, frameworks, and
+        standards work are public — and citable.
+      </p>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <span class="ghost-num" aria-hidden="true">01</span>
+      <Eyebrow num="01" label="Industries" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        Regulated is our comfort zone.
+      </h2>
+      <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          INDUSTRIES.map((i) => (
+            <li class="grid gap-x-10 gap-y-1 py-5 md:grid-cols-[15rem_1fr]">
+              <span class="font-display text-2xl">{i.name}</span>
+              <span class="self-center leading-relaxed text-ink-soft">{i.blurb}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Representative engagements -->
+  <section class="relative border-t border-ink/10 bg-cream">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="02" label="Representative engagements" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        The shapes of work we deliver.
+      </h2>
+      <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">
+        Representative, end-to-end engagement patterns — each one we are built to deliver from
+        architecture through monitoring.
+      </p>
+      <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          ENGAGEMENTS.map((e) => (
+            <div class="border-t-2 border-ink/80 pt-5">
+              <h3 class="font-display text-xl">{e.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink-soft">
+                {e.desc}
+                {e.fn && (
+                  <sup class="fn">
+                    <a href={`#fn-${e.fn}`} aria-label={`Footnote ${e.fn}`}>
+                      {e.fn}
+                    </a>
+                  </sup>
+                )}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Open source -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <span class="ghost-num" aria-hidden="true">03</span>
+      <Eyebrow num="03" label="Built in the open" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        Open-source infrastructure, used in production.
+      </h2>
+      <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          PROJECTS.map((p) => (
+            <li>
+              <a
+                href={p.href}
+                rel="noopener"
+                class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[9rem_1fr_auto]"
+              >
+                <span class="font-display text-xl transition-colors group-hover:text-saffron">
+                  {p.name}
+                </span>
+                <span class="leading-relaxed text-ink-soft">
+                  {p.desc}
+                  <span class="mt-1.5 block font-mono text-[11px] uppercase tracking-[0.14em] text-slate">
+                    {p.meta} · {p.role}
+                  </span>
+                </span>
+                <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
+                  GitHub ↗
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 font-mono text-xs text-slate">
+        Plus 40+ conda-forge packages maintained for reproducible scientific computing.
+      </p>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <span class="ghost-num" aria-hidden="true">04</span>
+      <Eyebrow num="04" label="Selected publications" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">Peer-reviewed, not press-released.</h2>
+      <ol class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          PUBS.map((pub) => (
+            <li class="py-5">
+              {pub.href ? (
+                <a href={pub.href} rel="noopener" class="link-ink font-display text-lg leading-snug">
+                  {pub.title}
+                </a>
+              ) : (
+                <span class="font-display text-lg leading-snug">{pub.title}</span>
+              )}
+              <p class="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
+                {pub.venue} · {pub.year}
+                {pub.note && <span class="text-saffron"> · {pub.note}</span>}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+      <a href={SITE.scholar} rel="noopener" class="link-ink label-mono mt-8 inline-block text-ink-soft">
+        Full list on Google Scholar ↗
+      </a>
+    </div>
+  </section>
+
+  <!-- Standards & community -->
+  <section class="relative border-t border-ink/10 bg-cream">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="05" label="Standards & community" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        We help write the rules we build by.
+      </h2>
+      <ul class="mt-10 grid gap-x-10 gap-y-6 md:grid-cols-2">
+        {
+          COMMUNITY.map((c) => (
+            <li class="border-l-2 border-saffron/60 pl-5 leading-relaxed text-ink-soft">
+              {c.href ? (
+                <a href={c.href} rel="noopener" class="link-ink">
+                  {c.text}
+                </a>
+              ) : (
+                c.text
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <CTABand />
+
+  <!-- Footnotes -->
+  <section aria-label="Sources and attribution" class="mx-auto max-w-6xl px-5 py-12">
+    <p class="label-mono text-slate">Sources & attribution</p>
+    <ol class="mt-4 max-w-3xl space-y-2 font-mono text-xs leading-relaxed text-slate">
+      <li id="fn-2">
+        2 — Training-cost reductions delivered in Vaiyu client engagements; latency and resource
+        reductions delivered by our founder at Indiana University.
+      </li>
+    </ol>
+  </section>
+</Base>

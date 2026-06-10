@@ -1,0 +1,29 @@
+---
+import { SITE } from '../data/site';
+
+interface Props {
+  heading?: string;
+  sub?: string;
+}
+const {
+  heading = 'Tell us what you’re trying to ship.',
+  sub = 'We typically start with a 2–4 week discovery sprint: framing, feasibility, and a costed plan.',
+} = Astro.props;
+---
+
+<section class="border-t border-ink/10 bg-cream">
+  <div class="mx-auto max-w-6xl px-5 py-20 md:py-24">
+    <h2 class="h-display max-w-2xl text-4xl md:text-5xl">{heading}</h2>
+    <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">{sub}</p>
+    <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+      <a
+        href={`mailto:${SITE.email}`}
+        class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
+      >
+        <span class="label-mono">Write to us</span>
+        <span aria-hidden="true">→</span>
+      </a>
+      <span class="font-mono text-sm text-slate">{SITE.emailDisplay}</span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = 'text-ink' } = Astro.props;
+---
+
+<svg
+  class={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
+  viewBox="0 0 1440 720"
+  preserveAspectRatio="xMidYMid slice"
+  fill="none"
+  aria-hidden="true"
+>
+  <path
+    d="M-60 140 C 240 90, 420 210, 720 170 S 1240 90, 1500 150"
+    stroke="currentColor"
+    stroke-opacity="0.07"
+    stroke-width="1.2"></path>
+  <path
+    d="M-60 260 C 300 220, 520 330, 860 280 S 1300 200, 1500 260"
+    stroke="currentColor"
+    stroke-opacity="0.055"
+    stroke-width="1.2"></path>
+  <path
+    class="windline"
+    d="M-60 330 C 280 290, 520 405, 840 350 S 1310 265, 1500 330"
+    stroke="#b25415"
+    stroke-opacity="0.35"
+    stroke-width="1.4"></path>
+  <path
+    d="M-60 400 C 260 360, 560 470, 900 410 S 1320 330, 1500 390"
+    stroke="currentColor"
+    stroke-opacity="0.07"
+    stroke-width="1.2"></path>
+  <path
+    d="M-60 530 C 320 490, 540 600, 880 540 S 1340 460, 1500 530"
+    stroke="currentColor"
+    stroke-opacity="0.05"
+    stroke-width="1.2"></path>
+  <path
+    d="M-60 650 C 300 610, 560 700, 920 650 S 1340 590, 1500 640"
+    stroke="currentColor"
+    stroke-opacity="0.045"
+    stroke-width="1.2"></path>
+</svg>

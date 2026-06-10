@@ -1,0 +1,13 @@
+---
+interface Props {
+  num?: string;
+  label: string;
+  tone?: 'default' | 'light';
+  class?: string;
+}
+const { num, label, tone = 'default', class: className = '' } = Astro.props;
+---
+
+<p class:list={['label-mono', tone === 'light' ? 'text-saffron-bright' : 'text-saffron', className]}>
+  {num && <span aria-hidden="true">§ {num} · </span>}{label}
+</p>
