@@ -21,4 +21,4 @@ One-time setup: **Settings → Pages → Source: "GitHub Actions"**. The custom 
 
 - Copy and structured data (services, projects, publications, stats): `src/data/site.ts`
 - Pages: `src/pages/` · layout & SEO/JSON-LD: `src/layouts/Base.astro`
-- Plan and content rules: `PLAN.md` — including the **VerySafe firewall**: no VerySafe.ai / SafeCompute / attestation-product content on this site, and `sarthak@vaiyu.solutions` as the only contact address.
+- Plan and content rules: `PLAN.md` — including the **VerySafe firewall**: no VerySafe.ai / SafeCompute / attestation-product content on this site, and `support@vaiyu.solutions` as the only contact address.

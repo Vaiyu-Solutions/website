@@ -1,8 +1,8 @@
 export const SITE = {
   name: 'Vaiyu Solutions',
   url: 'https://vaiyu.solutions',
-  email: 'sarthak@vaiyu.solutions',
-  emailDisplay: 'sarthak [at] vaiyu [dot] solutions',
+  email: 'support@vaiyu.solutions',
+  emailDisplay: 'support [at] vaiyu [dot] solutions',
   tagline: 'AI from architecture to production, for industries where it has to be right.',
   location: 'Worldwide',
   linkedin: 'https://www.linkedin.com/company/vaiyu-solutions',

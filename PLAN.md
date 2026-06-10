@@ -157,7 +157,7 @@ Estimated new/changed files: ~25–35 (scaffold + components + pages + workflow)
 3. **Case studies**: generic, deliverable engagement examples ("representative engagements" on `/work`) — no client-specific claims; public research carries the proof.
 4. **Industries**: healthcare & pharma, financial services, energy, manufacturing, **and automotive**.
 5. **Team**: collective ("interdisciplinary team of five engineers and scientists").
-6. **Contact**: `sarthak@vaiyu.solutions` only (displayed obfuscated). No calendar embed, no analytics.
+6. **Contact**: `support@vaiyu.solutions` only (displayed obfuscated; changed from `sarthak@` on 2026-06-10). No calendar embed, no analytics.
 7. **Stack**: Astro 5 + Tailwind 4 on GitHub Pages via Actions — implemented.
 
 ## 12. Implementation status (2026-06-10)
