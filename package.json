@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "lint:firewall": "node scripts/firewall-lint.mjs",
+    "verify": "astro build && node scripts/firewall-lint.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.0",
