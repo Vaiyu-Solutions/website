@@ -9,6 +9,8 @@ pnpm install
 pnpm dev       # local dev server
 pnpm build     # static build → dist/
 pnpm preview   # serve the build locally
+pnpm lint:firewall  # VerySafe brand-firewall check on dist/ (run after build)
+pnpm verify         # build + firewall lint in one step
 ```
 
 ## Deploy

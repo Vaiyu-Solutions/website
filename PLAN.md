@@ -30,7 +30,7 @@ Status: plan only — no implementation until approved.
 2. Founder bio on this site: Vaiyu + UPenn/Indiana/TUM/MLCommons only. The "Founder of VerySafe.ai" line stays on the personal site, not here.
 3. Contact email is `support@vaiyu.solutions` everywhere — never `sarthak@verysafe.ai`.
 4. "AI governance & compliance readiness" is offered as a *consulting service* (process, validation, documentation, privacy) — never as a compute/attestation *product pitch*.
-5. Pre-launch lint: grep the built site for `verysafe|safecompute|attestation|RATS|SLSA|HSM` — must return zero hits.
+5. Pre-launch lint: run `pnpm lint:firewall` (`scripts/firewall-lint.mjs`) over the built `dist/` — must return zero hits. It flags `verysafe|safecompute|attestation` case-insensitively, and the acronyms `\bRATS\b|\bSLSA\b|\bHSM\b` case-sensitively and word-boundaried, so legitimate terms (e.g. the *BraTS* benchmark, which contains "raTS") are not false-flagged.
 6. (One-directional rule: the personal site mentioning both companies is fine; this firewall governs vaiyu.solutions only.)
 
 ## 4. Site map
