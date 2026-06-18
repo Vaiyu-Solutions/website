@@ -89,7 +89,7 @@ export const SERVICES: {
     slug: 'deployment',
     num: '04',
     title: 'Deployment, MLOps & Optimization',
-    tag: 'Secure, observable, affordable AI in production — cloud, on-prem, or edge.',
+    tag: 'Secure, observable, affordable AI in production — new builds and stalled pilots alike.',
     bullets: [
       { text: 'API-driven integration with your stack: REST, MCP, A2A' },
       { text: 'CI/CD for models, monitoring, and drift detection' },
@@ -184,6 +184,10 @@ export const INDUSTRIES = [
 ];
 
 export const ENGAGEMENTS = [
+  {
+    title: 'The pilot that stalled before production',
+    desc: 'The model that wowed in a demo and then stalled — or the prototype you inherited and can’t trust. We re-engineer it into something your ops team can run and your auditors can sign off: hardened pipelines, lineage, monitoring, drift detection, and the tests that got skipped.',
+  },
   {
     title: 'Research model → clinical deployment',
     desc: 'Take a promising model from the lab to validated deployment on hospital infrastructure: data harmonization, retraining, and inference optimization for the hardware you actually have.',
