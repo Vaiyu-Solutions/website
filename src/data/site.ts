@@ -152,12 +152,19 @@ export const MODELS = [
   },
 ];
 
-export const INDUSTRIES = [
+export const INDUSTRIES: { name: string; tag: string; blurb: string; href?: string }[] = [
   {
     name: 'Healthcare & Pharma',
     tag: 'anchor domain',
     blurb:
       'Our anchor. A decade building AI that runs in hospitals: imaging pipelines, multi-site collaboration without data sharing, validation that satisfies clinical review.',
+  },
+  {
+    name: 'Academia & Research',
+    tag: 'lab to clinic',
+    blurb:
+      'Universities, research hospitals, and consortia. We turn grant-funded prototypes into sustainable, validated software — and carry research models the last mile into clinical deployment.',
+    href: '/academia/',
   },
   {
     name: 'Financial Services',

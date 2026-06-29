@@ -41,7 +41,13 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
             {
               INDUSTRIES.map((i) => (
                 <li class="flex items-baseline justify-between gap-4 py-3">
-                  <span class="font-display text-xl">{i.name}</span>
+                  {i.href ? (
+                    <a href={i.href} class="font-display text-xl transition-colors hover:text-saffron">
+                      {i.name}
+                    </a>
+                  ) : (
+                    <span class="font-display text-xl">{i.name}</span>
+                  )}
                   <span class="hidden font-mono text-[11px] text-slate sm:block">{i.tag}</span>
                 </li>
               ))

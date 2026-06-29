@@ -1,0 +1,362 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CTABand from '../components/CTABand.astro';
+import WindField from '../components/WindField.astro';
+import { SITE, STATS, PROJECTS, COMMUNITY } from '../data/site';
+
+// What we carry across the translation gap — hero aside.
+const BRIDGE = [
+  { from: 'Published model', to: 'Validated pipeline' },
+  { from: 'Research prototype', to: 'Maintained tool' },
+  { from: 'Single-site result', to: 'Federated network' },
+  { from: 'Lab GPUs', to: 'Clinical hardware' },
+];
+
+// Academic-specific reframing of the service lines.
+const ACADEMIC_SERVICES: { num: string; title: string; desc: string; fn?: string }[] = [
+  {
+    num: '01',
+    title: 'Research software sustainability',
+    desc: 'Turn grant-funded code into maintained, citeable, reviewer-proof infrastructure: packaging, CI/CD, documentation, and test coverage — with a maintainership plan that outlives any single hire.',
+  },
+  {
+    num: '02',
+    title: 'Clinical translation',
+    desc: 'Take a validated research model to deployment on hospital infrastructure: harmonization, retraining, inference optimization for clinical hardware, and validation protocols that satisfy clinical review.',
+    fn: '4',
+  },
+  {
+    num: '03',
+    title: 'Federated & multi-site learning',
+    desc: 'Train and harmonize across institutions without moving patient data — the approach behind a 71-site, six-continent study, hardened into infrastructure your consortium can run.',
+    fn: '3',
+  },
+  {
+    num: '04',
+    title: 'Reproducibility & benchmarking',
+    desc: 'Reproducible pipelines, experiment lineage, and federated benchmarking, so results hold up to peer review and replicate across sites and scanners.',
+  },
+  {
+    num: '05',
+    title: 'Data harmonization',
+    desc: 'Reconcile imaging and tabular data across scanners, sites, formats, and legacy systems, so models generalize beyond the cohort they were trained on.',
+  },
+  {
+    num: '06',
+    title: 'Proposal & grant support',
+    desc: 'Co-develop the software, translation, and sustainability aims of your next submission — with defensible scope and effort estimates that evaluators trust.',
+    fn: 'a',
+  },
+];
+
+// Engagement models framed for how academic work is actually funded.
+const ACADEMIC_MODELS = [
+  {
+    num: '01',
+    title: 'Discovery sprint',
+    desc: '2–4 weeks, fixed scope and fee: framing, feasibility, and a costed plan. The low-risk way to start.',
+  },
+  {
+    num: '02',
+    title: 'Subaward or consultant',
+    desc: 'A defined scope on an active award — software maintenance, federated infrastructure, deployment — as a subcontract or consulting line.',
+  },
+  {
+    num: '03',
+    title: 'Co-developed proposal',
+    desc: 'We help author the engineering, translation, or sustainability aims of a new submission and join as a named partner.',
+  },
+  {
+    num: '04',
+    title: 'SBIR / STTR partnership',
+    desc: 'For commercialization-ready tools: Vaiyu as the small-business partner, your lab as the academic collaborator.',
+  },
+  {
+    num: '05',
+    title: 'Build & handover',
+    desc: 'Scoped delivery with documentation and training, so the capability stays with your students and staff.',
+  },
+];
+---
+
+<Base
+  title="For Research Institutions"
+  description="Vaiyu Solutions is the engineering team that turns research-grade AI into sustainable, validated, deployable software — software sustainability, clinical translation, federated multi-site learning, and grant-fit engagement for universities and research labs."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-16 pt-20 md:pb-24 md:pt-28 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <Eyebrow label="For universities & research institutions" class="reveal" />
+        <h1 class="h-display mt-5 text-[2.6rem] md:text-6xl reveal reveal-2">
+          From bench to bedside — and built to <em>stay</em> there.
+        </h1>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
+          Academic labs produce the breakthroughs. Vaiyu is the engineering team that turns a
+          published model into sustainable, validated, deployable software — the work that rarely
+          fits inside a grant’s scope or a postdoc’s tenure.
+        </p>
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 reveal reveal-4">
+          <a
+            href="/contact/"
+            class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
+          >
+            <span class="label-mono">Start a conversation</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="/work/" class="link-ink label-mono text-ink-soft">See the track record</a>
+        </div>
+      </div>
+      <aside class="self-center lg:col-span-5 reveal reveal-5">
+        <div class="border border-ink/15 bg-paper/80 p-7">
+          <p class="label-mono text-slate">What we carry across the gap</p>
+          <ul class="mt-4 divide-y divide-ink/10">
+            {
+              BRIDGE.map((b) => (
+                <li class="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 py-3">
+                  <span class="font-mono text-[11px] uppercase tracking-widest text-slate">
+                    {b.from}
+                  </span>
+                  <span aria-hidden="true" class="text-saffron">→</span>
+                  <span class="font-display text-lg">{b.to}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Proof bar -->
+  <section aria-label="Track record" class="border-y border-ink/10 bg-cream">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-5 py-12 md:grid-cols-5">
+      {
+        STATS.map((s) => (
+          <div>
+            <p class="font-display text-4xl leading-none md:text-[2.6rem]">
+              {s.prefix && (
+                <span class="mr-1 align-middle font-mono text-[11px] uppercase tracking-widest text-slate">
+                  {s.prefix}
+                </span>
+              )}
+              {s.value}
+              {s.fn && (
+                <sup class="fn">
+                  <a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>
+                    {s.fn}
+                  </a>
+                </sup>
+              )}
+            </p>
+            <p class="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-slate">
+              {s.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- The translation gap -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto grid max-w-6xl gap-x-12 gap-y-8 px-5 py-16 md:py-20 lg:grid-cols-12">
+      <span class="ghost-num" aria-hidden="true">01</span>
+      <div class="lg:col-span-5">
+        <Eyebrow num="01" label="The translation gap" />
+        <h2 class="h-display mt-4 text-3xl md:text-4xl">Papers don’t run in production.</h2>
+      </div>
+      <div class="space-y-5 leading-relaxed text-ink-soft lg:col-span-7">
+        <p>
+          Research code is written to prove a point and publish it — by students and postdocs
+          optimizing for novelty, not maintenance, validation, or deployment. When they graduate,
+          the institutional knowledge leaves with them. Meanwhile reviewers, journals, and IRBs
+          increasingly demand reproducibility, sustainability, and audit-ready validation.
+        </p>
+        <p>
+          We close that gap. Vaiyu is the professional engineering layer alongside your lab — not
+          competing with your people, but doing the part they were never staffed to do. We have
+          spent a decade building AI that runs in hospitals, and we bring that discipline to the
+          tools and models your science depends on.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we do for labs -->
+  <section class="relative border-t border-ink/10 bg-cream">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="02" label="What we do for labs" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        Built for how research gets funded — and used.
+      </h2>
+      <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          ACADEMIC_SERVICES.map((s) => (
+            <div class="border-t-2 border-ink/80 pt-5">
+              <p class="font-mono text-[11px] text-slate">{s.num}</p>
+              <h3 class="font-display mt-3 text-xl">{s.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink-soft">
+                {s.desc}
+                {s.fn && (
+                  <sup class="fn">
+                    <a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>
+                      {s.fn}
+                    </a>
+                  </sup>
+                )}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Open-source frameworks -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <span class="ghost-num" aria-hidden="true">02</span>
+      <Eyebrow num="03" label="Built in the open" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        Our frameworks already run in research labs worldwide.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        We don’t arrive with slideware. The open-source tools our team created and co-leads are used
+        by research hospitals and consortia on six continents — and we maintain them to a production
+        standard.
+      </p>
+      <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          PROJECTS.map((p) => (
+            <li>
+              <a
+                href={p.href}
+                rel="noopener"
+                class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[9rem_1fr_auto]"
+              >
+                <span class="font-display text-xl transition-colors group-hover:text-saffron">
+                  {p.name}
+                </span>
+                <span class="leading-relaxed text-ink-soft">
+                  {p.desc}
+                  <span class="mt-1.5 block font-mono text-[11px] uppercase tracking-[0.14em] text-slate">
+                    {p.meta} · {p.role}
+                  </span>
+                </span>
+                <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
+                  GitHub ↗
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-6 font-mono text-xs text-slate">
+        Plus 40+ conda-forge packages maintained for reproducible scientific computing.
+      </p>
+    </div>
+  </section>
+
+  <!-- Credibility band -->
+  <section class="relative overflow-hidden bg-ink text-paper">
+    <WindField class="text-paper" />
+    <div class="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 md:py-24 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <Eyebrow num="04" label="Credibility" tone="light" />
+        <h2 class="h-display mt-4 text-4xl md:text-5xl">
+          Peer-reviewed, cited, and <em>standard-setting</em>.
+        </h2>
+        <p class="mt-6 max-w-xl leading-relaxed text-paper/75">
+          Our team’s research appears in <strong class="text-paper">Nature Communications</strong>
+          and <strong class="text-paper">Nature Machine Intelligence</strong>, and has been covered
+          by <strong class="text-paper">The Wall Street Journal</strong>. We’ve led more than
+          <strong class="text-paper">$9M</strong> in NIH/NCI-funded R&D, and we hold the Vice Chair
+          for Algorithmic Development of the
+          <a href={SITE.mlcommons} class="link-paper" rel="noopener">MLCommons Medical Working Group</a>
+          — helping write the standards medical AI is measured against.
+        </p>
+        <a href="/work/" class="link-paper label-mono mt-8 inline-block text-paper/70">
+          Publications & standards work →
+        </a>
+      </div>
+      <div class="self-end lg:col-span-5">
+        <ul class="divide-y divide-paper/10 border-y border-paper/10">
+          {
+            COMMUNITY.map((c) => (
+              <li class="py-4 leading-relaxed text-paper/80">
+                {c.href ? (
+                  <a href={c.href} rel="noopener" class="link-paper">
+                    {c.text}
+                  </a>
+                ) : (
+                  c.text
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we engage -->
+  <section class="border-t border-ink/10">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-24">
+      <Eyebrow num="05" label="How we engage" />
+      <h2 class="h-display mt-4 max-w-2xl text-4xl md:text-5xl">Ways in that fit a grant budget.</h2>
+      <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">
+        We meet research budgets where they are — from a fixed-fee pilot to a named role on your next
+        award.
+      </p>
+      <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          ACADEMIC_MODELS.map((m) => (
+            <div class="border-t-2 border-ink/80 pt-5">
+              <p class="font-mono text-[11px] text-slate">{m.num}</p>
+              <h3 class="font-display mt-3 text-xl">{m.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink-soft">{m.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    heading="Bring us into your next proposal — or your next sprint."
+    sub="Start with a 30-minute call or a fixed-scope discovery sprint. If software sustainability, federated learning, or clinical deployment is on your roadmap, we should talk."
+  />
+
+  <!-- Footnotes -->
+  <section aria-label="Sources and attribution" class="mx-auto max-w-6xl px-5 py-12">
+    <p class="label-mono text-slate">Sources & attribution</p>
+    <ol class="mt-4 max-w-3xl space-y-2 font-mono text-xs leading-relaxed text-slate">
+      <li id="fn-1">
+        1 — Led by our founder across NIH/NCI-funded programs at the University of Pennsylvania and
+        Indiana University.
+      </li>
+      <li id="fn-2">
+        2 — Vaiyu client engagements: pre-training optimization with model accuracy maintained or
+        improved.
+      </li>
+      <li id="fn-3">
+        3 — Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
+        Nature Communications 13 (2022).
+        <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">
+          doi:10.1038/s41467-022-33407-5</a
+        > — 71 sites across 6 continents, the largest real-world federated learning study to date.
+      </li>
+      <li id="fn-4">
+        4 — Founder track record at Indiana University: inference latency reduced by up to 70%,
+        compute requirements by 10–50%, in clinical research environments.
+      </li>
+      <li id="fn-a">
+        a — The “data as IP” approach our founder led at Indiana University contributed to a $3.5M
+        NIH/NCI award.
+      </li>
+    </ol>
+  </section>
+</Base>

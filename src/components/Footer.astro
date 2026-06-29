@@ -2,6 +2,8 @@
 import { SITE, NAV } from '../data/site';
 
 const year = new Date().getFullYear();
+// Academia is intentionally kept out of the top nav; surface it in the footer for discoverability.
+const exploreLinks = [...NAV.slice(0, 2), { href: '/academia/', label: 'Academia' }, ...NAV.slice(2)];
 ---
 
 <footer class="bg-ink text-paper/75">
@@ -22,7 +24,7 @@ const year = new Date().getFullYear();
       <p class="label-mono text-paper/45">Explore</p>
       <ul class="mt-5 space-y-3">
         {
-          NAV.map((l) => (
+          exploreLinks.map((l) => (
             <li>
               <a href={l.href} class="link-paper">
                 {l.label}
