@@ -51,31 +51,39 @@ const ACADEMIC_SERVICES: { num: string; title: string; desc: string; fn?: string
 ];
 
 // Engagement models framed for how academic work is actually funded.
+// `outcome` = the tangible "what you get" — the so-what — from each model.
+// Copy is length-tuned to ~3 lines of `desc` and ~2 lines of `outcome`, and the
+// card markup reserves exactly that height, so every card aligns on the grid.
 const ACADEMIC_MODELS = [
   {
-    num: '01',
     title: 'Discovery sprint',
-    desc: '2–4 weeks, fixed scope and fee: framing, feasibility, and a costed plan. The low-risk way to start.',
+    desc: 'A 2–4 week engagement, fixed in scope and fee: problem framing, feasibility, and a costed plan. The low-commitment way to begin.',
+    outcome: 'A costed, de-risked plan you can take straight to a program officer.',
   },
   {
-    num: '02',
     title: 'Subaward or consultant',
-    desc: 'A defined scope on an active award — software maintenance, federated infrastructure, deployment — as a subcontract or consulting line.',
+    desc: 'A defined scope on an active award — maintenance, federated infrastructure, or deployment — added as a subcontract or consultant.',
+    outcome: 'Senior engineering on your current award, with no new hire to justify.',
   },
   {
-    num: '03',
     title: 'Co-developed proposal',
-    desc: 'We help author the engineering, translation, or sustainability aims of a new submission and join as a named partner.',
+    desc: 'We help author the engineering, translation, and sustainability aims of a new submission, and join the team as a named partner.',
+    outcome: 'A more competitive proposal, with the engineering risk already retired.',
   },
   {
-    num: '04',
     title: 'SBIR / STTR partnership',
-    desc: 'For commercialization-ready tools: Vaiyu as the small-business partner, your lab as the academic collaborator.',
+    desc: 'For commercialization-ready tools: Vaiyu as the small-business partner and your lab as the academic collaborator on the bid.',
+    outcome: 'Non-dilutive funding to commercialize — the small-business burden on us.',
   },
   {
-    num: '05',
     title: 'Build & handover',
-    desc: 'Scoped delivery with documentation and training, so the capability stays with your students and staff.',
+    desc: 'Scoped delivery with full documentation, tests, and hands-on training, so the capability stays with your students and staff.',
+    outcome: 'Working software your students and staff can run long after we’re gone.',
+  },
+  {
+    title: 'Maintainership retainer',
+    desc: 'Ongoing maintenance, security patches, and support for the tools your science depends on — billed as a predictable annual line.',
+    outcome: 'Research software that stays citeable, secure, and reviewer-proof for years.',
   },
 ];
 ---
@@ -163,7 +171,6 @@ const ACADEMIC_MODELS = [
   <!-- The translation gap -->
   <section class="relative border-t border-ink/10">
     <div class="relative mx-auto grid max-w-6xl gap-x-12 gap-y-8 px-5 py-16 md:py-20 lg:grid-cols-12">
-      <span class="ghost-num" aria-hidden="true">01</span>
       <div class="lg:col-span-5">
         <Eyebrow num="01" label="The translation gap" />
         <h2 class="h-display mt-4 text-3xl md:text-4xl">Papers don’t run in production.</h2>
@@ -195,9 +202,9 @@ const ACADEMIC_MODELS = [
       <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {
           ACADEMIC_SERVICES.map((s) => (
-            <div class="border-t-2 border-ink/80 pt-5">
-              <p class="font-mono text-[11px] text-slate">{s.num}</p>
-              <h3 class="font-display mt-3 text-xl">{s.title}</h3>
+            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
+              <p class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron">{s.num}</p>
+              <h3 class="font-display mt-3 text-xl transition-colors group-hover:text-saffron">{s.title}</h3>
               <p class="mt-3 text-sm leading-relaxed text-ink-soft">
                 {s.desc}
                 {s.fn && (
@@ -218,7 +225,6 @@ const ACADEMIC_MODELS = [
   <!-- Open-source frameworks -->
   <section class="relative border-t border-ink/10">
     <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
-      <span class="ghost-num" aria-hidden="true">02</span>
       <Eyebrow num="03" label="Built in the open" />
       <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
         Our frameworks already run in research labs worldwide.
@@ -261,34 +267,34 @@ const ACADEMIC_MODELS = [
   </section>
 
   <!-- Credibility band -->
-  <section class="relative overflow-hidden bg-ink text-paper">
-    <WindField class="text-paper" />
+  <section class="relative overflow-hidden border-t-4 border-saffron bg-cream">
+    <WindField class="text-ink" />
     <div class="relative mx-auto grid max-w-6xl gap-12 px-5 py-20 md:py-24 lg:grid-cols-12">
       <div class="lg:col-span-7">
-        <Eyebrow num="04" label="Credibility" tone="light" />
+        <Eyebrow num="04" label="Credibility" />
         <h2 class="h-display mt-4 text-4xl md:text-5xl">
           Peer-reviewed, cited, and <em>standard-setting</em>.
         </h2>
-        <p class="mt-6 max-w-xl leading-relaxed text-paper/75">
-          Our team’s research appears in <strong class="text-paper">Nature Communications</strong>
-          and <strong class="text-paper">Nature Machine Intelligence</strong>, and has been covered
-          by <strong class="text-paper">The Wall Street Journal</strong>. We’ve led more than
-          <strong class="text-paper">$9M</strong> in NIH/NCI-funded R&D, and we hold the Vice Chair
+        <p class="mt-6 max-w-xl leading-relaxed text-ink-soft">
+          Our team’s research appears in <strong class="text-ink">Nature Communications</strong>
+          and <strong class="text-ink">Nature Machine Intelligence</strong>, and has been covered
+          by <strong class="text-ink">The Wall Street Journal</strong>. We’ve led more than
+          <strong class="text-ink">$9M</strong> in NIH/NCI-funded R&D, and we hold the Vice Chair
           for Algorithmic Development of the
-          <a href={SITE.mlcommons} class="link-paper" rel="noopener">MLCommons Medical Working Group</a>
+          <a href={SITE.mlcommons} class="link-ink" rel="noopener">MLCommons Medical Working Group</a>
           — helping write the standards medical AI is measured against.
         </p>
-        <a href="/work/" class="link-paper label-mono mt-8 inline-block text-paper/70">
+        <a href="/work/" class="link-ink label-mono mt-8 inline-block text-slate">
           Publications & standards work →
         </a>
       </div>
       <div class="self-end lg:col-span-5">
-        <ul class="divide-y divide-paper/10 border-y border-paper/10">
+        <ul class="divide-y divide-ink/10 border-y border-ink/10">
           {
             COMMUNITY.map((c) => (
-              <li class="py-4 leading-relaxed text-paper/80">
+              <li class="py-4 leading-relaxed text-ink-soft">
                 {c.href ? (
-                  <a href={c.href} rel="noopener" class="link-paper">
+                  <a href={c.href} rel="noopener" class="link-ink">
                     {c.text}
                   </a>
                 ) : (
@@ -314,10 +320,21 @@ const ACADEMIC_MODELS = [
       <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {
           ACADEMIC_MODELS.map((m) => (
-            <div class="border-t-2 border-ink/80 pt-5">
-              <p class="font-mono text-[11px] text-slate">{m.num}</p>
-              <h3 class="font-display mt-3 text-xl">{m.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-ink-soft">{m.desc}</p>
+            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
+              <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
+                {m.title}
+              </h3>
+              <p class="mt-3 line-clamp-3 min-h-[4.27rem] text-sm leading-relaxed text-ink-soft">
+                {m.desc}
+              </p>
+              <div class="mt-4 border-t border-ink/10 pt-4">
+                <p class="flex min-h-[2.62rem] items-baseline gap-2">
+                  <span aria-hidden="true" class="shrink-0 text-saffron transition-transform group-hover:translate-x-0.5">
+                    →
+                  </span>
+                  <span class="font-display text-[0.95rem] italic leading-snug text-ink">{m.outcome}</span>
+                </p>
+              </div>
             </div>
           ))
         }
