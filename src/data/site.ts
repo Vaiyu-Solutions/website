@@ -20,11 +20,11 @@ export const NAV = [
 
 /** Home proof bar. `fn` indexes into the home page footnotes. */
 export const STATS = [
-  { value: '11+', label: 'years operationalizing AI, prototype to production' },
+  { value: '15+', label: 'years operationalizing AI, prototype to production' },
   { value: '$9M+', label: 'federally funded AI R&D led', fn: 1 },
   { value: '50%', prefix: 'up to', label: 'training cost cut for clients', fn: 2 },
   { value: '71', label: 'sites in one federated learning study', fn: 3 },
-  { value: '70%', prefix: 'up to', label: 'inference latency removed', fn: 4 },
+  { value: '90%', prefix: 'up to', label: 'inference latency removed', fn: 4 },
 ];
 
 export interface ServiceBullet {
