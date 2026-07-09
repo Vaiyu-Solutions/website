@@ -1,0 +1,616 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CTABand from '../components/CTABand.astro';
+import WindField from '../components/WindField.astro';
+import { SITE, STATS, PROJECTS, COMMUNITY } from '../data/site';
+
+// What changes under a hotel group — hero aside. Left column is length-constrained:
+// it renders as a nowrap 11px mono label in a 9rem column.
+const BRIDGE = [
+  { from: 'Seven systems', to: 'One revenue truth' },
+  { from: 'Rooms priced', to: 'Banquets modeled' },
+  { from: 'Bookable via OTA', to: 'Readable by any agent' },
+  { from: 'Photocopied ID', to: 'Lawful digital identity' },
+];
+
+// The case for the page. Every claim carries its source; `fns` index the footnotes below.
+const BURNING: { num: string; title: string; desc: string; fns?: string[] }[] = [
+  {
+    num: '01',
+    title: 'Your systems don’t talk, and no vendor is paid to make them.',
+    desc: 'Only 11% of hotels report a fully integrated tech stack. 27% run seven or more platforms, 27% lose eleven or more hours a week to manual reconciliation, and 91% still rely on manual reporting. Every vendor sells a system of record and profits from owning its slice — harmonizing across them is nobody’s product.',
+    fns: ['a'],
+  },
+  {
+    num: '02',
+    title: 'The margin is where the software isn’t.',
+    desc: 'Non-room revenue — banquets, weddings, restaurants, spa — reaches up to 60% of the total in Indian Tier II/III hotels, against roughly 32% for US full-service properties. India runs eight to ten million weddings a year, in a market estimated near US$130bn. Every revenue-management system on the market prices rooms.',
+    fns: ['b', 'c'],
+  },
+  {
+    num: '03',
+    title: 'Your room rate is now a tax decision.',
+    desc: 'Since 1 April 2025, a single room sold above ₹7,500 on a single night makes a property “specified premises” for the whole of the following financial year — reclassifying every restaurant inside it. The declaration is filed a year ahead, under demand uncertainty, and continues until you revoke it. No pricing system models this, because none of them know what a specified premises is.',
+    fns: ['d'],
+  },
+  {
+    num: '04',
+    title: 'Agents book what they can read.',
+    desc: 'AI Overviews cut click-through to the top organic result by roughly 58%, and organic click-through by 61% on affected queries. Travel is the fastest-growing vertical for AI referral traffic. ChatGPT launched apps with two of the largest OTAs; Google published an agent-payments protocol with sixty-plus backers. Inventory that is machine-readable only inside an OTA is inventory the OTA owns.',
+    fns: ['e', 'f', 'g'],
+  },
+  {
+    num: '05',
+    title: 'The commission is not the whole cost.',
+    desc: 'OTA commission runs 15–25%, and to about 30% with promoted placement, against 5–12% to acquire a guest directly. OTA bookings also cancel harder — one major OTA’s group segment at 42%, against 11.1% for direct. Independents take 61% of bookings through OTAs; branded chains, 22%.',
+    fns: ['h'],
+  },
+  {
+    num: '06',
+    title: 'A dated regulator is coming for the guest file.',
+    desc: 'India’s DPDP obligations commence 13 May 2027, with penalties reaching ₹250 crore for a security-safeguards failure. A hotel group holds passport scans, payment credentials, and — through a spa — treatment records that are special-category health data for inbound EU guests. The Aadhaar photocopy at your front desk is already outside what UIDAI permits.',
+    fns: ['i', 'j', 'k'],
+  },
+];
+
+// Why a healthcare-AI team belongs in this room. Left: evidenced capability. Right: where it lands.
+const TRANSFERS: { have: string; apply: string; fn?: string }[] = [
+  {
+    have: 'Harmonization across scanners, sites, formats, and legacy systems',
+    apply:
+      'One guest identity and one revenue truth across PMS, POS, booking engine, banquet, spa, and bakery.',
+  },
+  {
+    have: 'Validation protocols and audit-ready documentation for clinical review',
+    apply:
+      'Data-fiduciary obligations met on a dated plan — and a pricing decision an auditor can reconstruct a year later.',
+  },
+  {
+    have: 'Privacy-preserving design: de-identification and access control',
+    apply:
+      'Passport, Aadhaar, payment, and spa-treatment records, held lawfully and consented at every touchpoint.',
+  },
+  {
+    have: 'Inference optimization for constrained clinical hardware',
+    apply: 'Offline-capable check-in and kitchen tooling at a resort with no reliable uplink.',
+    fn: '4',
+  },
+  {
+    have: 'Low-code frameworks so non-ML staff can run the model',
+    apply: 'A revenue manager, not a data scientist, operates the banquet model.',
+  },
+  {
+    have: 'Reproducible pipelines and experiment lineage',
+    apply: 'Why the model quoted that rate, for that wedding — a year later, in a dispute.',
+  },
+];
+
+// The six core services, with hospitality's nouns. Nothing here is a new business line.
+const HOSPITALITY_SERVICES: { num: string; title: string; desc: string; fns?: string[] }[] = [
+  {
+    num: '01',
+    title: 'Readiness & AI strategy sprint',
+    desc: 'Two to four weeks, fixed scope and fee: use-case triage against the P&L, a data-readiness audit, and an explicit build-vs-buy verdict per use case — including, wherever it is true, “just buy the software.”',
+  },
+  {
+    num: '02',
+    title: 'The guest & revenue spine',
+    desc: 'Harmonization across PMS, POS, booking engine, banquet, spa, and the spreadsheets. One guest identity, one revenue truth per property per day, one consent ledger. Boring, load-bearing, and everything above it depends on it.',
+  },
+  {
+    num: '03',
+    title: 'Banquet, F&B & demand models',
+    desc: 'The models nobody sells: event conversion priced against the room inventory an event displaces, multi-outlet forecasting and kitchen-waste reduction, tax-aware rate strategy, and a review-response model that knows which reviews are worth answering.',
+    fns: ['l', 'm'],
+  },
+  {
+    num: '04',
+    title: 'Guest technology & deployment',
+    desc: 'Lawful digital check-in, automated foreign-guest reporting inside the statutory 24 hours, tokenized card handling, agent-readable distribution, and offline-capable inference for properties without a reliable uplink.',
+    fns: ['n', 'o'],
+  },
+  {
+    num: '05',
+    title: 'Guest-data governance',
+    desc: 'A dated plan to 13 May 2027: consent architecture, retention and erasure that actually delete, breach response, model audit — and identity capture at the front desk that is lawful today, not next year.',
+    fns: ['i', 'k'],
+  },
+  {
+    num: '06',
+    title: 'Fractional AI leadership',
+    desc: 'Senior data and AI leadership for a group that will never hire a full-time Chief Data Officer — and shouldn’t. Vendor vetting, roadmap governance, and board reporting, a few days a quarter.',
+  },
+];
+
+// Engagement models sized to how a hotel group actually buys.
+// Copy is length-tuned to ~3 lines of `desc` and ~2 lines of `outcome`; the card markup
+// reserves exactly that height so every card aligns on the grid.
+const HOSPITALITY_MODELS = [
+  {
+    title: 'Readiness sprint',
+    desc: 'Two to four weeks, fixed scope and fee: where AI pays, where it doesn’t, and what your data can actually support today.',
+    outcome: 'A costed roadmap your owner and your GM both believe.',
+  },
+  {
+    title: 'Check-in pilot',
+    desc: 'One property. Lawful digital check-in, automated foreign-guest reporting, tokenized cards — live, and measured against the front desk it replaces.',
+    outcome: 'A visible win, and the guest-data spine underneath it.',
+  },
+  {
+    title: 'Banquet & F&B model',
+    desc: 'The event funnel and the kitchens, forecast and priced at one property, with a before-and-after on conversion, covers, and waste.',
+    outcome: 'Margin found in the half of the business nobody modeled.',
+  },
+  {
+    title: 'Tax-aware pricing review',
+    desc: 'Annual. We model the specified-premises decision per property before the filing window closes; your chartered accountant files it.',
+    outcome: 'A filed position with the sensitivity analysis behind it.',
+  },
+  {
+    title: 'Data-protection readiness',
+    desc: 'A dated program to 13 May 2027 — consent, retention, erasure, breach response, and lawful identity capture at the desk.',
+    outcome: 'An obligation met before it becomes a penalty.',
+  },
+  {
+    title: 'Agent-readable distribution',
+    desc: 'Structured supply, machine-readable rates and availability, and an evaluation harness for when an agent gets a booking wrong.',
+    outcome: 'Bookable by an AI agent that isn’t an OTA.',
+  },
+];
+---
+
+<Base
+  title="For Hotels & Hospitality Groups"
+  description="Vaiyu Solutions builds the data spine, models, and guest technology that hotel groups need — banquet and F&B intelligence, agent-readable distribution, lawful digital check-in, and guest data ready for India's data-protection regime, from a team that has been doing this in hospitals for a decade."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-16 pt-20 md:pb-24 md:pt-28 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <Eyebrow label="For hotel groups & hospitality operators" class="reveal" />
+        <h1 class="h-display mt-5 text-[2.6rem] md:text-6xl reveal reveal-2">
+          Your profit is in the banquet hall. Your risk is in the <em>guest file</em>.
+        </h1>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
+          Hotel software has spent a decade optimizing the room. Meanwhile the banquets, restaurants,
+          and spa that carry the margin run on spreadsheets — and the guest data that carries the
+          regulatory risk runs on nothing at all. Vaiyu builds the spine under both: one guest
+          identity, one revenue truth, and models your revenue manager can operate and your auditor
+          can reconstruct. We have been doing exactly this in hospitals for a decade.
+        </p>
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 reveal reveal-4">
+          <a
+            href="/contact/"
+            class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
+          >
+            <span class="label-mono">Start a conversation</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="/work/" class="link-ink label-mono text-ink-soft">See the track record</a>
+        </div>
+      </div>
+      <aside class="self-center lg:col-span-5 reveal reveal-5">
+        <div class="border border-ink/15 bg-paper/80 p-7">
+          <p class="label-mono text-slate">What we change</p>
+          <ul class="mt-4 divide-y divide-ink/10">
+            {
+              BRIDGE.map((b) => (
+                <li class="flex items-baseline gap-x-3 py-3">
+                  <span class="w-36 shrink-0 whitespace-nowrap font-mono text-[11px] uppercase tracking-widest text-slate">
+                    {b.from}
+                  </span>
+                  <span aria-hidden="true" class="shrink-0 text-saffron">→</span>
+                  <span class="font-display text-lg">{b.to}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Proof bar -->
+  <section aria-label="Track record" class="border-y border-ink/10 bg-cream">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-5 py-12 md:grid-cols-5">
+      {
+        STATS.map((s) => (
+          <div>
+            <p class="font-display text-4xl leading-none md:text-[2.6rem]">
+              {s.prefix && (
+                <span class="mr-1 align-middle font-mono text-[11px] uppercase tracking-widest text-slate">
+                  {s.prefix}
+                </span>
+              )}
+              {s.value}
+              {s.fn && (
+                <sup class="fn">
+                  <a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>
+                    {s.fn}
+                  </a>
+                </sup>
+              )}
+            </p>
+            <p class="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-slate">
+              {s.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- The burning platform -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="01" label="The burning platform" />
+      <h2 class="h-display mt-4 max-w-3xl text-3xl md:text-4xl">
+        Every system you run was designed to sell a room.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        Hospitality is the most vendor-saturated software category there is — and none of those
+        vendors is paid to solve any of the six problems below. Each one is a data, modeling, or
+        governance problem, sitting underneath the applications rather than inside them.
+      </p>
+      <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          BURNING.map((b) => (
+            <li class="group grid gap-x-8 gap-y-2 py-7 md:grid-cols-[4rem_1fr]">
+              <span class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron">
+                {b.num}
+              </span>
+              <div>
+                <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
+                  {b.title}
+                </h3>
+                <p class="mt-2.5 max-w-3xl leading-relaxed text-ink-soft">
+                  {b.desc}
+                  {b.fns && (
+                    <sup class="fn">
+                      {b.fns.map((f, i) => (
+                        <Fragment>
+                          {i > 0 && <span aria-hidden="true">,</span>}
+                          <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
+                            {f}
+                          </a>
+                        </Fragment>
+                      ))}
+                    </sup>
+                  )}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- What transfers -->
+  <section class="relative border-t border-ink/10 bg-cream">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="02" label="What transfers" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        We didn’t learn this in hospitality. That’s the point.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        We have spent a decade building AI that runs in hospitals, under regulators who ask for
+        evidence rather than a demo. Nothing below is a stretch — it is the same work, applied to a
+        guest instead of a patient.
+      </p>
+      <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          TRANSFERS.map((t) => (
+            <li class="group grid items-baseline gap-x-10 gap-y-2 py-5 md:grid-cols-[1fr_auto_1fr]">
+              <span class="leading-relaxed text-slate">
+                {t.have}
+                {t.fn && (
+                  <sup class="fn">
+                    <a href={`#fn-${t.fn}`} aria-label={`Footnote ${t.fn}`}>
+                      {t.fn}
+                    </a>
+                  </sup>
+                )}
+              </span>
+              <span
+                aria-hidden="true"
+                class="hidden shrink-0 text-saffron transition-transform group-hover:translate-x-0.5 md:block"
+              >
+                →
+              </span>
+              <span class="font-display text-lg leading-snug transition-colors group-hover:text-saffron">
+                {t.apply}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <blockquote class="mt-12 max-w-2xl border-l-2 border-saffron pl-6">
+        <p class="font-display text-2xl italic leading-snug md:text-[1.75rem]">
+          Your spa is a clinic in the eyes of a data regulator. Clinics are where we come from.
+        </p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- What we do for hotel groups -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="03" label="What we do for hotel groups" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        Six ways in — your systems, your data, your team afterward.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        We do not build or replace a PMS, a booking engine, a channel manager, or a point-of-sale.
+        Those work, you already pay for them, and ripping one out is a multi-year project with its own
+        vendor category. We integrate with what you run — and build the layer no vendor is incentivized
+        to build.
+      </p>
+      <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          HOSPITALITY_SERVICES.map((s) => (
+            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
+              <p class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron">{s.num}</p>
+              <h3 class="font-display mt-3 text-xl transition-colors group-hover:text-saffron">{s.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink-soft">
+                {s.desc}
+                {s.fns && (
+                  <sup class="fn">
+                    {s.fns.map((f, i) => (
+                      <Fragment>
+                        {i > 0 && <span aria-hidden="true">,</span>}
+                        <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
+                          {f}
+                        </a>
+                      </Fragment>
+                    ))}
+                  </sup>
+                )}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Credibility band -->
+  <section class="relative overflow-hidden border-t-4 border-saffron bg-cream">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto max-w-6xl px-5 py-20 md:py-24">
+      <div class="grid gap-12 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <Eyebrow num="04" label="Credibility" />
+          <h2 class="h-display mt-4 text-4xl md:text-5xl">
+            Peer-reviewed, cited, and <em>standard-setting</em>.
+          </h2>
+          <p class="mt-6 max-w-xl leading-relaxed text-ink-soft">
+            Our team’s research appears in <strong class="text-ink">Nature Communications</strong>
+            and <strong class="text-ink">Nature Machine Intelligence</strong>, and has been covered
+            by <strong class="text-ink">The Wall Street Journal</strong>. We’ve led more than
+            <strong class="text-ink">$9M</strong> in NIH/NCI-funded R&D, and we hold the Vice Chair
+            for Algorithmic Development of the
+            <a href={SITE.mlcommons} class="link-ink" rel="noopener">MLCommons Medical Working Group</a>
+            — helping write the standards medical AI is measured against.
+          </p>
+          <a href="/work/" class="link-ink label-mono mt-8 inline-block text-slate">
+            Publications & standards work →
+          </a>
+        </div>
+        <div class="self-end lg:col-span-5">
+          <ul class="divide-y divide-ink/10 border-y border-ink/10">
+            {
+              COMMUNITY.map((c) => (
+                <li class="py-4 leading-relaxed text-ink-soft">
+                  {c.href ? (
+                    <a href={c.href} rel="noopener" class="link-ink">
+                      {c.text}
+                    </a>
+                  ) : (
+                    c.text
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-20">
+        <p class="label-mono text-slate">Built in the open</p>
+        <p class="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+          These frameworks were built so hospitals could train together without ever sharing a patient
+          record. The same harmonization, privacy, and lineage machinery is what a hotel group needs
+          to hold a guest file in 2027.
+        </p>
+        <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+          {
+            PROJECTS.map((p) => (
+              <li>
+                <a
+                  href={p.href}
+                  rel="noopener"
+                  class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[9rem_1fr_auto]"
+                >
+                  <span class="font-display text-xl transition-colors group-hover:text-saffron">
+                    {p.name}
+                  </span>
+                  <span class="leading-relaxed text-ink-soft">
+                    {p.desc}
+                    <span class="mt-1.5 block font-mono text-[11px] uppercase tracking-[0.14em] text-slate">
+                      {p.meta} · {p.role}
+                    </span>
+                  </span>
+                  <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
+                    GitHub ↗
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-6 font-mono text-xs text-slate">
+          Plus 40+ conda-forge packages maintained for reproducible scientific computing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we engage -->
+  <section class="border-t border-ink/10">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-24">
+      <Eyebrow num="05" label="How we engage" />
+      <h2 class="h-display mt-4 max-w-2xl text-4xl md:text-5xl">
+        Start at the front desk. Finish at the P&L.
+      </h2>
+      <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">
+        Each of these is a standalone engagement with its own scope, fee, and exit criteria. Most
+        groups start with one of the first two.
+      </p>
+      <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          HOSPITALITY_MODELS.map((m) => (
+            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
+              <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
+                {m.title}
+              </h3>
+              <p class="mt-3 line-clamp-3 min-h-[4.27rem] text-sm leading-relaxed text-ink-soft">
+                {m.desc}
+              </p>
+              <div class="mt-4 border-t border-ink/10 pt-4">
+                <p class="flex min-h-[2.62rem] items-baseline gap-2">
+                  <span aria-hidden="true" class="shrink-0 text-saffron transition-transform group-hover:translate-x-0.5">
+                    →
+                  </span>
+                  <span class="font-display text-[0.95rem] italic leading-snug text-ink">{m.outcome}</span>
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-12 max-w-2xl border-l-2 border-ink/15 pl-6 text-sm leading-relaxed text-slate">
+        We model the specified-premises decision; we do not file it. Any tax position we recommend goes
+        to your chartered accountant for sign-off, in writing, before it is acted on.
+      </p>
+    </div>
+  </section>
+
+  <CTABand
+    heading="The room is a commodity. Everything else is yours."
+    sub="Start with a readiness sprint or a single-property check-in pilot. If banquet intelligence, agent-readable distribution, or guest-data readiness is on your roadmap, we should talk."
+  />
+
+  <!-- Footnotes -->
+  <section aria-label="Sources and attribution" class="mx-auto max-w-6xl px-5 py-12">
+    <p class="label-mono text-slate">Sources & attribution</p>
+    <ol class="mt-4 max-w-3xl space-y-2 font-mono text-xs leading-relaxed text-slate">
+      <li id="fn-1">
+        1 — Led by our founder across NIH/NCI-funded programs at the University of Pennsylvania and
+        Indiana University.
+      </li>
+      <li id="fn-2">
+        2 — Vaiyu client engagements: pre-training optimization with model accuracy maintained or
+        improved.
+      </li>
+      <li id="fn-3">
+        3 — Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
+        Nature Communications 13 (2022).
+        <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">
+          doi:10.1038/s41467-022-33407-5</a
+        > — 71 sites across 6 continents, the largest real-world federated learning study to date.
+      </li>
+      <li id="fn-4">
+        4 — Founder track record at Indiana University: inference latency reduced by up to 70%,
+        compute requirements by 10–50%, in clinical research environments.
+      </li>
+      <li id="fn-a">
+        a — Otelier, <em>2026 Hotel Operations Index</em>. A vendor-sponsored survey; the direction is
+        corroborated by Cloudbeds’ <em>2026 State of Independent Hotels</em> (67% of independents name
+        managing disparate systems a top concern) and by NYU SPS Tisch / RateGain / HEDNA,
+        <em>State of Distribution 2025</em> (80% of hotels spend up to two days a week on manual
+        reporting; ~21,000 properties).
+      </li>
+      <li id="fn-b">
+        b — Savills India with Hotelivate, survey of ~600 hotels across 150 cities, 2024–25 — non-room
+        revenue up to 60% of total in Tier II/III. US contrast (~32% non-room): CBRE Hotels Research,
+        <em>Trends®</em>, 2025.
+      </li>
+      <li id="fn-c">
+        c — Jefferies with CAIT, 2023 — India’s wedding market estimated near US$130bn across 8–10
+        million weddings a year; the second-largest consumption category after food and grocery.
+      </li>
+      <li id="fn-d">
+        d — CBIC FAQ on restaurant service supplied at “specified premises,” 27 March 2025, and
+        Annexure VII: a premises is <em>specified</em> if, in the preceding financial year, the value of
+        supply of any unit of accommodation exceeded ₹7,500 per unit per day; restaurant service there
+        attracts 18% GST with input tax credit, elsewhere 5% without. Effective 1 April 2025; the
+        definition and its preceding-year lookback survive the rate rationalization effective 22
+        September 2025. Opt-in and opt-out are filed 1 January – 31 March for the succeeding financial
+        year and auto-continue until revoked (GSTN Advisory No. 645, 4 January 2026). Verified 9 July
+        2026. This is a modeling problem, not tax advice.
+      </li>
+      <li id="fn-e">
+        e — Ahrefs, December 2025, ~300,000 keywords — AI Overviews cut click-through to the
+        top-ranking page by ~58%. Seer Interactive, September 2025 — organic click-through 1.76% →
+        0.61% on queries showing an AI Overview (3,119 queries; 25.1M impressions). Both are
+        general-query studies; no hospitality-specific measurement exists.
+      </li>
+      <li id="fn-f">
+        f — Similarweb, 2025 — travel and hospitality is the fastest-growing vertical for AI referral
+        traffic (+1,700%, July 2024 – February 2025).
+      </li>
+      <li id="fn-g">
+        g — OpenAI DevDay, 6 October 2025 — ChatGPT apps launched with two of the largest OTAs as
+        partners. Google Agent Payments Protocol, 16 September 2025, 60+ partners. Note that OpenAI
+        walked back in-chat travel checkout in March 2026; transactions remain on the OTA’s own site.
+        The near-term shift is in discovery, not payment.
+      </li>
+      <li id="fn-h">
+        h — Commission ranges are directional; no OTA publishes a rate card. The firmest anchor is
+        Booking Holdings’ FY2024 blended take rate of ~14.3% (revenue ÷ gross bookings). Cancellation
+        by channel: D-EDGE, October 2024 — direct 11.1%, Booking.com group 42% (Europe). Channel mix:
+        Cloudbeds, 2024 (independents 61% via OTA) and RateGain, 2025 (branded chains 22%).
+      </li>
+      <li id="fn-i">
+        i — India’s Digital Personal Data Protection Rules, notified 13 November 2025. Substantive
+        obligations — notice, security safeguards, breach notification, retention, erasure — commence
+        13 May 2027. Penalties reach ₹250 crore for a security-safeguards failure (DPDP Act 2023,
+        Schedule 1). Consent notices are required in all 22 scheduled languages.
+      </li>
+      <li id="fn-j">
+        j — GDPR Article 9 — health data is special-category, and applies to EU-resident guests’ spa and
+        wellness treatment records. India’s DPDP framework draws no equivalent sensitive-data class.
+      </li>
+      <li id="fn-k">
+        k — UIDAI / PIB advisory, May 2022 — private entities such as hotels may not collect or store
+        Aadhaar photocopies. Masked Aadhaar, offline e-KYC, QR, or OTP verification is the permitted
+        route.
+      </li>
+      <li id="fn-l">
+        l — Champions 12.3 (WRI/WRAP-backed), <em>The Business Case for Reducing Food Loss and Waste:
+        Hotels</em>, 2018 — 21% average kitchen food-waste reduction in year one across 42 hotel sites
+        in 15 countries; $7 saved per $1 invested. The strongest non-vendor evidence in the category.
+      </li>
+      <li id="fn-m">
+        m — Anderson, C., “The Impact of Social Media on Lodging Performance,” Cornell Center for
+        Hospitality Research, 2012 — a 1-point gain on a 100-point review index is associated with
+        +1.42% RevPAR. Anderson, C. & Han, S., Cornell CHR, 2016 — revenue rises with review-response
+        rate only to ~40%; responding to more than ~85% of reviews is associated with lower revenue
+        than not responding at all. Which is why we model which reviews to answer.
+      </li>
+      <li id="fn-n">
+        n — Immigration and Foreigners Act, 2025 (Act No. 13 of 2025), in force 1 September 2025 —
+        every accommodation provider must report each foreign guest via the Bureau of Immigration
+        portal within 24 hours of arrival.
+      </li>
+      <li id="fn-o">
+        o — RBI card-on-file tokenization, in force 1 October 2022 — merchants and aggregators may not
+        store the card number, expiry, or CVV; network tokens are required. Directly affects hotels
+        holding cards to guarantee a no-show.
+      </li>
+    </ol>
+  </section>
+</Base>

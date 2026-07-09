@@ -188,6 +188,13 @@ export const INDUSTRIES: { name: string; tag: string; blurb: string; href?: stri
     tag: 'safety-critical',
     blurb: 'Perception and analytics built under hard latency, safety, and certification constraints.',
   },
+  {
+    name: 'Hospitality',
+    tag: 'margin & guest trust',
+    blurb:
+      'Hotel groups and multi-property operators. We build the data spine under the banquet hall, the restaurants, and the spa — and hold the guest file to the standard a data regulator now expects.',
+    href: '/hospitality/',
+  },
 ];
 
 export const ENGAGEMENTS = [
