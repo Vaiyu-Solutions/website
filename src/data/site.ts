@@ -173,9 +173,11 @@ export const INDUSTRIES: { name: string; tag: string; blurb: string; href?: stri
       'Document intelligence, risk models, and LLM workflows — deployed with the lineage and audit trail your regulators expect.',
   },
   {
-    name: 'Energy',
+    name: 'Energy & Utilities',
     tag: 'always-on',
-    blurb: 'Forecasting, monitoring, and optimization for infrastructure that cannot go down.',
+    blurb:
+      'Transmission developers, utilities, and the grid that cannot go down. We unlock capacity on the lines already in the ground — dynamic line rating, topology optimization, and sovereign siting and permitting copilots that never leave your perimeter.',
+    href: '/energy-and-utilities/',
   },
   {
     name: 'Manufacturing',

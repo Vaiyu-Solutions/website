@@ -1,0 +1,885 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CTABand from '../components/CTABand.astro';
+import WindField from '../components/WindField.astro';
+import { SITE, STATS, PROJECTS, COMMUNITY } from '../data/site';
+
+// What moves in-house — hero aside. The left column renders as a nowrap 11px mono
+// label in a 10rem column: keep `from` at or under ~20 characters.
+const BRIDGE = [
+  { from: 'Static line ratings', to: 'Capacity you already own' },
+  { from: 'Manual permitting', to: 'Sovereign siting copilot' },
+  { from: 'One utility’s model', to: 'Federated grid intelligence' },
+  { from: 'Black-box SaaS', to: 'Auditor-grade sovereign AI' },
+  { from: 'Desk-bound analysis', to: 'Edge tools in the field' },
+];
+
+// The case for the page. Every number carries its source; `fns` index the footnotes below.
+const BLEEDING: { num: string; title: string; desc: string; fns?: string[] }[] = [
+  {
+    num: '01',
+    title: 'Congestion you pay for twice.',
+    desc: 'U.S. transmission congestion cost roughly $20.8B in 2022 — electricity that exists but cannot reach load, because the wires are “full” on paper at worst-case ratings. Much of that headroom is real, and recoverable without a single new tower.',
+    fns: ['h'],
+  },
+  {
+    num: '02',
+    title: 'A queue that bleeds out before it connects.',
+    desc: 'Of all the generation that entered U.S. interconnection queues since 2000, about 13% ever reached commercial operation. 77% withdrew. Roughly 2,290 GW still sits waiting. Procedural reform is real and underway; the attrition is the story.',
+    fns: ['b'],
+  },
+  {
+    num: '03',
+    title: 'Delay is a line item now, not a slipped date.',
+    desc: 'PJM’s average interconnection timeline stretched from under two years in 2008 to more than eight in 2025, while its capacity bill leapt from $2.2B to $16.1B in a single cycle. RMI attributes essentially the whole $13.9B increase to a queue too slow to bring new supply online — not to real scarcity.',
+    fns: ['h'],
+  },
+  {
+    num: '04',
+    title: 'Permitting burns the balance sheet.',
+    desc: 'NEPA and EIS reviews average four to six and a half years, and can exceed a decade. Sightline estimated that one utility transmission project alone absorbed about $52.4M in permitting-delay costs.',
+    fns: ['d'],
+  },
+  {
+    num: '05',
+    title: 'Hyperscalers are routing around you.',
+    desc: 'Behind-the-meter “bring your own power” arrangements let data-center developers bypass the public interconnection queue entirely. That is a direct disintermediation threat to any developer or utility whose moat is knowing how to work that queue.',
+  },
+];
+
+// Evidenced capability, and where it lands on a grid. Left column is the technology
+// we have shipped in another regulated domain; right column is the transmission workflow.
+const STACK: { title: string; desc: string; apply: string; fn?: string }[] = [
+  {
+    title: 'Sovereign LLM orchestration & enclave inference',
+    desc: 'Remote-attested, cryptographically logged inference for frontier or open-weight models, so nothing leaves your perimeter.',
+    apply:
+      'Permitting and NEPA copilots, and regulatory-filing drafting — the only compliant way to put a language model near grid-sensitive text while NERC CIP rules out public APIs.',
+    fn: 'e',
+  },
+  {
+    title: 'Federated & privacy-preserving learning',
+    desc: 'Proven across 71 sites on six continents, in the largest real-world federated learning study to date.',
+    apply:
+      'Joint model training across neighboring utilities, ISOs, and RTOs — interregional congestion and line-rating models — without centralizing anyone’s raw grid data.',
+    fn: '3',
+  },
+  {
+    title: 'RAG & document intelligence over regulatory corpora',
+    desc: 'Retrieval-augmented systems that draft, cite, and cross-check against thousands of pages of filings.',
+    apply:
+      'Interconnection-study triage, NEPA drafting, precedent search across prior dockets, and public-comment triage — with source lineage that survives litigation.',
+  },
+  {
+    title: 'GIS + ML spatial optimization',
+    desc: 'Low-code geospatial and language pipelines that ingest parcel, environmental, and zoning layers.',
+    apply:
+      'Corridor and routing alternatives, ranked on technical, environmental, and social criteria, with explainable outputs a regulator can interrogate.',
+  },
+  {
+    title: 'Edge-optimized, compressed models',
+    desc: 'Pruning and quantization delivering up to 70% latency reduction and 10–50% lower compute.',
+    apply:
+      'Siting and risk models running offline on a land agent’s tablet, and coordination models running on grid-edge devices without a round trip to the cloud.',
+    fn: '4',
+  },
+  {
+    title: 'Explainable AI & cryptographic audit lineage',
+    desc: 'Remote attestation, supply-chain provenance, and signed audit chains, with explainability built in rather than bolted on.',
+    apply:
+      'Governance aligned to NERC CIP, and an audit trail that holds up under a regulator’s — or a litigant’s — scrutiny.',
+  },
+  {
+    title: 'Physics-informed, domain-constrained modeling',
+    desc: 'Physical constraints embedded into training, so accuracy holds on noisy real-world signals.',
+    apply:
+      'Dynamic line rating, topology optimization, and weather-driven capacity forecasting — the physics engine underneath a virtual interconnect.',
+    fn: 'f',
+  },
+];
+
+// What deploys on existing infrastructure — no new interconnect, no new right-of-way.
+const WORKFLOWS: {
+  workflow: string;
+  app: string;
+  outcome: string;
+  when: string;
+  fn?: string;
+}[] = [
+  {
+    workflow: 'Interconnection-study & filing review',
+    app: 'Sovereign retrieval that drafts, cross-references, and pre-validates against precedent and grid code before a filing goes out.',
+    outcome: 'Review from months to days, and fewer re-submissions that reset the queue.',
+    when: '8–12 wks to pilot',
+  },
+  {
+    workflow: 'Dynamic line rating',
+    app: 'Physics-informed models on weather and sensor data, computing real-time ampacity against a conservative static derating.',
+    outcome: '10–30% more usable capacity in ordinary conditions; up to ~50% on a cold, windy day.',
+    when: '4–8 wks to model',
+    fn: 'f',
+  },
+  {
+    workflow: 'Topology optimization',
+    app: 'Real-time power-flow models that reroute around congested corridors onto parallel paths sitting idle.',
+    outcome: 'Congestion relief on existing wires — 56% more flow in one real MISO reconfiguration.',
+    when: '6–10 wks to pilot',
+    fn: 'f',
+  },
+  {
+    workflow: 'Siting & corridor optimization',
+    app: 'GIS and ML pipelines that rank route alternatives against technical, environmental, and social criteria.',
+    outcome: 'Siting analysis from months to days, with rankings a hearing examiner can follow.',
+    when: '6–10 wks to pilot',
+  },
+  {
+    workflow: 'Congestion & adequacy forecasting',
+    app: 'Federated learning across neighboring utilities and RTOs — a shared model, trained on signal nobody had to hand over.',
+    outcome: 'Region-wide optimization, with no data-sharing agreement to negotiate.',
+    when: '3–6 mo to federate',
+  },
+  {
+    workflow: 'Delay-cost intelligence',
+    app: 'Every project benchmarked against the permitting and queue-delay costs it is currently absorbing.',
+    outcome: 'Board-level clarity on which projects are hemorrhaging, and what accelerating them is worth.',
+    when: '4–6 wks to stand up',
+  },
+];
+
+// The six core services, in transmission's nouns. Nothing here is a new business line.
+const ENERGY_SERVICES: { num: string; title: string; desc: string; fn?: string }[] = [
+  {
+    num: '01',
+    title: 'Threat & opportunity assessment',
+    desc: 'A two-to-four week sprint, fixed in scope and fee: where you are exposed to interconnection and permitting delay, what the AI-native entrants and the ISOs have already deployed, and a costed pilot plan against it.',
+  },
+  {
+    num: '02',
+    title: 'Grid & regulatory data engineering',
+    desc: 'Ingestion and harmonization across GIS, SCADA, permitting archives, and land records. Unglamorous, load-bearing, and the thing every siting or permitting copilot silently depends on.',
+  },
+  {
+    num: '03',
+    title: 'Virtual-interconnect & forecasting models',
+    desc: 'Dynamic line rating, topology optimization, corridor optimization, and filing-drafting models — plus federated training across utility and RTO partners when the data cannot move.',
+  },
+  {
+    num: '04',
+    title: 'Sovereign deployment & edge optimization',
+    desc: 'Enclave-based inference inside your own perimeter, which is the NERC-CIP-compatible path — and field-tablet models for land agents working where there is no signal.',
+    fn: 'e',
+  },
+  {
+    num: '05',
+    title: 'Audit-grade governance',
+    desc: 'Remote attestation, signed audit lineage, and validation protocols built for NERC CIP and federal grant-compliance scrutiny, rather than for internal comfort.',
+  },
+  {
+    num: '06',
+    title: 'Embedded AI leadership',
+    desc: 'Fractional technical leadership for a team that is already engineering- and analytics-literate, but has never had to stand up an in-house AI function.',
+  },
+];
+
+// Engagement models sized to how transmission work is actually funded.
+// Copy is length-tuned to ~3 lines of `desc`, ~2 of `outcome`, ~2 of `measured`;
+// the card markup reserves exactly that height so every card aligns on the grid.
+const ENERGY_MODELS = [
+  {
+    title: 'Threat-brief sprint',
+    when: '2–4 weeks',
+    desc: 'Your specific exposure to interconnection and permitting delay, the deployments already live at the ISOs, and a costed plan against both.',
+    outcome: 'A board-ready case: cost of inaction, next to cost of the pilot.',
+    measured: 'Named exposures, ranked. One scoped pilot, with a price on it.',
+  },
+  {
+    title: 'Sovereign pilot',
+    when: '8–12 weeks',
+    desc: 'One high-value workflow — usually permitting drafting or dynamic line rating — built on your infrastructure, with an honest before-and-after.',
+    outcome: 'One workflow, provably faster, entirely inside your perimeter.',
+    measured: 'Hours saved per review; MW unlocked; re-submission rate.',
+  },
+  {
+    title: 'Virtual-interconnect intelligence',
+    when: 'Pilot in weeks, then ongoing',
+    desc: 'Line rating, topology optimization, and power-flow models run as a managed, sovereign capability across the corridors you already own.',
+    outcome: 'Capacity you already paid for, released without a right-of-way.',
+    measured: 'MW of usable capacity unlocked; congestion cost avoided; corridors covered.',
+  },
+  {
+    title: 'Build & handover',
+    when: '3–6 months',
+    desc: 'Full delivery of a siting, forecasting, or virtual-interconnect system — documented, tested, and taught to the teams who will run it.',
+    outcome: 'Working software your own engineers own after we leave.',
+    measured: 'Capability transfer verified against a baseline; team proficiency.',
+  },
+  {
+    title: 'Federated multi-party engagement',
+    when: '3–6 months to stand up',
+    desc: 'Federated training across neighboring utilities, ISOs, or RTOs. Everyone trains on everyone’s signal; nobody’s raw grid data leaves home.',
+    outcome: 'Regional intelligence, with no data-sharing agreement to negotiate.',
+    measured: 'Model-accuracy gain per partner; region-wide optimization.',
+  },
+  {
+    title: 'Embedded AI leadership',
+    when: 'Ongoing',
+    desc: 'Senior technical leadership — architecture, hiring, vendor selection — for a team standing up its first in-house AI function.',
+    outcome: 'Your team, levelled up — not a dependency on ours.',
+    measured: 'Internal capability milestones; time to first deployment.',
+  },
+];
+---
+
+<Base
+  title="For Transmission Developers & Utilities"
+  description="Vaiyu Solutions builds sovereign AI for transmission developers and utilities — virtual interconnects that unlock capacity on the lines you already own, federated grid intelligence, and sovereign copilots for siting and permitting, with auditor-grade lineage on every decision."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-16 pt-20 md:pb-24 md:pt-28 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <Eyebrow label="For transmission developers & utilities" class="reveal" />
+        <h1 class="h-display mt-5 text-[2.6rem] md:text-6xl reveal reveal-2">
+          The grid must double by 2050 — but the capacity you need is <em>already in your wires</em>.
+        </h1>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
+          New transmission takes four to ten years to permit and build. The losses are happening now:
+          roughly $20.8B a year in congestion, an interconnection queue that 77% of projects abandon
+          before they ever connect, and capacity you already own, sitting idle behind worst-case line
+          ratings. Vaiyu builds the sovereign AI that unlocks that stranded capacity today — while your
+          grid models, routing strategy, and compliance trail never leave your enterprise boundary.
+        </p>
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 reveal reveal-4">
+          <a
+            href="/contact/"
+            class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
+          >
+            <span class="label-mono">Start a conversation</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="/work/" class="link-ink label-mono text-ink-soft">See the track record</a>
+        </div>
+      </div>
+      <aside class="self-center lg:col-span-5 reveal reveal-5">
+        <div class="border border-ink/15 bg-paper/80 p-7">
+          <p class="label-mono text-slate">What moves in-house</p>
+          <ul class="mt-4 divide-y divide-ink/10">
+            {
+              BRIDGE.map((b) => (
+                <li class="flex items-baseline gap-x-3 py-3">
+                  <span class="w-40 shrink-0 whitespace-nowrap font-mono text-[11px] uppercase tracking-widest text-slate">
+                    {b.from}
+                  </span>
+                  <span aria-hidden="true" class="shrink-0 text-saffron">→</span>
+                  <span class="font-display text-lg">{b.to}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Proof bar -->
+  <section aria-label="Track record" class="border-y border-ink/10 bg-cream">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-5 py-12 md:grid-cols-5">
+      {
+        STATS.map((s) => (
+          <div>
+            <p class="font-display text-4xl leading-none md:text-[2.6rem]">
+              {s.prefix && (
+                <span class="mr-1 align-middle font-mono text-[11px] uppercase tracking-widest text-slate">
+                  {s.prefix}
+                </span>
+              )}
+              {s.value}
+              {s.fn && (
+                <sup class="fn">
+                  <a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>
+                    {s.fn}
+                  </a>
+                </sup>
+              )}
+            </p>
+            <p class="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-slate">
+              {s.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- The bleeding -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="01" label="The bleeding" />
+      <h2 class="h-display mt-4 max-w-3xl text-3xl md:text-4xl">
+        Every year you wait for steel, the grid bleeds.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        The mismatch is brutal. A hyperscale data center gets built in twelve to eighteen months; new
+        transmission and the interconnection studies behind it take four to ten years.<sup class="fn"
+          ><a href="#fn-a" aria-label="Footnote a">a</a></sup
+        > That gap is not a scheduling inconvenience. It is a recurring, quantified loss, landing on ratepayers
+        and on whoever the regulator decides is responsible. Which is the premise of this page: you do
+        not have to close the physical gap to stop most of the bleeding.
+      </p>
+      <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          BLEEDING.map((b) => (
+            <li class="group grid gap-x-8 gap-y-2 py-7 md:grid-cols-[4rem_1fr]">
+              <span class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron">
+                {b.num}
+              </span>
+              <div>
+                <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
+                  {b.title}
+                </h3>
+                <p class="mt-2.5 max-w-3xl leading-relaxed text-ink-soft">
+                  {b.desc}
+                  {b.fns && (
+                    <sup class="fn">
+                      {b.fns.map((f, i) => (
+                        <Fragment>
+                          {i > 0 && <span aria-hidden="true">,</span>}
+                          <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
+                            {f}
+                          </a>
+                        </Fragment>
+                      ))}
+                    </sup>
+                  )}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- The bridge -->
+  <section class="relative border-t border-ink/10 bg-cream">
+    <div class="relative mx-auto grid max-w-6xl gap-x-12 gap-y-8 px-5 py-16 md:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <Eyebrow num="02" label="Virtual interconnects" />
+        <h2 class="h-display mt-4 text-3xl md:text-4xl">
+          The physical grid takes a decade. The capacity layer ships in weeks.
+        </h2>
+      </div>
+      <div class="space-y-5 leading-relaxed text-ink-soft lg:col-span-7">
+        <p>
+          Between “the grid is broken” and “buy our AI” there is a piece that usually goes missing:
+          there is a capability layer that pays for itself long before the first new line energizes.
+          We call it a <strong class="text-ink">virtual interconnect</strong>.
+        </p>
+        <p>
+          The term is borrowed on purpose. In European gas markets, regulators formalized
+          <em>virtual interconnection points</em> — a legal construct that lets shippers trade capacity
+          across several existing physical border points as though they were one, without laying new pipe.
+          The electricity grid has no formal equivalent, so treat this as a deliberate analogy rather than
+          established utility vocabulary.<sup class="fn"
+            ><a href="#fn-g" aria-label="Footnote g">g</a></sup
+          > The idea maps exactly: software-defined capacity on the lines you already own.
+        </p>
+        <p>
+          The mechanics are not speculative. Grid-enhancing technologies are the hardware enablers —
+          dynamic line rating, topology optimization, advanced power-flow control. DOE states that
+          dynamic line rating alone can let a line deliver 50% more energy than its labeled limits on a
+          cold, windy day, with 10–30% typical in ordinary conditions; in one real MISO reconfiguration,
+          topology-optimization software found 56% more power-flow capacity than the un-optimized
+          case.<sup class="fn"><a href="#fn-f" aria-label="Footnote f">f</a></sup>
+        </p>
+        <p>
+          Sovereign AI is the operating system that runs them together. Deployed one corridor at a time,
+          these technologies deliver fragmented gains. Coordinated across corridors, across operating
+          companies, and — through federated learning — across ISO and RTO boundaries, they behave like
+          interconnection capacity that never had to be permitted. That coordination is an AI problem:
+          real-time, physics-constrained, and well past what an operator can run by hand on
+          high-frequency sensor and weather data.
+        </p>
+      </div>
+      <div class="lg:col-span-12">
+        <blockquote class="mt-6 max-w-3xl border-l-2 border-saffron pl-6">
+          <p class="font-display text-2xl italic leading-snug md:text-[1.75rem]">
+            The offer is not “help us build more grid.” It is: make the grid you already own behave as
+            though it has meaningfully more capacity — this year.
+          </p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Regulatory reality -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="03" label="Regulatory reality" />
+      <h2 class="h-display mt-4 max-w-3xl text-3xl md:text-4xl">
+        Sovereign isn’t a preference here. It’s the only deployment model that is currently possible.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        Any honest version of this offer has to address regulation head-on, because it cuts both ways.
+        Two of the constraints that keep other vendors out are, on closer reading, doors.
+      </p>
+
+      <div class="mt-12 grid gap-x-12 gap-y-14 lg:grid-cols-2">
+        <div>
+          <p class="label-mono text-slate">Headwinds · why most AI vendors can’t deploy here</p>
+          <ul class="mt-6 divide-y divide-ink/10 border-y border-ink/10">
+            <li class="py-5">
+              <h3 class="font-display text-lg leading-snug">
+                NERC CIP effectively rules out public cloud for bulk-power operations.
+              </h3>
+              <p class="mt-2 leading-relaxed text-ink-soft">
+                That is NERC’s own assessment: the current device-centric standards are “effectively
+                prohibiting industry from using cloud technologies except in the most basic use cases,”
+                and cloud-capable standards are not expected to be enforceable until roughly 2029.<sup
+                  class="fn"><a href="#fn-e" aria-label="Footnote e">e</a></sup
+                > A grid-model workflow on a public LLM API is not a policy edge case. It is outside the
+                compliance envelope. Enclave-based inference is the entry ticket, not a differentiator.
+              </p>
+            </li>
+            <li class="py-5">
+              <h3 class="font-display text-lg leading-snug">
+                The CapEx/OpEx gap under-deploys exactly this capability.
+              </h3>
+              <p class="mt-2 leading-relaxed text-ink-soft">
+                Under traditional cost-of-service regulation, a utility earns a regulated return on
+                capital it puts in rate base — steel and concrete — but does not earn profits on
+                expenses.<sup class="fn"><a href="#fn-j" aria-label="Footnote j">j</a></sup> Software-defined
+                capacity booked as OpEx earns nothing. That is why it is chronically under-adopted despite
+                the economics, and precisely why an as-a-service wrapper is the right commercial shape:
+                it routes around the disincentive instead of fighting it.
+              </p>
+            </li>
+            <li class="py-5">
+              <h3 class="font-display text-lg leading-snug">
+                A technology cleared in one jurisdiction can stall in the next.
+              </h3>
+              <p class="mt-2 leading-relaxed text-ink-soft">
+                State commissions scrutinize grid-modernization capital hard, and independently. Which is
+                itself an argument for federated, portable, auditor-grade approaches over a one-off black
+                box that has to win the argument again in every state.
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="label-mono text-saffron">Tailwinds · the rules are opening, not closing</p>
+          <ul class="mt-6 divide-y divide-ink/10 border-y border-ink/10">
+            <li class="py-5">
+              <h3 class="font-display text-lg leading-snug">FERC Order 881 already forced the hard part.</h3>
+              <p class="mt-2 leading-relaxed text-ink-soft">
+                As of its July 2025 compliance deadline, transmission providers must use ambient-adjusted
+                ratings as the basis for near-term service. Regulators have <em>already</em> pushed utilities
+                off worst-case static ratings.<sup class="fn"
+                  ><a href="#fn-i" aria-label="Footnote i">i</a></sup
+                > Order 881 mandates ambient-adjusted ratings, not sensor-based dynamic line rating — but it
+                moves the baseline decisively, and DLR is the next step onto rails FERC has already laid.
+              </p>
+            </li>
+            <li class="py-5">
+              <h3 class="font-display text-lg leading-snug">The federal money is pointed here.</h3>
+              <p class="mt-2 leading-relaxed text-ink-soft">
+                DOE’s Grid Resilience and Innovation Partnerships program is authorized at $10.5B for grid
+                modernization and interregional transmission.<sup class="fn"
+                  ><a href="#fn-j" aria-label="Footnote j">j</a></sup
+                > Capacity upgrades can be funded from federal grants, not only from rate-base capital.
+              </p>
+            </li>
+            <li class="py-5">
+              <h3 class="font-display text-lg leading-snug">The ISOs are adopting AI themselves.</h3>
+              <p class="mt-2 leading-relaxed text-ink-soft">
+                PJM’s collaboration with Google and Tapestry, and MISO’s market-facing topology-reconfiguration
+                process, are regulator-visible precedents that AI in the interconnection loop is acceptable at
+                the ISO level.<sup class="fn"><a href="#fn-c" aria-label="Footnote c">c</a></sup> The standard
+                is being set right now, by whoever ships while everyone else is running an internal review.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <blockquote class="mt-14 max-w-3xl border-l-2 border-saffron pl-6">
+        <p class="font-display text-2xl italic leading-snug md:text-[1.75rem]">
+          On this grid, on-prem is not the compliance-cautious option. It is the only one. And the
+          regulatory trend runs toward the capability we sell, not away from it.
+        </p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- The stack -->
+  <section class="relative border-t border-ink/10 bg-cream">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="04" label="What transfers" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        The stack, mapped to how you actually work.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        Not lab demos. Each of these is a technology we have built and shipped in another regulated,
+        high-stakes domain, with an honest line to where it lands in transmission. SCADA, EMS, OMS, ADMS,
+        and DERMS are the systems your team already runs — all five are being rearchitected around this
+        stack, not replaced by something your operators won’t recognize.
+      </p>
+      <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          STACK.map((t) => (
+            <li class="group grid items-baseline gap-x-10 gap-y-2 py-6 md:grid-cols-[1fr_auto_1fr]">
+              <div>
+                <h3 class="font-display text-lg leading-snug transition-colors group-hover:text-saffron">
+                  {t.title}
+                </h3>
+                <p class="mt-1.5 text-sm leading-relaxed text-slate">
+                  {t.desc}
+                  {t.fn && (
+                    <sup class="fn">
+                      <a href={`#fn-${t.fn}`} aria-label={`Footnote ${t.fn}`}>
+                        {t.fn}
+                      </a>
+                    </sup>
+                  )}
+                </p>
+              </div>
+              <span
+                aria-hidden="true"
+                class="hidden shrink-0 text-saffron transition-transform group-hover:translate-x-0.5 md:block"
+              >
+                →
+              </span>
+              <p class="leading-relaxed text-ink-soft">{t.apply}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <blockquote class="mt-14 max-w-2xl border-l-2 border-saffron pl-6">
+        <p class="font-display text-2xl italic leading-snug md:text-[1.75rem]">
+          The goal isn’t AI that works for you. It’s AI that makes you work better.
+        </p>
+      </blockquote>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        These tools make your scarce GIS analysts, transmission engineers, and permitting counsel faster.
+        They do not replace their judgment, and we will not sell you a system that pretends otherwise.
+      </p>
+
+      <div class="mt-20">
+        <p class="label-mono text-slate">Where AI helps now</p>
+        <p class="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+          Every workflow below deploys on the infrastructure you have today. No new interconnect, no new
+          right-of-way, no rate case.
+        </p>
+        <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+          {
+            WORKFLOWS.map((w) => (
+              <li class="group grid gap-x-8 gap-y-3 py-6 md:grid-cols-[12rem_1fr_10rem]">
+                <span class="font-display text-lg leading-snug transition-colors group-hover:text-saffron">
+                  {w.workflow}
+                </span>
+                <div>
+                  <p class="leading-relaxed text-ink-soft">{w.app}</p>
+                  <p class="mt-2 flex items-baseline gap-2">
+                    <span
+                      aria-hidden="true"
+                      class="shrink-0 text-saffron transition-transform group-hover:translate-x-0.5"
+                    >
+                      →
+                    </span>
+                    <span class="font-display text-[0.95rem] italic leading-snug text-ink">
+                      {w.outcome}
+                      {w.fn && (
+                        <sup class="fn">
+                          <a href={`#fn-${w.fn}`} aria-label={`Footnote ${w.fn}`}>
+                            {w.fn}
+                          </a>
+                        </sup>
+                      )}
+                    </span>
+                  </p>
+                </div>
+                <span class="self-baseline font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-slate md:text-right">
+                  {w.when}
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we do -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="05" label="What we do for transmission" />
+      <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
+        Six ways we plug in — same team, your infrastructure.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        We do not build or replace your SCADA, your EMS, or your GIS. Those work, you already pay for
+        them, and ripping one out is a multi-year project with its own vendor category. We build the
+        intelligence layer above them — and run it inside your perimeter.
+      </p>
+      <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          ENERGY_SERVICES.map((s) => (
+            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
+              <p class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron">{s.num}</p>
+              <h3 class="font-display mt-3 text-xl transition-colors group-hover:text-saffron">{s.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink-soft">
+                {s.desc}
+                {s.fn && (
+                  <sup class="fn">
+                    <a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>
+                      {s.fn}
+                    </a>
+                  </sup>
+                )}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Credibility band -->
+  <section class="relative overflow-hidden border-t-4 border-saffron bg-cream">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto max-w-6xl px-5 py-20 md:py-24">
+      <div class="grid gap-12 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <Eyebrow num="06" label="Credibility" />
+          <h2 class="h-display mt-4 text-4xl md:text-5xl">
+            Peer-reviewed, cited, and <em>standard-setting</em>.
+          </h2>
+          <p class="mt-6 max-w-xl leading-relaxed text-ink-soft">
+            Our team’s research appears in <strong class="text-ink">Nature Communications</strong>
+            and <strong class="text-ink">Nature Machine Intelligence</strong>, and has been covered
+            by <strong class="text-ink">The Wall Street Journal</strong>. We’ve led more than
+            <strong class="text-ink">$9M</strong> in NIH/NCI-funded R&D, and we hold the Vice Chair
+            for Algorithmic Development of the
+            <a href={SITE.mlcommons} class="link-ink" rel="noopener">MLCommons Medical Working Group</a>
+            — helping write the standards medical AI is measured against.
+          </p>
+          <a href="/work/" class="link-ink label-mono mt-8 inline-block text-slate">
+            Publications & standards work →
+          </a>
+        </div>
+        <div class="self-end lg:col-span-5">
+          <ul class="divide-y divide-ink/10 border-y border-ink/10">
+            {
+              COMMUNITY.map((c) => (
+                <li class="py-4 leading-relaxed text-ink-soft">
+                  {c.href ? (
+                    <a href={c.href} rel="noopener" class="link-ink">
+                      {c.text}
+                    </a>
+                  ) : (
+                    c.text
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-20">
+        <p class="label-mono text-slate">Built in the open</p>
+        <p class="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+          These frameworks were built so hospitals could train together without ever sharing a patient
+          record. The privacy, federation, and audit machinery underneath them is exactly what
+          multi-utility and multi-RTO collaboration requires.
+        </p>
+        <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+          {
+            PROJECTS.map((p) => (
+              <li>
+                <a
+                  href={p.href}
+                  rel="noopener"
+                  class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[9rem_1fr_auto]"
+                >
+                  <span class="font-display text-xl transition-colors group-hover:text-saffron">
+                    {p.name}
+                  </span>
+                  <span class="leading-relaxed text-ink-soft">
+                    {p.desc}
+                    <span class="mt-1.5 block font-mono text-[11px] uppercase tracking-[0.14em] text-slate">
+                      {p.meta} · {p.role}
+                    </span>
+                  </span>
+                  <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
+                    GitHub ↗
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-6 font-mono text-xs text-slate">
+          Plus 40+ conda-forge packages maintained for reproducible scientific computing.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we engage -->
+  <section class="border-t border-ink/10">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-24">
+      <Eyebrow num="07" label="How we engage" />
+      <h2 class="h-display mt-4 max-w-2xl text-4xl md:text-5xl">
+        Ways in that fit how the work gets funded.
+      </h2>
+      <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">
+        Each is a standalone engagement with its own scope, fee, and exit criteria. Most developers and
+        utilities start with one of the first two.
+      </p>
+      <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          ENERGY_MODELS.map((m) => (
+            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
+              <p class="font-mono text-[11px] uppercase tracking-[0.14em] text-slate transition-colors group-hover:text-saffron">
+                {m.when}
+              </p>
+              <h3 class="font-display mt-3 min-h-[3.5rem] text-xl leading-snug transition-colors group-hover:text-saffron">
+                {m.title}
+              </h3>
+              <p class="mt-1 line-clamp-3 min-h-[4.27rem] text-sm leading-relaxed text-ink-soft">
+                {m.desc}
+              </p>
+              <div class="mt-4 border-t border-ink/10 pt-4">
+                <p class="flex min-h-[2.62rem] items-baseline gap-2">
+                  <span aria-hidden="true" class="shrink-0 text-saffron transition-transform group-hover:translate-x-0.5">
+                    →
+                  </span>
+                  <span class="font-display text-[0.95rem] italic leading-snug text-ink">{m.outcome}</span>
+                </p>
+                <p class="mt-3 min-h-[2.9rem] font-mono text-[11px] leading-relaxed text-slate">
+                  <span class="uppercase tracking-[0.14em]">Measured by</span> · {m.measured}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-12 max-w-2xl border-l-2 border-ink/15 pl-6 text-sm leading-relaxed text-slate">
+        Virtual-interconnect intelligence is delivered as a managed service — which is how it lands in
+        OpEx rather than rate base, and why it does not have to wait on a rate case. We build the models
+        and the audit trail; we do not certify compliance. Any NERC CIP or filing position we support
+        goes to your compliance officer and counsel for sign-off, in writing, before it is acted on.
+      </p>
+    </div>
+  </section>
+
+  <CTABand
+    heading="Don’t wait on steel to stop the bleeding."
+    sub="The capacity is already in your wires. Start with a threat-brief sprint or a fixed-scope pilot — dynamic line rating, permitting automation, or a sovereign virtual-interconnect proof — and put a number on what unlocking it this year is worth."
+  />
+
+  <!-- Footnotes -->
+  <section aria-label="Sources and attribution" class="mx-auto max-w-6xl px-5 py-12">
+    <p class="label-mono text-slate">Sources & attribution</p>
+    <ol class="mt-4 max-w-3xl space-y-2 font-mono text-xs leading-relaxed text-slate">
+      <li id="fn-1">
+        1 — Led by our founder across NIH/NCI-funded programs at the University of Pennsylvania and
+        Indiana University.
+      </li>
+      <li id="fn-2">
+        2 — Vaiyu client engagements: pre-training optimization with model accuracy maintained or
+        improved.
+      </li>
+      <li id="fn-3">
+        3 — Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
+        Nature Communications 13 (2022).
+        <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">
+          doi:10.1038/s41467-022-33407-5</a
+        > — 71 sites across 6 continents, the largest real-world federated learning study to date.
+      </li>
+      <li id="fn-4">
+        4 — Founder track record at Indiana University: inference latency reduced by up to 70%,
+        compute requirements by 10–50%, in clinical research environments.
+      </li>
+      <li id="fn-a">
+        a — Transmission build- and permit-time ranges, and the roughly two-fold expansion of transmission
+        capacity required by mid-century, are DOE-attributed projections (U.S. DOE,
+        <em>National Transmission Needs Study</em>, 2023; DOE <em>Liftoff</em>). Planning estimates, not
+        measured figures.
+      </li>
+      <li id="fn-b">
+        b — Lawrence Berkeley National Laboratory, <em>Queued Up: 2025 Edition</em> (data through
+        year-end 2024) — approximately 2,290 GW of generation and storage actively seeking interconnection.
+        Of capacity entering queues between 2000 and 2019, about 13% had reached commercial operation by
+        end-2024; about 77% was withdrawn. LBNL cautions that the 2024 decline in queue volume is not yet
+        attributable to FERC Order 2023.
+      </li>
+      <li id="fn-c">
+        c — PJM Interconnection, “PJM, Google and Tapestry Join Forces,” 10 April 2025 — a multiyear
+        collaboration applying AI to regional planning and the interconnection process. PJM itself
+        describes the gains as hard to quantify, and reported page-throughput figures are vendor-reported
+        rather than audited. MISO’s Cost Reconfiguration Process makes it the first RTO to let market
+        participants request topology reconfiguration.
+      </li>
+      <li id="fn-d">
+        d — Sightline Institute analysis of permitting-delay costs (~$52.4M) on a Puget Sound Energy
+        transmission project. NEPA/EIS review averages of 4–6.5 years are widely documented. Attributed
+        to its source; not independently verified.
+      </li>
+      <li id="fn-e">
+        e — NERC, Project 2023-09 “Risk Management for Third-Party Cloud Services” white paper, and the
+        CIP Roadmap — the current device-centric CIP standards are “effectively prohibiting industry from
+        using cloud technologies except in the most basic use cases,” with cloud-capable standards not
+        expected to be enforceable until roughly 2029. This is an effective restriction on bulk-electric-system
+        operations rather than a formal ban; BES Cyber System <em>Information</em> has been cloud-permitted
+        since January 2024.
+      </li>
+      <li id="fn-f">
+        f — U.S. DOE Office of Electricity, “Grid-Enhancing Technologies” — DOE states dynamic line rating
+        can let a line “deliver 50 percent more energy than its labeled limits” on a cold, windy day;
+        typical real-world gains are 10–30%. Topology optimization: NewGrid identified a MISO-territory
+        reconfiguration increasing power flow 56% over the un-optimized solution. RMI and Quanta,
+        <em>GETting Interconnected in PJM</em> (2024), model 6.6 GW of otherwise-stalled interconnection
+        capacity unlocked across five PJM states by 2027 — a sponsor-funded modeled projection, not an
+        observed result.
+      </li>
+      <li id="fn-g">
+        g — “Virtual interconnection point” is a formal construct in European natural-gas regulation, not
+        in U.S. electricity: Commission Regulation (EU) 2017/459 (CAM Network Code), Art. 19(9), requires
+        transmission operators to offer capacity at a single virtual point where two or more physical
+        points connect the same adjacent systems. No DOE, FERC, or NERC source uses “virtual interconnect”
+        for electricity. We use it as a deliberate analogy — software-defined capacity on existing lines —
+        and not as standard U.S. grid terminology.
+      </li>
+      <li id="fn-h">
+        h — Grid Strategies, <em>Transmission Congestion Costs in the U.S. RTOs</em> (July 2023) —
+        approximately $20.8B in 2022 ($12.1B across RTOs excluding CAISO, extrapolated nationally). RMI,
+        <em>PJM’s Speed to Power Problem and How to Fix It</em> (November 2025) — average interconnection
+        timeline from under two years in 2008 to over eight in 2025; PJM’s capacity bill from $2.2B to
+        $16.1B in a single cycle, with RMI attributing the ~$13.9B increase to slow interconnection rather
+        than genuine scarcity. Both authors advocate for transmission buildout; the headline figures
+        reconcile against PJM’s own auction reports, but the normative framing is theirs.
+      </li>
+      <li id="fn-i">
+        i — FERC Order No. 881 (2021) requires transmission providers to use ambient-adjusted ratings as
+        the basis for near-term transmission service; its 12 July 2025 compliance deadline has passed.
+        Order 881 mandates ambient-adjusted ratings, <em>not</em> full sensor-based dynamic line rating —
+        the two are distinct and we do not conflate them. FERC Order No. 2023 (2023) replaced serial
+        first-come study with a “first-ready, first-served” cluster process.
+      </li>
+      <li id="fn-j">
+        j — Lawrence Berkeley National Laboratory, <em>Future Electric Utility Regulation</em> No. 8 (2017)
+        — under traditional cost-of-service regulation, utilities “typically have an incentive to make
+        capital investments, but rarely to employ expense-based solutions, since utilities do not earn
+        profits on expenses.” DOE’s Grid Resilience and Innovation Partnerships program is authorized at
+        $10.5B under the Bipartisan Infrastructure Law, with roughly $7.6B awarded across 105 projects
+        through its first two rounds. Program continuity under the current administration is unconfirmed.
+      </li>
+    </ol>
+  </section>
+</Base>
