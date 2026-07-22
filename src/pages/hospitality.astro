@@ -19,19 +19,19 @@ const BURNING: { num: string; title: string; desc: string; fns?: string[] }[] = 
   {
     num: '01',
     title: 'Your systems don’t talk, and no vendor is paid to make them.',
-    desc: 'Only 11% of hotels report a fully integrated tech stack. 27% run seven or more platforms, 27% lose eleven or more hours a week to manual reconciliation, and 91% still rely on manual reporting. Every vendor sells a system of record and profits from owning its slice — harmonizing across them is nobody’s product.',
+    desc: 'Only 11% of hotels report a fully integrated tech stack. 27% run seven or more platforms, 27% lose eleven or more hours a week to manual reconciliation, and 91% still rely on manual reporting. Every vendor sells a system of record and profits from owning its slice; harmonizing across them is nobody’s product.',
     fns: ['a'],
   },
   {
     num: '02',
     title: 'The margin is where the software isn’t.',
-    desc: 'Non-room revenue — banquets, weddings, restaurants, spa — reaches up to 60% of the total in Indian Tier II/III hotels, against roughly 32% for US full-service properties. India runs eight to ten million weddings a year, in a market estimated near US$130bn. Every revenue-management system on the market prices rooms.',
+    desc: 'Non-room revenue (banquets, weddings, restaurants, spa) reaches up to 60% of the total in Indian Tier II/III hotels, against roughly 32% for US full-service properties. India runs eight to ten million weddings a year, in a market estimated near US$130bn. Every revenue-management system on the market prices rooms.',
     fns: ['b', 'c'],
   },
   {
     num: '03',
     title: 'Your room rate is now a tax decision.',
-    desc: 'Since 1 April 2025, a single room sold above ₹7,500 on a single night makes a property “specified premises” for the whole of the following financial year — reclassifying every restaurant inside it. The declaration is filed a year ahead, under demand uncertainty, and continues until you revoke it. No pricing system models this, because none of them know what a specified premises is.',
+    desc: 'Since 1 April 2025, a single room sold above ₹7,500 on a single night makes a property “specified premises” for the whole of the following financial year, reclassifying every restaurant inside it. The declaration is filed a year ahead, under demand uncertainty, and continues until you revoke it. No pricing system models this, because none of them know what a specified premises is.',
     fns: ['d'],
   },
   {
@@ -43,13 +43,13 @@ const BURNING: { num: string; title: string; desc: string; fns?: string[] }[] = 
   {
     num: '05',
     title: 'The commission is not the whole cost.',
-    desc: 'OTA commission runs 15–25%, and to about 30% with promoted placement, against 5–12% to acquire a guest directly. OTA bookings also cancel harder — one major OTA’s group segment at 42%, against 11.1% for direct. Independents take 61% of bookings through OTAs; branded chains, 22%.',
+    desc: 'OTA commission runs 15–25%, and to about 30% with promoted placement, against 5–12% to acquire a guest directly. OTA bookings also cancel harder: one major OTA’s group segment at 42%, against 11.1% for direct. Independents take 61% of bookings through OTAs; branded chains, 22%.',
     fns: ['h'],
   },
   {
     num: '06',
     title: 'A dated regulator is coming for the guest file.',
-    desc: 'India’s DPDP obligations commence 13 May 2027, with penalties reaching ₹250 crore for a security-safeguards failure. A hotel group holds passport scans, payment credentials, and — through a spa — treatment records that are special-category health data for inbound EU guests. The Aadhaar photocopy at your front desk is already outside what UIDAI permits.',
+    desc: 'India’s DPDP obligations commence 13 May 2027, with penalties reaching ₹250 crore for a security-safeguards failure. A hotel group holds passport scans, payment credentials, and (through a spa) treatment records that are special-category health data for inbound EU guests. The Aadhaar photocopy at your front desk is already outside what UIDAI permits.',
     fns: ['i', 'j', 'k'],
   },
 ];
@@ -64,7 +64,7 @@ const TRANSFERS: { have: string; apply: string; fn?: string }[] = [
   {
     have: 'Validation protocols and audit-ready documentation for clinical review',
     apply:
-      'Data-fiduciary obligations met on a dated plan — and a pricing decision an auditor can reconstruct a year later.',
+      'Data-fiduciary obligations met on a dated plan, and a pricing decision an auditor can reconstruct a year later.',
   },
   {
     have: 'Privacy-preserving design: de-identification and access control',
@@ -82,7 +82,7 @@ const TRANSFERS: { have: string; apply: string; fn?: string }[] = [
   },
   {
     have: 'Reproducible pipelines and experiment lineage',
-    apply: 'Why the model quoted that rate, for that wedding — a year later, in a dispute.',
+    apply: 'Why the model quoted that rate, for that wedding (a year later, in a dispute).',
   },
 ];
 
@@ -91,7 +91,7 @@ const HOSPITALITY_SERVICES: { num: string; title: string; desc: string; fns?: st
   {
     num: '01',
     title: 'Readiness & AI strategy sprint',
-    desc: 'Two to four weeks, fixed scope and fee: use-case triage against the P&L, a data-readiness audit, and an explicit build-vs-buy verdict per use case — including, wherever it is true, “just buy the software.”',
+    desc: 'Two to four weeks, fixed scope and fee: use-case triage against the P&L, a data-readiness audit, and an explicit build-vs-buy verdict per use case, including, wherever it is true, “just buy the software.”',
   },
   {
     num: '02',
@@ -113,13 +113,13 @@ const HOSPITALITY_SERVICES: { num: string; title: string; desc: string; fns?: st
   {
     num: '05',
     title: 'Guest-data governance',
-    desc: 'A dated plan to 13 May 2027: consent architecture, retention and erasure that actually delete, breach response, model audit — and identity capture at the front desk that is lawful today, not next year.',
+    desc: 'A dated plan to 13 May 2027: consent architecture, retention and erasure that actually delete, breach response, model audit, and identity capture at the front desk that is lawful today, not next year.',
     fns: ['i', 'k'],
   },
   {
     num: '06',
     title: 'Fractional AI leadership',
-    desc: 'Senior data and AI leadership for a group that will never hire a full-time Chief Data Officer — and shouldn’t. Vendor vetting, roadmap governance, and board reporting, a few days a quarter.',
+    desc: 'Senior data and AI leadership for a group that will never hire a full-time Chief Data Officer, and shouldn’t. Vendor vetting, roadmap governance, and board reporting, a few days a quarter.',
   },
 ];
 
@@ -134,7 +134,7 @@ const HOSPITALITY_MODELS = [
   },
   {
     title: 'Check-in pilot',
-    desc: 'One property. Lawful digital check-in, automated foreign-guest reporting, tokenized cards — live, and measured against the front desk it replaces.',
+    desc: 'One property. Lawful digital check-in, automated foreign-guest reporting, tokenized cards, live, and measured against the front desk it replaces.',
     outcome: 'A visible win, and the guest-data spine underneath it.',
   },
   {
@@ -149,7 +149,7 @@ const HOSPITALITY_MODELS = [
   },
   {
     title: 'Data-protection readiness',
-    desc: 'A dated program to 13 May 2027 — consent, retention, erasure, breach response, and lawful identity capture at the desk.',
+    desc: 'A dated program to 13 May 2027: consent, retention, erasure, breach response, and lawful identity capture at the desk.',
     outcome: 'An obligation met before it becomes a penalty.',
   },
   {
@@ -162,7 +162,7 @@ const HOSPITALITY_MODELS = [
 
 <Base
   title="For Hotels & Hospitality Groups"
-  description="Vaiyu Solutions builds the data spine, models, and guest technology that hotel groups need — banquet and F&B intelligence, agent-readable distribution, lawful digital check-in, and guest data ready for India's data-protection regime, from a team that has been doing this in hospitals for a decade."
+  description="Vaiyu Solutions builds the data spine, models, and guest technology that hotel groups need: banquet and F&B intelligence, agent-readable distribution, lawful digital check-in, and guest data ready for India's data-protection regime, from a team that has been doing this in hospitals for a decade."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden">
@@ -175,7 +175,7 @@ const HOSPITALITY_MODELS = [
         </h1>
         <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
           Hotel software has spent a decade optimizing the room. Meanwhile the banquets, restaurants,
-          and spa that carry the margin run on spreadsheets — and the guest data that carries the
+          and spa that carry the margin run on spreadsheets, and the guest data that carries the
           regulatory risk runs on nothing at all. Vaiyu builds the spine under both: one guest
           identity, one revenue truth, and models your revenue manager can operate and your auditor
           can reconstruct. We have been doing exactly this in hospitals for a decade.
@@ -250,7 +250,7 @@ const HOSPITALITY_MODELS = [
         Every system you run was designed to sell a room.
       </h2>
       <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
-        Hospitality is the most vendor-saturated software category there is — and none of those
+        Hospitality is the most vendor-saturated software category there is, and none of those
         vendors is paid to solve any of the six problems below. Each one is a data, modeling, or
         governance problem, sitting underneath the applications rather than inside them.
       </p>
@@ -297,7 +297,7 @@ const HOSPITALITY_MODELS = [
       </h2>
       <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
         We have spent a decade building AI that runs in hospitals, under regulators who ask for
-        evidence rather than a demo. Nothing below is a stretch — it is the same work, applied to a
+        evidence rather than a demo. Nothing below is a stretch: it is the same work, applied to a
         guest instead of a patient.
       </p>
       <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
@@ -340,12 +340,12 @@ const HOSPITALITY_MODELS = [
     <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
       <Eyebrow num="03" label="What we do for hotel groups" />
       <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
-        Six ways in — your systems, your data, your team afterward.
+        Six ways in: your systems, your data, your team afterward.
       </h2>
       <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
         We do not build or replace a PMS, a booking engine, a channel manager, or a point-of-sale.
         Those work, you already pay for them, and ripping one out is a multi-year project with its own
-        vendor category. We integrate with what you run — and build the layer no vendor is incentivized
+        vendor category. We integrate with what you run, and build the layer no vendor is incentivized
         to build.
       </p>
       <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
@@ -393,7 +393,7 @@ const HOSPITALITY_MODELS = [
             <strong class="text-ink">$9M</strong> in NIH/NCI-funded R&D, and we hold the Vice Chair
             for Algorithmic Development of the
             <a href={SITE.mlcommons} class="link-ink" rel="noopener">MLCommons Medical Working Group</a>
-            — helping write the standards medical AI is measured against.
+            , helping write the standards medical AI is measured against.
           </p>
           <a href="/work/" class="link-ink label-mono mt-8 inline-block text-slate">
             Publications & standards work →
@@ -508,42 +508,42 @@ const HOSPITALITY_MODELS = [
     <p class="label-mono text-slate">Sources & attribution</p>
     <ol class="mt-4 max-w-3xl space-y-2 font-mono text-xs leading-relaxed text-slate">
       <li id="fn-1">
-        1 — Led by our founder across NIH/NCI-funded programs at the University of Pennsylvania and
+        1. Led by our founder across NIH/NCI-funded programs at the University of Pennsylvania and
         Indiana University.
       </li>
       <li id="fn-2">
-        2 — Vaiyu client engagements: pre-training optimization with model accuracy maintained or
+        2. Vaiyu client engagements: pre-training optimization with model accuracy maintained or
         improved.
       </li>
       <li id="fn-3">
-        3 — Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
+        3. Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
         Nature Communications 13 (2022).
         <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">
           doi:10.1038/s41467-022-33407-5</a
-        > — 71 sites across 6 continents, the largest real-world federated learning study to date.
+        >; 71 sites across 6 continents, the largest real-world federated learning study to date.
       </li>
       <li id="fn-4">
-        4 — Founder track record at Indiana University: inference latency reduced by up to 70%,
+        4. Founder track record at Indiana University: inference latency reduced by up to 70%,
         compute requirements by 10–50%, in clinical research environments.
       </li>
       <li id="fn-a">
-        a — Otelier, <em>2026 Hotel Operations Index</em>. A vendor-sponsored survey; the direction is
+        a. Otelier, <em>2026 Hotel Operations Index</em>. A vendor-sponsored survey; the direction is
         corroborated by Cloudbeds’ <em>2026 State of Independent Hotels</em> (67% of independents name
         managing disparate systems a top concern) and by NYU SPS Tisch / RateGain / HEDNA,
         <em>State of Distribution 2025</em> (80% of hotels spend up to two days a week on manual
         reporting; ~21,000 properties).
       </li>
       <li id="fn-b">
-        b — Savills India with Hotelivate, survey of ~600 hotels across 150 cities, 2024–25 — non-room
+        b. Savills India with Hotelivate, survey of ~600 hotels across 150 cities, 2024–25: non-room
         revenue up to 60% of total in Tier II/III. US contrast (~32% non-room): CBRE Hotels Research,
         <em>Trends®</em>, 2025.
       </li>
       <li id="fn-c">
-        c — Jefferies with CAIT, 2023 — India’s wedding market estimated near US$130bn across 8–10
+        c. Jefferies with CAIT, 2023: India’s wedding market estimated near US$130bn across 8–10
         million weddings a year; the second-largest consumption category after food and grocery.
       </li>
       <li id="fn-d">
-        d — CBIC FAQ on restaurant service supplied at “specified premises,” 27 March 2025, and
+        d. CBIC FAQ on restaurant service supplied at “specified premises,” 27 March 2025, and
         Annexure VII: a premises is <em>specified</em> if, in the preceding financial year, the value of
         supply of any unit of accommodation exceeded ₹7,500 per unit per day; restaurant service there
         attracts 18% GST with input tax credit, elsewhere 5% without. Effective 1 April 2025; the
@@ -553,61 +553,61 @@ const HOSPITALITY_MODELS = [
         2026. This is a modeling problem, not tax advice.
       </li>
       <li id="fn-e">
-        e — Ahrefs, December 2025, ~300,000 keywords — AI Overviews cut click-through to the
-        top-ranking page by ~58%. Seer Interactive, September 2025 — organic click-through 1.76% →
+        e. Ahrefs, December 2025, ~300,000 keywords: AI Overviews cut click-through to the
+        top-ranking page by ~58%. Seer Interactive, September 2025: organic click-through 1.76% →
         0.61% on queries showing an AI Overview (3,119 queries; 25.1M impressions). Both are
         general-query studies; no hospitality-specific measurement exists.
       </li>
       <li id="fn-f">
-        f — Similarweb, 2025 — travel and hospitality is the fastest-growing vertical for AI referral
+        f. Similarweb, 2025: travel and hospitality is the fastest-growing vertical for AI referral
         traffic (+1,700%, July 2024 – February 2025).
       </li>
       <li id="fn-g">
-        g — OpenAI DevDay, 6 October 2025 — ChatGPT apps launched with two of the largest OTAs as
+        g. OpenAI DevDay, 6 October 2025: ChatGPT apps launched with two of the largest OTAs as
         partners. Google Agent Payments Protocol, 16 September 2025, 60+ partners. Note that OpenAI
         walked back in-chat travel checkout in March 2026; transactions remain on the OTA’s own site.
         The near-term shift is in discovery, not payment.
       </li>
       <li id="fn-h">
-        h — Commission ranges are directional; no OTA publishes a rate card. The firmest anchor is
+        h. Commission ranges are directional; no OTA publishes a rate card. The firmest anchor is
         Booking Holdings’ FY2024 blended take rate of ~14.3% (revenue ÷ gross bookings). Cancellation
-        by channel: D-EDGE, October 2024 — direct 11.1%, Booking.com group 42% (Europe). Channel mix:
+        by channel: D-EDGE, October 2024: direct 11.1%, Booking.com group 42% (Europe). Channel mix:
         Cloudbeds, 2024 (independents 61% via OTA) and RateGain, 2025 (branded chains 22%).
       </li>
       <li id="fn-i">
-        i — India’s Digital Personal Data Protection Rules, notified 13 November 2025. Substantive
-        obligations — notice, security safeguards, breach notification, retention, erasure — commence
+        i. India’s Digital Personal Data Protection Rules, notified 13 November 2025. Substantive
+        obligations (notice, security safeguards, breach notification, retention, erasure) commence
         13 May 2027. Penalties reach ₹250 crore for a security-safeguards failure (DPDP Act 2023,
         Schedule 1). Consent notices are required in all 22 scheduled languages.
       </li>
       <li id="fn-j">
-        j — GDPR Article 9 — health data is special-category, and applies to EU-resident guests’ spa and
+        j. GDPR Article 9: health data is special-category, and applies to EU-resident guests’ spa and
         wellness treatment records. India’s DPDP framework draws no equivalent sensitive-data class.
       </li>
       <li id="fn-k">
-        k — UIDAI / PIB advisory, May 2022 — private entities such as hotels may not collect or store
+        k. UIDAI / PIB advisory, May 2022: private entities such as hotels may not collect or store
         Aadhaar photocopies. Masked Aadhaar, offline e-KYC, QR, or OTP verification is the permitted
         route.
       </li>
       <li id="fn-l">
-        l — Champions 12.3 (WRI/WRAP-backed), <em>The Business Case for Reducing Food Loss and Waste:
-        Hotels</em>, 2018 — 21% average kitchen food-waste reduction in year one across 42 hotel sites
+        l. Champions 12.3 (WRI/WRAP-backed), <em>The Business Case for Reducing Food Loss and Waste:
+        Hotels</em>, 2018: 21% average kitchen food-waste reduction in year one across 42 hotel sites
         in 15 countries; $7 saved per $1 invested. The strongest non-vendor evidence in the category.
       </li>
       <li id="fn-m">
-        m — Anderson, C., “The Impact of Social Media on Lodging Performance,” Cornell Center for
-        Hospitality Research, 2012 — a 1-point gain on a 100-point review index is associated with
-        +1.42% RevPAR. Anderson, C. & Han, S., Cornell CHR, 2016 — revenue rises with review-response
+        m. Anderson, C., “The Impact of Social Media on Lodging Performance,” Cornell Center for
+        Hospitality Research, 2012: a 1-point gain on a 100-point review index is associated with
+        +1.42% RevPAR. Anderson, C. & Han, S., Cornell CHR, 2016: revenue rises with review-response
         rate only to ~40%; responding to more than ~85% of reviews is associated with lower revenue
         than not responding at all. Which is why we model which reviews to answer.
       </li>
       <li id="fn-n">
-        n — Immigration and Foreigners Act, 2025 (Act No. 13 of 2025), in force 1 September 2025 —
+        n. Immigration and Foreigners Act, 2025 (Act No. 13 of 2025), in force 1 September 2025:
         every accommodation provider must report each foreign guest via the Bureau of Immigration
         portal within 24 hours of arrival.
       </li>
       <li id="fn-o">
-        o — RBI card-on-file tokenization, in force 1 October 2022 — merchants and aggregators may not
+        o. RBI card-on-file tokenization, in force 1 October 2022: merchants and aggregators may not
         store the card number, expiry, or CVV; network tokens are required. Directly affects hotels
         holding cards to guarantee a no-show.
       </li>

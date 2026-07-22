@@ -57,13 +57,13 @@ export const SERVICES: {
     slug: 'data',
     num: '02',
     title: 'Data Engineering for AI',
-    tag: 'Ingestion, curation, harmonization — data your models and your auditors can trust.',
+    tag: 'Ingestion, curation, harmonization: data your models and your auditors can trust.',
     bullets: [
       { text: 'Pipelines for ingestion, curation, and quality control' },
       { text: 'Harmonization across sites, formats, and legacy systems' },
       { text: 'Annotation workflows and dataset versioning' },
       {
-        text: '“Data as IP” strategy for licensing and collaboration — the approach that contributed to a $3.5M NIH/NCI award',
+        text: '“Data as IP” strategy for licensing and collaboration, the approach that contributed to a $3.5M NIH/NCI award',
         fn: 'a',
       },
     ],
@@ -73,13 +73,13 @@ export const SERVICES: {
     slug: 'models',
     num: '03',
     title: 'Model Development & Training',
-    tag: 'Custom pipelines, LLM adaptation, federated learning — built for your domain.',
+    tag: 'Custom pipelines, LLM adaptation, federated learning: built for your domain.',
     bullets: [
       { text: 'Architecture selection and custom training pipelines: vision, language, multimodal' },
       { text: 'Fine-tuning open and frontier models on proprietary data' },
       { text: 'Federated and privacy-preserving training when data cannot move' },
       {
-        text: 'Pre-training cost optimization — up to 50% lower training spend with accuracy maintained or improved',
+        text: 'Pre-training cost optimization: up to 50% lower training spend with accuracy maintained or improved',
         fn: 'b',
       },
     ],
@@ -89,12 +89,12 @@ export const SERVICES: {
     slug: 'deployment',
     num: '04',
     title: 'Deployment, MLOps & Optimization',
-    tag: 'Secure, observable, affordable AI in production — new builds and stalled pilots alike.',
+    tag: 'Secure, observable, affordable AI in production: new builds and stalled pilots alike.',
     bullets: [
       { text: 'API-driven integration with your stack: REST, MCP, A2A' },
       { text: 'CI/CD for models, monitoring, and drift detection' },
       {
-        text: 'Inference optimization for constrained and clinical hardware — up to 70% latency reduction, 10–50% fewer resources',
+        text: 'Inference optimization for constrained and clinical hardware: up to 70% latency reduction, 10–50% fewer resources',
         fn: 'c',
       },
       { text: 'Cloud, VPC, on-premises, and edge deployment' },
@@ -118,14 +118,14 @@ export const SERVICES: {
     slug: 'leadership',
     num: '06',
     title: 'Fractional AI Leadership & Enablement',
-    tag: 'Senior AI leadership — strategy, hiring, board reporting — without the full-time hire.',
+    tag: 'Senior AI leadership (strategy, hiring, board reporting) without the full-time hire.',
     bullets: [
       { text: 'Fractional Chief AI Officer engagements' },
       { text: 'Embedded technical advisory alongside your team' },
       { text: 'Hiring support and vendor selection' },
       { text: 'Workshops and upskilling, from instructors who have taught federated learning at MICCAI, AAAI, ISBI, and RSNA' },
     ],
-    get: 'Your team, levelled up — not a dependency on ours.',
+    get: 'Your team, levelled up, not a dependency on ours.',
   },
 ];
 
@@ -148,7 +148,7 @@ export const MODELS = [
   {
     num: '04',
     title: 'Fractional CAIO',
-    desc: 'Strategy, hiring, vendor selection, and board reporting — on a fractional basis.',
+    desc: 'Strategy, hiring, vendor selection, and board reporting, on a fractional basis.',
   },
 ];
 
@@ -163,20 +163,20 @@ export const INDUSTRIES: { name: string; tag: string; blurb: string; href?: stri
     name: 'Academia & Research',
     tag: 'lab to clinic',
     blurb:
-      'Universities, research hospitals, and consortia. We turn grant-funded prototypes into sustainable, validated software — and carry research models the last mile into clinical deployment.',
+      'Universities, research hospitals, and consortia. We turn grant-funded prototypes into sustainable, validated software, and carry research models the last mile into clinical deployment.',
     href: '/academia/',
   },
   {
     name: 'Financial Services',
     tag: 'audit-ready',
     blurb:
-      'Document intelligence, risk models, and LLM workflows — deployed with the lineage and audit trail your regulators expect.',
+      'Document intelligence, risk models, and LLM workflows, deployed with the lineage and audit trail your regulators expect.',
   },
   {
     name: 'Energy & Utilities',
     tag: 'always-on',
     blurb:
-      'Transmission developers, utilities, and the grid that cannot go down. We unlock capacity on the lines already in the ground — dynamic line rating, topology optimization, and sovereign siting and permitting copilots that never leave your perimeter.',
+      'Transmission developers, utilities, and the grid that cannot go down. We unlock capacity on the lines already in the ground: dynamic line rating, topology optimization, and sovereign siting and permitting copilots that never leave your perimeter.',
     href: '/energy-and-utilities/',
   },
   {
@@ -194,7 +194,7 @@ export const INDUSTRIES: { name: string; tag: string; blurb: string; href?: stri
     name: 'Hospitality',
     tag: 'margin & guest trust',
     blurb:
-      'Hotel groups and multi-property operators. We build the data spine under the banquet hall, the restaurants, and the spa — and hold the guest file to the standard a data regulator now expects.',
+      'Hotel groups and multi-property operators. We build the data spine under the banquet hall, the restaurants, and the spa, and hold the guest file to the standard a data regulator now expects.',
     href: '/hospitality/',
   },
 ];
@@ -202,19 +202,19 @@ export const INDUSTRIES: { name: string; tag: string; blurb: string; href?: stri
 export const ENGAGEMENTS = [
   {
     title: 'The pilot that stalled before production',
-    desc: 'The model that wowed in a demo and then stalled — or the prototype you inherited and can’t trust. We re-engineer it into something your ops team can run and your auditors can sign off: hardened pipelines, lineage, monitoring, drift detection, and the tests that got skipped.',
+    desc: 'The model that wowed in a demo and then stalled, or the prototype you inherited and can’t trust. We re-engineer it into something your ops team can run and your auditors can sign off: hardened pipelines, lineage, monitoring, drift detection, and the tests that got skipped.',
   },
   {
     title: 'Research model → clinical deployment',
     desc: 'Take a promising model from the lab to validated deployment on hospital infrastructure: data harmonization, retraining, and inference optimization for the hardware you actually have.',
   },
   {
-    title: 'Learning across sites — without moving data',
+    title: 'Learning across sites, without moving data',
     desc: 'Stand up federated training across hospitals, partners, or geographies, so consortia can build shared models while every record stays home.',
   },
   {
     title: 'Private LLMs on your data',
-    desc: 'Adapt open or frontier language models to your domain inside your own environment — fine-tuning, evaluation harnesses, and guardrails included.',
+    desc: 'Adapt open or frontier language models to your domain inside your own environment: fine-tuning, evaluation harnesses, and guardrails included.',
   },
   {
     title: 'Document intelligence for regulated back offices',
@@ -222,11 +222,11 @@ export const ENGAGEMENTS = [
   },
   {
     title: 'AI at the edge of the plant',
-    desc: 'Defect detection and predictive maintenance under real latency, bandwidth, and hardware budgets — production lines, vehicles, substations.',
+    desc: 'Defect detection and predictive maintenance under real latency, bandwidth, and hardware budgets: production lines, vehicles, substations.',
   },
   {
     title: 'The AI cost-down audit',
-    desc: 'A focused pass over your training and inference spend. Our track record: training costs cut by up to 50%, inference latency by up to 70% — without giving up accuracy.',
+    desc: 'A focused pass over your training and inference spend. Our track record: training costs cut by up to 50%, inference latency by up to 70%, without giving up accuracy.',
     fn: 2,
   },
 ];
@@ -269,7 +269,7 @@ export const PROJECTS = [
   },
   {
     name: 'GaNDLF-Synth',
-    desc: 'Democratizing generative AI for medical imaging — autoencoders to diffusion.',
+    desc: 'Democratizing generative AI for medical imaging: autoencoders to diffusion.',
     meta: 'MLCommons ecosystem',
     role: 'Created by our founder',
     href: 'https://github.com/mlcommons/GaNDLF-Synth',
@@ -281,7 +281,7 @@ export const PUBS = [
     title: 'Federated learning enables big data for rare cancer boundary detection',
     venue: 'Nature Communications',
     year: '2022',
-    note: '71 sites, 6 continents — the largest real-world federated learning study to date',
+    note: '71 sites, 6 continents: the largest real-world federated learning study to date',
     href: 'https://doi.org/10.1038/s41467-022-33407-5',
   },
   {
@@ -317,7 +317,7 @@ export const PUBS = [
 
 export const COMMUNITY = [
   {
-    text: 'Vice Chair, Algorithmic Development — MLCommons Medical Working Group',
+    text: 'Vice Chair, Algorithmic Development, MLCommons Medical Working Group',
     href: 'https://mlcommons.org/working-groups/data/medical/',
   },
   { text: 'Organizers of leading benchmarks: the BraTS and FeTS challenges (MICCAI)' },
