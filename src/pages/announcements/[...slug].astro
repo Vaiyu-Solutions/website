@@ -1,0 +1,80 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import CTABand from '../../components/CTABand.astro';
+import { SITE } from '../../data/site';
+import {
+  getAnnouncements,
+  announcementHref,
+  formatDate,
+  isoDate,
+  type Announcement,
+} from '../../lib/announcements';
+
+export async function getStaticPaths() {
+  const items = await getAnnouncements();
+  return items.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: Announcement;
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, date, author, excerpt, tags, cover } = entry.data;
+
+const url = new URL(announcementHref(entry), Astro.site).href;
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: title,
+  description: excerpt,
+  datePublished: isoDate(date),
+  mainEntityOfPage: url,
+  ...(cover ? { image: new URL(cover, Astro.site).href } : {}),
+  author: { '@type': 'Organization', name: author },
+  publisher: { '@type': 'Organization', name: SITE.name, url: `${SITE.url}/` },
+};
+---
+
+<Base title={title} description={excerpt} ogType="article" image={cover}>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(ld)} />
+
+  <article>
+    <!-- Header -->
+    <header class="border-b border-ink/10">
+      <div class="mx-auto max-w-6xl px-5 pb-12 pt-16 md:pt-20">
+        <a href="/announcements/" class="link-ink label-mono text-slate">← Announcements</a>
+        <Eyebrow label={tags.length > 0 ? tags.join(' · ') : 'Announcement'} class="mt-8" />
+        <h1 class="h-display mt-4 max-w-3xl text-[2.3rem] md:text-5xl">{title}</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">{excerpt}</p>
+        <p class="mt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-slate">
+          <time datetime={isoDate(date)}>{formatDate(date)}</time> · {author}
+        </p>
+      </div>
+    </header>
+
+    <div class="mx-auto max-w-6xl px-5 py-14 md:py-16">
+      {
+        cover && (
+          <img
+            src={cover}
+            alt=""
+            aria-hidden="true"
+            class="mb-12 max-h-40 w-auto"
+            loading="eager"
+          />
+        )
+      }
+      <div class="prose-editorial">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <CTABand />
+</Base>

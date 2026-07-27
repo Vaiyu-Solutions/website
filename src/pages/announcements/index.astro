@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import CTABand from '../../components/CTABand.astro';
+import WindField from '../../components/WindField.astro';
+import { getAnnouncements, announcementHref, formatDate, isoDate } from '../../lib/announcements';
+
+const items = await getAnnouncements();
+---
+
+<Base
+  title="Announcements"
+  description="Press releases, partnerships, and company news from Vaiyu Solutions."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden border-b border-ink/10">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto max-w-6xl px-5 pb-14 pt-20 md:pb-16 md:pt-24">
+      <Eyebrow label="Announcements" class="reveal" />
+      <h1 class="h-display mt-5 max-w-3xl text-[2.6rem] md:text-6xl reveal reveal-2">
+        Everything we announce, in <em>one place</em>.
+      </h1>
+      <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
+        Press releases, partnerships, and company news. This page is the canonical link, so
+        anything we post elsewhere points back here.
+      </p>
+    </div>
+  </section>
+
+  <!-- Index -->
+  <section class="mx-auto max-w-6xl px-5 py-16 md:py-20">
+    {
+      items.length === 0 ? (
+        <div class="border-t-2 border-ink/80 pt-6">
+          <p class="label-mono text-slate">Nothing yet</p>
+          <p class="h-display mt-4 max-w-xl text-3xl">
+            The first announcement will land here.
+          </p>
+        </div>
+      ) : (
+        <ul class="divide-y divide-ink/10 border-y border-ink/10">
+          {items.map((a) => (
+            <li>
+              <a
+                href={announcementHref(a)}
+                class="group grid gap-x-10 gap-y-3 py-9 md:grid-cols-[11rem_1fr_auto]"
+              >
+                <span class="self-baseline">
+                  <time
+                    datetime={isoDate(a.data.date)}
+                    class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate transition-colors group-hover:text-saffron"
+                  >
+                    {formatDate(a.data.date)}
+                  </time>
+                  {a.data.draft && (
+                    <span class="mt-2 inline-block bg-saffron px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-paper">
+                      Draft
+                    </span>
+                  )}
+                </span>
+                <span>
+                  <span class="h-display block text-2xl transition-colors group-hover:text-saffron md:text-[1.75rem]">
+                    {a.data.title}
+                  </span>
+                  <span class="mt-3 block max-w-2xl leading-relaxed text-ink-soft">
+                    {a.data.excerpt}
+                  </span>
+                  {a.data.tags.length > 0 && (
+                    <span class="mt-4 block font-mono text-[11px] uppercase tracking-[0.14em] text-slate">
+                      {a.data.tags.join(' · ')}
+                    </span>
+                  )}
+                </span>
+                <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
+                  Read →
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <CTABand
+    heading="Want to talk about what we just announced?"
+    sub="We read every note. Tell us what you’re trying to ship and we’ll tell you whether we’re the right team for it."
+  />
+</Base>

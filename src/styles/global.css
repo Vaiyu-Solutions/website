@@ -73,6 +73,88 @@
     text-decoration-color: var(--color-saffron-bright);
   }
 
+  /* Long-form markdown body (announcements). Editorial measure, no typography plugin. */
+  .prose-editorial {
+    max-width: 44rem;
+    color: var(--color-ink-soft);
+    line-height: 1.75;
+  }
+  .prose-editorial > * + * {
+    margin-top: 1.5rem;
+  }
+  .prose-editorial h2,
+  .prose-editorial h3 {
+    font-family: var(--font-display);
+    font-weight: 560;
+    letter-spacing: -0.014em;
+    line-height: 1.2;
+    color: var(--color-ink);
+    margin-top: 3rem;
+  }
+  .prose-editorial h2 {
+    font-size: 1.75rem;
+  }
+  .prose-editorial h3 {
+    font-size: 1.3rem;
+    margin-top: 2.25rem;
+  }
+  .prose-editorial strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .prose-editorial a {
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, var(--color-ink) 25%, transparent);
+    text-underline-offset: 0.24em;
+    transition: color 150ms ease, text-decoration-color 150ms ease;
+  }
+  .prose-editorial a:hover {
+    color: var(--color-saffron);
+    text-decoration-color: var(--color-saffron);
+  }
+  .prose-editorial ul,
+  .prose-editorial ol {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .prose-editorial ol {
+    list-style: decimal;
+  }
+  .prose-editorial li + li {
+    margin-top: 0.5rem;
+  }
+  .prose-editorial blockquote {
+    border-left: 2px solid var(--color-saffron);
+    padding: 0.25rem 0 0.25rem 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+  }
+  .prose-editorial blockquote p + p {
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+  }
+  .prose-editorial blockquote p + p strong {
+    color: var(--color-slate);
+  }
+  .prose-editorial hr {
+    border-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+    margin-top: 3rem;
+  }
+  .prose-editorial code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-cream);
+    padding: 0.1em 0.35em;
+  }
+
   /* Oversized ghost numerals behind section headings */
   .ghost-num {
     position: absolute;

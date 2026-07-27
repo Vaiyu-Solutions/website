@@ -8,10 +8,12 @@ const DIST = 'dist';
 const TEXT_EXT = new Set(['.html', '.xml', '.css', '.js', '.json', '.svg', '.txt']);
 
 // Brand/product names — case-insensitive; distinctive enough not to false-positive.
-const TERMS = /verysafe|safecompute|attestation/i;
+// `g` is required: built HTML is minified onto a single line, so without it only
+// the first violation in the whole file would ever be reported.
+const TERMS = /verysafe|safecompute|attestation/gi;
 // Product acronyms — case-sensitive AND word-boundaried, so legitimate terms like
 // the BraTS benchmark (which contains "raTS") are never flagged.
-const ACRONYMS = /\bRATS\b|\bSLSA\b|\bHSM\b/;
+const ACRONYMS = /\bRATS\b|\bSLSA\b|\bHSM\b/g;
 
 async function* walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
@@ -35,8 +37,7 @@ for await (const file of walk(DIST)) {
   const text = await readFile(file, 'utf8');
   text.split(/\r?\n/).forEach((line, i) => {
     for (const re of [TERMS, ACRONYMS]) {
-      const m = line.match(re);
-      if (m) {
+      for (const m of line.matchAll(re)) {
         const ctx = line.slice(Math.max(0, m.index - 30), m.index + m[0].length + 30).trim();
         hits.push(`${file}:${i + 1}  «${m[0]}»  …${ctx}…`);
       }

@@ -8,6 +8,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "new:announcement": "node scripts/new-announcement.mjs",
     "lint:firewall": "node scripts/firewall-lint.mjs",
     "verify": "astro build && node scripts/firewall-lint.mjs"
   },
