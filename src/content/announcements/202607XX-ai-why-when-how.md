@@ -1,13 +1,22 @@
-Everyone's Using AI. Almost Nobody Can Find It in the Earnings.
+***Overall comments***
+- What is the objective(s) of below ? Is it compelling ?
+- Sourcing vs interpretation in the body - settle and spell it
+- tighten the language and overall flow
+- Prefacing or setting the stage
+- make Connection to Vaiyu clear
+***
+
+
+Everyone's Using AI. Almost Nobody Can Find It in the Earnings --- comment: so-what ? Is this a narrative or an interpretation or both ? Not sure if this title is appropriate although it catches attention
 
 Vaiyu Solutions | 29 July 2026
 
 
 THE SHORT VERSION
 
-- Why: the gains are real, and they have been measured properly. In controlled trials people worked about 25% faster and produced work rated 40% better. The same trials found those people got things wrong more often when the task fell outside what the tool was good at. Both halves of that matter.
-- When: you are ready when you can name a decision that comes round every week and currently gets made on stale or partial information, and when the systems holding that information agree on what a site, a job, or a customer is.
-- How: most of what executives want from "AI" turns out to be arithmetic on joined-up data. A model earns its place on the handful of calls that arithmetic cannot reach. Keep a named person on every decision, and settle what "working" means before anyone starts building.
+- Why: the gains are real, and they have been measured properly. In controlled trials people worked about 25% faster and produced work rated 40% better. The same trials found those people got things wrong more often when the task fell outside what the tool was good at. Both halves of that matter. comment: Is this really the “when” or the “how”. There has to be stronger whys
+- When: you are ready when you can name a decision that comes round every week and currently gets made on stale or partial information, and when the systems holding that information agree on what a site, a job, or a customer is. comment: Is this really the only when”. Need stronger arguments
+- How: most of what executives want from "AI" turns out to be arithmetic on joined-up data. A model earns its place on the handful of calls that arithmetic cannot reach. Keep a named person on every decision, and settle what "working" means before anyone starts building. comment: sounds a bit like when
 - The honest bit: sometimes the answer is "not yet." That advice is free, and it beats a project that quietly dies in month nine.
 
 
