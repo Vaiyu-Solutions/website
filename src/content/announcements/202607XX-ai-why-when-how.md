@@ -19,14 +19,14 @@ Caption: Figure 1. Source: McKinsey & Company, "The State of AI in 2025," 5 Nove
 
 Our read: almost everyone is using AI and very few are getting paid for it, and in our experience the difference has little to do with budget and nothing to do with which model anyone picked. It comes down to why you start, when you start, and how you run the work. That is this piece.
 
-A note on method before we begin, because we will show you figures from several different sources. The caption under each figure tells you where the data comes from and how it was collected. The sentences marked "our read" are our interpretation. We keep the two separate so you always know where the data ends and our opinion begins.
+One note on method before we begin. The caption under each figure tells you where the data comes from and how it was collected. The sentences marked "our read" are our interpretation. We keep the two separate so you always know where the data ends and our opinion begins.
 
 
 ## THE SHORT VERSION
 
-- Why: the gains are real and properly measured. In controlled trials, people using AI worked about 25% faster and produced work rated 40% better, with the biggest improvement going to the weakest performers. It raises the floor of a whole team at once, and it reads the parts of your operation nobody has time to read.
-- When: when you can name a recurring decision that continuously gets made late or on partial information, and when the systems holding that information agree on the basics (what a site, a job, a customer is). Readiness is organizational, not technical.
-- How: plumbing before models. Join the data, do the arithmetic, and let a model **earn** its place only on the calls arithmetic cannot reach. Keep a named person on every decision, agree what "working" means before anything is built, and give the project exits so it can stop early and cheaply.
+- Why: the gains are real and properly measured. In controlled trials, people using AI worked about 25% faster and produced work rated 40% better, and the weakest performers improved most. It raises the floor of a whole team at once.
+- When: when you can name a recurring decision that keeps getting made late or on partial information, and when the systems holding that information agree on the basics (what a site, a job, a customer is). Readiness is organizational, not technical.
+- How: plumbing before models. Join the data, do the arithmetic, and let a model **earn** its place only on the calls arithmetic cannot reach. Keep a named person on every decision, agree what "working" means before anything is built, and stage the work so it pays as it goes: a first return inside a quarter, and exits so you can stop early and cheaply.
 - The honest bit: sometimes the answer is "not yet". That advice is free, and it beats a project that quietly dies in month nine.
 
 
@@ -67,7 +67,7 @@ Third, it lets your operation see itself. Every business writes down far more th
 
 And a fourth, quieter reason: your people are almost certainly using it already. At 88% adoption, the realistic question is not whether AI enters your business. It is whether it enters with sources shown and a named owner, or informally, through personal accounts, on company problems.
 
-(You have probably also heard that 95% of enterprise AI pilots return nothing. That number comes from a preliminary MIT working paper: not peer reviewed, "failure" defined narrowly as no quick profit-and-loss impact, and fairly criticized, including for the awkward fact that the group publishing it also builds the sort of infrastructure it recommends. The direction is right. The precision is not. We would rather you had the honest version of that number than the viral one.)
+(You have probably also heard that 95% of enterprise AI pilots return nothing. That number comes from a preliminary MIT working paper: not peer reviewed, with "failure" defined narrowly as no quick profit-and-loss impact. The direction is right. The precision is not. We would rather you had the honest version of that number than the viral one.)
 
 
 ## THE WHEN: THREE QUESTIONS, NONE OF THEM ABOUT TECHNOLOGY
@@ -78,9 +78,9 @@ Not in the sense of "we should look at AI". A real decision, one that comes roun
 
 2. Does the data exist, and does it agree with itself?
 
-The pattern is identical in every industry we work in. The numbers that matter sit in four or five systems that were never designed to talk to each other, so every report leadership sees gets assembled by hand and arrives after the decision it was meant to inform. Gartner expects organizations to abandon 60% of AI projects that are not supported by AI-ready data, and in the same research 63% of data leaders said they either lack the right data practices or are not sure whether they have them. Our read: putting AI on top of fragmented data does not fix the fragmentation, it produces confident nonsense faster. If two departments calculate downtime differently, AI will not settle the argument. It will pick a side, with conviction.
+The pattern is identical in every industry we work in. The numbers that matter sit in four or five systems that were never designed to talk to each other, so every report leadership sees gets assembled by hand and arrives after the decision it was meant to inform. Gartner expects 60% of AI projects to be abandoned because the data under them is not ready. In the same research, 63% of data leaders said they either lack the right data practices or are not sure whether they have them. Our read: putting AI on top of fragmented data does not fix the fragmentation, it produces confident nonsense faster. If two departments calculate downtime differently, AI will not settle the argument. It will pick a side, with conviction.
 
-3. Can you wait for the payback?
+3. Can you show a return inside a quarter?
 
 
 >>> INSERT FIGURE 3 HERE <<<
@@ -88,7 +88,7 @@ File: figure-3-payback-gap.png
 Caption: Figure 3. Source: Deloitte, "AI ROI: the paradox of rising investment and elusive returns," 2025 (n=1,854 executives across 14 countries in Europe and the Middle East; self-reported).
 
 
-Most organizations report reaching a satisfactory return in two to four years, not the seven to twelve months a board expects of a normal technology investment. Only 6% see payback inside a year. Our read: the timeline is not a reason to wait, it is a reason to size the first project honestly. Scope something small enough to prove itself inside a quarter, and treat anyone promising transformation by the next board meeting the way you would treat any other number that looks too good.
+Most organizations report reaching a satisfactory return in two to four years, not the seven to twelve months a board expects of a normal technology investment. Only 6% see payback inside a year. Our read: nobody should sign up for a three-year wait, and you do not have to. Two to four years is what it costs when AI is run as one big transformation program with all the value stacked at the far end. Sequenced as small steps, the same work pays as it goes: the first joined-up report often settles a question leadership has argued about for a year, and it lands in weeks. Scope the first project to show a return inside a quarter, however small, and let each win pay for the next. Small, visible and regular is what keeps a board funding the work. A return inside a quarter is a reasonable ask. Transformation by the next board meeting is not, and anyone promising it deserves the same scrutiny as any other number that looks too good.
 
 Answer yes to all three and you are already readier than most of the 88%.
 
@@ -107,7 +107,7 @@ Notice the bars are split, because the sources are different kinds of fact. The 
 
 Our read: projects die of unowned decisions, unprepared data and undefined success, all of which get settled before a model is ever chosen. The how is mostly within your control, and it looks like this.
 
-Plumbing first. Most of what executives want from "AI" turns out to be arithmetic on joined-up data: profit per site per day, labor against the revenue it produced, cost against benchmark. Once the plumbing exists those numbers arrive on their own, and the foundation tends to pay for itself before any model shows up.
+Plumbing first. Most of what executives want from "AI" turns out to be arithmetic on joined-up data: profit per site per day, labor against the revenue it produced, cost against benchmark. Once the plumbing exists those numbers arrive on their own. That is usually the first win, it tends to land in weeks, and it pays for the foundation before any model shows up.
 
 Models only where arithmetic cannot reach. Forecasting. Spotting anomalies. Finding patterns in messy free text. Pricing under uncertainty. A model has to earn its place on those calls. Everything else is a report.
 
@@ -119,7 +119,7 @@ File: figure-5-five-gates.png
 Caption: Figure 5. Vaiyu Solutions.
 
 
-Every gate you exit at early is money you did not spend and risk you did not take on, so a good partner should be trying to get you off the path as early as possible. A model that reaches the last gate has earned its place. Most requests never get there, and that is a good outcome, not a failed project.
+Every gate you exit at early is money you did not spend and risk you did not take on, so a good partner should be trying to get you off the path as early as possible. Each gate also leaves something you keep, whether or not a model ever ships: cleaner data, a working report, a measured baseline. Even an early exit leaves you ahead of where you started. A model that reaches the last gate has earned its place. Most requests never get there, and that is a good outcome, not a failed project.
 
 Two more habits worth stealing.
 
@@ -132,9 +132,9 @@ Settle what "working" means up front. Acceptance criteria before development sta
 
 If you take one thing from this piece, take the test: name the decision.
 
-If you can name it, then AI, or quite often just joined-up data and honest arithmetic, has a place in your business, and a first project scopes in weeks rather than years. If you cannot name it yet, the honest first step is plumbing rather than models, and that is worth hearing before the budget is spent rather than after.
+If you can name it, then AI, or quite often just joined-up data and honest arithmetic, has a place in your business, and a first project scopes in weeks, with something measurable to show for it inside the quarter. If you cannot name it yet, the honest first step is plumbing rather than models, and that is worth hearing before the budget is spent rather than after.
 
-That test, and everything else in this piece, is simply how we work. Vaiyu Solutions takes AI from architecture into production in industries where it has to be right: healthcare and life sciences, financial services, energy and utilities, manufacturing, research institutions. Our habits come from places where a wrong answer has consequences. Our team led the largest federated learning study published to date, 71 institutions across six continents training a shared model with no patient record ever leaving its home hospital, published in Nature Communications, and we have put AI directly into a health system's own radiology environment, taking the measurements available to oncologists at the point of decision from a handful per patient to somewhere between 70 and 85. We are an OpenAI Select Partner, and we would still rather talk you out of a model you do not need.
+That test, and everything else in this piece, is simply how we work. Vaiyu Solutions takes AI from architecture into production in industries where it has to be right: healthcare and life sciences, financial services, energy and utilities, manufacturing, research institutions. Our habits come from places where a wrong answer has consequences. Our team led the largest federated learning study published to date: 71 institutions across six continents training a shared model with no patient record ever leaving its home hospital, published in Nature Communications. We have also put AI directly into a health system's own radiology environment, taking the measurements available to oncologists at the point of decision from a handful per patient to between 70 and 85. We are an OpenAI Select Partner, and we would still rather talk you out of a model you do not need.
 
 Show the evidence, keep a person accountable, measure the value. None of that is specific to healthcare. It is what makes AI work anywhere.
 
