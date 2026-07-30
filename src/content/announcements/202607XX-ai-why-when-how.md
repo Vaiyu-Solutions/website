@@ -22,12 +22,14 @@ Our read: almost everyone is using AI and very few are getting paid for it, and 
 One note on method before we begin. The caption under each figure tells you what it shows, where the data comes from and how it was collected. The sentences marked "our read" are our interpretation. We keep the two separate so you always know where the data ends and our opinion begins.
 
 
-## THE SHORT VERSION
+## TL;DR
 
-- Why: the gains are real and properly measured. In controlled trials, people using AI worked about 25% faster and produced work rated 40% better, and the weakest performers improved most. It raises the floor of a whole team at once.
-- When: when you can name a recurring decision that keeps getting made late or on partial information, and when the systems holding that information agree on the basics (what a site, a job, a customer is). Readiness is organizational, not technical.
-- How: plumbing before models. Join the data, do the arithmetic, and let a model **earn** its place only on the calls arithmetic cannot reach. Keep a named person on every decision, agree what "working" means before anything is built, and stage the work so it pays as it goes: a first return inside a quarter, and exits so you can stop early and cheaply.
-- The honest bit: sometimes the answer is "not yet". That advice is free, and it beats a project that quietly dies in month nine.
+- **Why we wrote this:** 88% of organizations use AI and only about 6% can credit it with real earnings. The difference is not budget or model choice, it is why you start, when you start and how you run the work.
+- **The technology:** a prediction engine, best treated as a tireless junior analyst. It reads everything, drafts in seconds, and is occasionally wrong with total confidence, which is why a named person stays on every decision.
+- **The why:** in controlled trials, people using AI worked about 25% faster and produced work rated 40% better, with the weakest performers gaining most. The same trials show people trusting the tool past its edge, so you plan for the gains and the failure mode together.
+- **The when:** three questions, none of them about technology. Can you name the recurring decision? Does the data behind it agree with itself? Can you show a return inside a quarter?
+- **The how:** plumbing before models, models only where arithmetic cannot reach, "working" defined before anything is built, and gates with exits so each stage pays as it goes or stops early and cheaply.
+- **The test:** name the decision. If you can, a first project scopes in weeks. If you cannot, the honest answer is "not yet". That advice is free, and it beats a project that quietly dies in month nine.
 
 
 ## FIRST, A MINUTE ON WHAT THE TECHNOLOGY IS
