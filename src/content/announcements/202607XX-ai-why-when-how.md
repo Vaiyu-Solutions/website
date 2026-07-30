@@ -22,7 +22,7 @@ Our read: almost everyone is using AI and very few are getting paid for it, and 
 One note on method before we begin. The caption under each figure tells you what it shows, where the data comes from and how it was collected. The sentences marked "our read" are our interpretation. We keep the two separate so you always know where the data ends and our opinion begins.
 
 
-## TL;DR
+## THE SHORT VERSION
 
 - **Why we wrote this:** 88% of organizations use AI and only about 6% can credit it with real earnings. The difference is not budget or model choice, it is why you start, when you start and how you run the work.
 - **The technology:** a prediction engine, best treated as a tireless junior analyst. It reads everything, drafts in seconds, and is occasionally wrong with total confidence, which is why a named person stays on every decision.
