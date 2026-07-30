@@ -1,22 +1,26 @@
 ***Overall comments***
-- What is the objective(s) of below ? Is it compelling ?
-- Sourcing vs interpretation in the body - settle and spell it
-- tighten the language and overall flow
+- What is the objective(s) of this writeup? Is it compelling ? the objective is to "educate" high level executives about the benefits of AI and how to get started in their own organizations
+- first talk about why this blog entry exists at all, and then go into actual answers
+- it is perhaps a bit too long: does it need to be split into 2-3 instead?
+- having figures sourced from different places needs more interpretation
+- Sourcing vs interpretation in the body - settle and spell it; add own interpretation right after the figures that go back to the primary objectives 
 - Prefacing or setting the stage
-- make Connection to Vaiyu clear
+- tighten the language and overall flow
+- language needs to be simpler; reduce technical jargon
+- make Connection to Vaiyu clear in a subtle manner
 ***
 
 
-Everyone's Using AI. Almost Nobody Can Find It in the Earnings --- comment: so-what ? Is this a narrative or an interpretation or both ? Not sure if this title is appropriate although it catches attention
+Everyone's Using AI. Almost Nobody Can Find It in the Earnings --- comment: so-what ? Is this a narrative or an interpretation or both ? Not sure if this title is appropriate although it catches attention;currently the content is does not support any points towards "earnings" - perhaps the title needs to be different and more targeted - perhaps this should be titled after the rest of doc is finished
 
 Vaiyu Solutions | 29 July 2026
 
 
 THE SHORT VERSION
 
-- Why: the gains are real, and they have been measured properly. In controlled trials people worked about 25% faster and produced work rated 40% better. The same trials found those people got things wrong more often when the task fell outside what the tool was good at. Both halves of that matter. comment: Is this really the “when” or the “how”. There has to be stronger whys
-- When: you are ready when you can name a decision that comes round every week and currently gets made on stale or partial information, and when the systems holding that information agree on what a site, a job, or a customer is. comment: Is this really the only when”. Need stronger arguments
-- How: most of what executives want from "AI" turns out to be arithmetic on joined-up data. A model earns its place on the handful of calls that arithmetic cannot reach. Keep a named person on every decision, and settle what "working" means before anyone starts building. comment: sounds a bit like when
+- Why: the gains are real, and they have been measured properly. In controlled trials people worked about 25% faster and produced work rated 40% better. The same trials found those people got things wrong more often when the task fell outside what the tool was good at. Both halves of that matter. comment: Is this really the “when” or the “how”. There has to be stronger whys; this is more of a "how" or "why" question
+- When: you are ready when you can name a decision that comes round every week and currently gets made on stale or partial information, and when the systems holding that information agree on what a site, a job, or a customer is. comment: Is this really the only when”. Need stronger and more arguments such as augmented operational intelligence
+- How: most of what executives want from "AI" turns out to be arithmetic on joined-up data. A model earns its place on the handful of calls that arithmetic cannot reach. Keep a named person on every decision, and settle what "working" means before anyone starts building. comment: sounds a bit like when; "how" is about the mechanics; 
 - The honest bit: sometimes the answer is "not yet." That advice is free, and it beats a project that quietly dies in month nine.
 
 
@@ -41,14 +45,16 @@ That one fact explains both the magic and the trouble.
 
 The magic is that something predicting language this well can read ten thousand maintenance logs before lunch and tell you what is in them. It can draft a contract clause. It can reconcile four systems that have never once agreed on what a "department" is.
 
-The trouble is that a prediction engine does not know things the way your controller knows things. When it is unsure, it does not go quiet. It guesses, fluently, in complete sentences, with excellent grammar. That is not a reason to walk away from it. It is a design constraint, and it is why anything built seriously shows its sources and keeps a named person on the decision.
+The magic of ai is that it can process data very fast in a variety of vectors (reading maintenace logs, drafting a contract clause, so on).
 
-You will hear a lot about "agents" this year too. An agent is the same prediction engine given permission to go and do things: look something up, fill in a form, kick off a report. Useful. Also the reason oversight matters more rather than less.
+The trouble is that a prediction engine does not know things the way your controller knows things. When it is unsure, it does not go quiet. It guesses, fluently, in complete sentences, with excellent grammar. That is not a reason to walk away from it or get discouraged by it. It is how it is built that dictates its behavior, and it is why anything built seriously shows its sources and keeps a named person on the decision. This shows human participation.
+
+You will hear a lot about "agents" this year too. An agent is the same prediction engine given permission to go and do things: look something up, fill in a form, kick off a report. Useful. Also the reason oversight matters more rather than less. if you extend this capability to write an "agent", it will need human oversight to ensure it does not go off<[fim-middle]> the rails.
 
 The mental model we keep coming back to is a tireless junior analyst. Reads everything, never sleeps, drafts in seconds, and is occasionally wrong with total confidence. You would not let that analyst sign the wire transfer. You would happily put ten of them on the team.
 
 
-THE WHY: THE EVIDENCE GOES BOTH WAYS
+## THE WHY: THE EVIDENCE GOES BOTH WAYS
 
 The good evidence here does not come from vendor decks. It comes from randomized controlled trials, the same design used to test medicines.
 
@@ -67,7 +73,7 @@ So AI is very good at raising the floor. It is not good at telling you when it i
 (You have probably heard the claim that 95% of enterprise AI pilots return nothing. It comes from a preliminary MIT working paper that has not been peer reviewed, it defines "failure" narrowly as no quick profit-and-loss impact, and it has drawn fair criticism, including for the slightly awkward fact that the project publishing it also builds the sort of infrastructure it recommends. The direction of travel is right. The precision is not there. We would rather you had the honest version of that number than the viral one.)
 
 
-THE WHEN: THREE QUESTIONS, NONE OF THEM ABOUT TECHNOLOGY
+## THE WHEN: THREE QUESTIONS, NONE OF THEM ABOUT TECHNOLOGY
 
 1. Can you name the decision?
 
@@ -100,7 +106,7 @@ Caption: Figure 3. Source: Deloitte, "AI ROI: the paradox of rising investment a
 Most organizations report reaching a satisfactory return in two to four years, not the seven to twelve months a board expects of a normal technology investment. Only 6% see payback inside a year. Budget your patience accordingly, and make the first project small enough that you do not need much of it.
 
 
-THE HOW: WHAT THE SUCCESSFUL FEW DO DIFFERENTLY
+## THE HOW: WHAT THE SUCCESSFUL FEW DO DIFFERENTLY
 
 The organizations getting real value follow a pattern that is boring, repeatable and very learnable. It helps to start by knowing where projects die.
 
@@ -119,6 +125,7 @@ Here is the sequence we run.
 File: figure-5-five-gates.png
 Caption: Figure 5. Vaiyu Solutions.
 
+comment: this comes very abruptly, and needs to flow better. perhaps this can simply be a single concluding paragraph that summarizes the flow and the value Vaiyu Solutions brings to organizations.
 
 The exits are the interesting part. A good partner should be trying to get you off that path as early as possible, because every gate you exit at is money you did not spend and risk you did not take on. If you make it to gate five, a model has earned its place. Most requests do not get there, and that is a good outcome rather than a failed project.
 
