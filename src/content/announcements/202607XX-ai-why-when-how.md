@@ -7,7 +7,7 @@ Vaiyu Solutions | 29 July 2026
 
 Nearly every executive team we sit down with asks the same three questions, usually in the same order. Why should we take AI seriously, beyond the headlines? When does it make sense for us? And how do we start without spending a year and a budget finding out?
 
-This piece is our answer to all three, written for people who run businesses rather than people who build models. One pair of numbers explains why the questions deserve straight answers.
+This article is our answer to all three, written for people who run businesses rather than people who build models. One pair of numbers explains why the questions deserve straight answers.
 
 As of mid-2025, 88% of organizations say they use AI regularly in at least one part of the business. Only about 39% can point to any impact on earnings, and for most of those it is under 5%. Roughly 6% can credit AI with more than 5% of earnings.
 
@@ -25,8 +25,8 @@ A note on method before we begin, because we will show you figures from several 
 ## THE SHORT VERSION
 
 - Why: the gains are real and properly measured. In controlled trials, people using AI worked about 25% faster and produced work rated 40% better, with the biggest improvement going to the weakest performers. It raises the floor of a whole team at once, and it reads the parts of your operation nobody has time to read.
-- When: when you can name a recurring decision that currently gets made late or on partial information, when the systems holding that information agree on the basics (what a site, a job, a customer is), and when you can live with payback measured in years rather than months. Readiness is organizational, not technical.
-- How: plumbing before models. Join the data, do the arithmetic, and let a model earn its place only on the calls arithmetic cannot reach. Keep a named person on every decision, agree what "working" means before anything is built, and give the project exits so it can stop early and cheaply.
+- When: when you can name a recurring decision that continuously gets made late or on partial information, and when the systems holding that information agree on the basics (what a site, a job, a customer is). Readiness is organizational, not technical.
+- How: plumbing before models. Join the data, do the arithmetic, and let a model **earn** its place only on the calls arithmetic cannot reach. Keep a named person on every decision, agree what "working" means before anything is built, and give the project exits so it can stop early and cheaply.
 - The honest bit: sometimes the answer is "not yet". That advice is free, and it beats a project that quietly dies in month nine.
 
 
