@@ -14,12 +14,12 @@ As of mid-2025, 88% of organizations say they use AI regularly in at least one p
 
 >>> INSERT FIGURE 1 HERE <<<
 File: figure-1-adoption-vs-value.png
-Caption: Figure 1. Source: McKinsey & Company, "The State of AI in 2025," 5 November 2025 (n=1,993 across 105 countries; self-reported).
+Caption: Figure 1. The gap between using AI and earning from it: the share of organizations using AI regularly, the share reporting any earnings impact, and the share where it moves earnings more than 5%. Source: McKinsey & Company, "The State of AI in 2025," 5 November 2025 (n=1,993 across 105 countries; self-reported).
 
 
 Our read: almost everyone is using AI and very few are getting paid for it, and in our experience the difference has little to do with budget and nothing to do with which model anyone picked. It comes down to why you start, when you start, and how you run the work. That is this piece.
 
-One note on method before we begin. The caption under each figure tells you where the data comes from and how it was collected. The sentences marked "our read" are our interpretation. We keep the two separate so you always know where the data ends and our opinion begins.
+One note on method before we begin. The caption under each figure tells you what it shows, where the data comes from and how it was collected. The sentences marked "our read" are our interpretation. We keep the two separate so you always know where the data ends and our opinion begins.
 
 
 ## THE SHORT VERSION
@@ -54,7 +54,7 @@ First, it makes people measurably better at their work.
 
 >>> INSERT FIGURE 2 HERE <<<
 File: figure-2-evidence-both-ways.png
-Caption: Figure 2. Sources: Harvard Business School and BCG randomized controlled trial, 758 consultants, 2023. Brynjolfsson, Li and Raymond, Quarterly Journal of Economics, 2025 (peer reviewed).
+Caption: Figure 2. Both sides of the trial evidence: how much faster and better people worked with an AI assistant, and how much more often they went wrong when the task sat outside the tool's competence. Sources: Harvard Business School and BCG randomized controlled trial, 758 consultants, 2023. Brynjolfsson, Li and Raymond, Quarterly Journal of Economics, 2025 (peer reviewed).
 
 
 People given an AI assistant worked about 25% faster and produced work rated 40% better. Now look at the bottom bar, because most people selling AI will not put it on a slide: the same people were 19 percentage points more likely to get the answer wrong when the task fell outside what the tool was good at. They could not see where the edge was, so they trusted it past the edge.
@@ -67,7 +67,7 @@ Third, it lets your operation see itself. Every business writes down far more th
 
 And a fourth, quieter reason: your people are almost certainly using it already. At 88% adoption, the realistic question is not whether AI enters your business. It is whether it enters with sources shown and a named owner, or informally, through personal accounts, on company problems.
 
-(You have probably also heard that 95% of enterprise AI pilots return nothing. That number comes from a preliminary MIT working paper: not peer reviewed, with "failure" defined narrowly as no quick profit-and-loss impact. The direction is right. The precision is not. We would rather you had the honest version of that number than the viral one.)
+(You have probably also heard that 95% of enterprise AI pilots return nothing. That number comes from a preliminary MIT working paper: not peer reviewed, "failure" defined narrowly as no quick profit-and-loss impact, and fairly criticized, including for the awkward fact that the group publishing it also builds the sort of infrastructure it recommends. The direction is right. The precision is not. We would rather you had the honest version of that number than the viral one.)
 
 
 ## THE WHEN: THREE QUESTIONS, NONE OF THEM ABOUT TECHNOLOGY
@@ -85,7 +85,7 @@ The pattern is identical in every industry we work in. The numbers that matter s
 
 >>> INSERT FIGURE 3 HERE <<<
 File: figure-3-payback-gap.png
-Caption: Figure 3. Source: Deloitte, "AI ROI: the paradox of rising investment and elusive returns," 2025 (n=1,854 executives across 14 countries in Europe and the Middle East; self-reported).
+Caption: Figure 3. The payback gap: how long boards expect a technology investment to take to pay back, against how long organizations report AI actually taking. Source: Deloitte, "AI ROI: the paradox of rising investment and elusive returns," 2025 (n=1,854 executives across 14 countries in Europe and the Middle East; self-reported).
 
 
 Most organizations report reaching a satisfactory return in two to four years, not the seven to twelve months a board expects of a normal technology investment. Only 6% see payback inside a year. Our read: nobody should sign up for a three-year wait, and you do not have to. Two to four years is what it costs when AI is run as one big transformation program with all the value stacked at the far end. Sequenced as small steps, the same work pays as it goes: the first joined-up report often settles a question leadership has argued about for a year, and it lands in weeks. Scope the first project to show a return inside a quarter, however small, and let each win pay for the next. Small, visible and regular is what keeps a board funding the work. A return inside a quarter is a reasonable ask. Transformation by the next board meeting is not, and anyone promising it deserves the same scrutiny as any other number that looks too good.
@@ -100,7 +100,7 @@ The organizations getting real value follow a pattern that is boring, repeatable
 
 >>> INSERT FIGURE 4 HERE <<<
 File: figure-4-where-projects-die.png
-Caption: Figure 4. Measured: S&P Global Market Intelligence, 2025 Voice of the Enterprise (1,000+ respondents, North America and Europe). Forecast: Gartner, 26 February 2025 and 25 June 2025.
+Caption: Figure 4. The main reasons AI projects get abandoned, split by kind of evidence: measured outcomes from real projects against analyst forecasts. Measured: S&P Global Market Intelligence, 2025 Voice of the Enterprise (1,000+ respondents, North America and Europe). Forecast: Gartner, 26 February 2025 and 25 June 2025.
 
 
 Notice the bars are split, because the sources are different kinds of fact. The solid bars are things that happened to real projects. The hatched bars are analyst predictions. Anyone who shows you all four as the same kind of fact is doing something to you rather than for you.
@@ -116,7 +116,7 @@ Gates with exits. We run every engagement as a sequence of five gates, and the e
 
 >>> INSERT FIGURE 5 HERE <<<
 File: figure-5-five-gates.png
-Caption: Figure 5. Vaiyu Solutions.
+Caption: Figure 5. The five gates we run every engagement through, with an exit at each one. Source: Vaiyu Solutions.
 
 
 Every gate you exit at early is money you did not spend and risk you did not take on, so a good partner should be trying to get you off the path as early as possible. Each gate also leaves something you keep, whether or not a model ever ships: cleaner data, a working report, a measured baseline. Even an early exit leaves you ahead of where you started. A model that reaches the last gate has earned its place. Most requests never get there, and that is a good outcome, not a failed project.
