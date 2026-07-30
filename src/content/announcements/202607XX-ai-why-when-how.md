@@ -34,7 +34,7 @@ One note on method before we begin. The caption under each figure tells you what
 
 ## FIRST, A MINUTE ON WHAT THE TECHNOLOGY IS
 
-Strip away the mystique and the thing behind ChatGPT and its cousins is a prediction engine. It has read an enormous amount of text, and it writes answers one word at a time, each word predicted from everything that came before it.
+Strip away the mystique and the thing behind ChatGPT and its cousins is a **prediction engine**. It has read an enormous amount of text, and it writes answers one word at a time, each word predicted from everything that came before it.
 
 That one fact explains both the magic and the trouble.
 
