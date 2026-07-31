@@ -1,15 +1,10 @@
 # AI: The Why, the When and the How
 
-Vaiyu Solutions | 29 July 2026
+Almost everyone is using AI but very few are getting **meaningful returns.** In our experience the difference has little to do with budget and nothing to do with the AI model picked. 
 
+It has to do with these three questions: 1\) **Why** should we take AI seriously, beyond the headlines? 2\) **When** does it make sense to use it? 3\) **How** do we start with it?
 
-## WHY WE WROTE THIS
-
-Nearly every executive team we sit down with asks the same three questions, usually in the same order. Why should we take AI seriously, beyond the headlines? When does it make sense for us? And how do we start without spending a year and a budget finding out?
-
-This article is our answer to all three, written for people who run businesses rather than people who build models. One pair of numbers explains why the questions deserve straight answers.
-
-As of mid-2025, 88% of organizations say they use AI regularly in at least one part of the business. Only about 39% can point to any impact on earnings, and for most of those it is under 5%. Roughly 6% can credit AI with more than 5% of earnings.
+This article addresses these important questions. It is written for people who run their businesses and are curious about using AI to make it better. Perhaps the statistics below is a good place to start:
 
 
 >>> INSERT FIGURE 1 HERE <<<
@@ -17,9 +12,18 @@ File: figure-1-adoption-vs-value.png
 Caption: Figure 1. The gap between using AI and earning from it: the share of organizations using AI regularly, the share reporting any earnings impact, and the share where it moves earnings more than 5%. Source: McKinsey & Company, "The State of AI in 2025," 5 November 2025 (n=1,993 across 105 countries; self-reported).
 
 
-Our read: almost everyone is using AI and very few are getting paid for it, and in our experience the difference has little to do with budget and nothing to do with which model anyone picked. It comes down to why you start, when you start, and how you run the work. That is this piece.
+To look at these questions with a deeper lens, let us take a minute to understand what AI actually is. Strip away the mystique and the thing behind ChatGPT and its cousins is a “prediction engine”. It has read an enormous amount of text, and it writes answers one word at a time, each word predicted from everything that came before it. This one fact explains both the magic and trouble.
 
-One note on method before we begin. The caption under each figure tells you what it shows, where the data comes from and how it was collected. The sentences marked "our read" are our interpretation. We keep the two separate so you always know where the data ends and our opinion begins.
+The magic is **speed and breadth**. Something that predicts language this well can read ten thousand maintenance logs in a few moments and tell you what is in them. It can draft a contract clause. It can line up four systems that have never once agreed on what a "department" is.
+
+The trouble is that a prediction engine does not know things the way your controller knows things. When it is unsure, it does not go quiet. It guesses fluently, in complete sentences, with excellent grammar. This is not a reason to walk away from it. It is simply how the machine is built, and it is why anything built seriously shows *its sources.*
+
+AI “agents” we hear a lot about are the same “prediction engines” given permission to act: look something up, fill in a form, kick off a report. Genuinely useful. It is also why oversight matters more rather than less, because a system that can do things needs closer monitoring. The analogy that best encompasses this is to think of an AI agent as a tirelessly confident junior analyst \- reads everything, never sleeps, drafts in seconds, and is occasionally wrong. However, you would not let this analyst take any decision without oversight, though having multiples of them on the team would increase productivity.
+
+\*\*\* I will continue touching the content from here on in my next pass. The one below is pasted as-is from original \*\*\*
+
+\*\*\* 1 para each for why, how, when \*\*\*  
+\*\*\* hard-hitting conclusion \*\*\*
 
 
 ## THE SHORT VERSION
