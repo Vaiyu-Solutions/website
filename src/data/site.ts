@@ -126,7 +126,7 @@ export const SERVICES: {
       { text: 'Hiring support and vendor selection' },
       { text: 'Workshops and upskilling, from instructors who have taught federated learning at MICCAI, AAAI, ISBI, and RSNA' },
     ],
-    get: 'Your team, levelled up, not a dependency on ours.',
+    get: 'Your team runs it without us afterward.',
   },
 ];
 
@@ -139,7 +139,7 @@ export const MODELS = [
   {
     num: '02',
     title: 'Build & Handover',
-    desc: 'Scoped delivery with documentation, training, and knowledge transfer. No black-box handoffs.',
+    desc: 'Scoped delivery with documentation, training, and knowledge transfer, so nothing you inherit is a black box.',
   },
   {
     num: '03',
