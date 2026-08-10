@@ -11,3 +11,5 @@ node_modules/
 .DS_Store
 # local screenshots
 .shots/
+# playwright-cli session artifacts (snapshots, console logs)
+.playwright-cli/

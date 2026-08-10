@@ -10,9 +10,169 @@
   --color-saffron: #e87228;
   --color-saffron-bright: #f09040;
 
+  /* The inverted block (footer). Kept separate from `ink` because in dark mode
+     `ink` becomes the text colour and can no longer double as a surface. */
+  --color-block: #191c22;
+  --color-block-fg: #f8f9fb;
+
   --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
   --font-sans: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* The one hard-coded stroke in WindField; needs to lift in dark mode. */
+  --windline-accent: #b25415;
+}
+
+/* ---------------------------------------------------------------------------
+   Light / dark
+   ---------------------------------------------------------------------------
+   The system setting is the default and works with JavaScript disabled: the
+   media query below carries the dark palette on its own. `html.theme-light` /
+   `html.theme-dark` are written by the header toggle and win on specificity
+   (0,1,1 vs 0,1,0), inside a media query or out of it, so the pinned choice
+   always beats the system setting.
+
+   The dark token list is duplicated rather than shared because CSS has no
+   portable way to apply one block of declarations from two conditions. Edit
+   both.
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: light dark;
+}
+html.theme-light {
+  color-scheme: light;
+}
+html.theme-dark {
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light) {
+    --color-paper: #0f1319;
+    --color-cream: #171c24;
+    --color-ink: #eef1f6;
+    --color-ink-soft: #c3ccd8;
+    --color-slate: #93a0b0;
+    --color-brand-blue: #82adef;
+    --color-saffron: #f2914a;
+    --color-saffron-bright: #f8ab6e;
+    --color-block: #191e26;
+    --color-block-fg: #eef1f6;
+    --windline-accent: #f0913f;
+  }
+}
+
+html.theme-dark {
+  --color-paper: #0f1319;
+  --color-cream: #171c24;
+  --color-ink: #eef1f6;
+  --color-ink-soft: #c3ccd8;
+  --color-slate: #93a0b0;
+  --color-brand-blue: #82adef;
+  --color-saffron: #f2914a;
+  --color-saffron-bright: #f8ab6e;
+  --color-block: #191e26;
+  --color-block-fg: #eef1f6;
+  --windline-accent: #f0913f;
+}
+
+/* Per-theme assets (the theme-toggle glyphs). Only the inactive one is hidden,
+   so the active one keeps whatever display the element normally has. */
+.on-dark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light) .on-dark {
+    display: unset;
+  }
+  :root:not(.theme-light) .on-light {
+    display: none;
+  }
+}
+html.theme-dark .on-dark {
+  display: unset;
+}
+html.theme-dark .on-light {
+  display: none;
+}
+html.theme-light .on-light {
+  display: unset;
+}
+html.theme-light .on-dark {
+  display: none;
+}
+
+/* The toggle is inert without JavaScript, so it is only shown once the inline
+   head script has run. */
+.theme-toggle {
+  display: none;
+}
+html.js .theme-toggle {
+  display: inline-flex;
+}
+
+/* Mobile nav. Same deal as the toggle: the trigger does nothing without JS, so
+   until the head script runs the links stay in the header and wrap as before. */
+.nav-trigger {
+  display: none;
+}
+.nav-trigger-close {
+  display: none;
+}
+#nav-trigger[aria-expanded='true'] .nav-trigger-open {
+  display: none;
+}
+#nav-trigger[aria-expanded='true'] .nav-trigger-close {
+  display: unset;
+}
+@media (width < 48rem) {
+  html.js .nav-trigger {
+    display: inline-flex;
+  }
+  html.js #site-nav {
+    display: none;
+  }
+  /* Panel styling lives here rather than on the markup so the no-JS header keeps
+     the wrapping row it has always had, instead of a stack it cannot collapse. */
+  html.js #site-nav.is-open {
+    display: block;
+    margin-top: 1rem;
+    border-top: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
+    padding-top: 0.75rem;
+  }
+  html.js #site-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  /* Full-width rows: on a phone the tap target should be the line, not the four
+     characters of "WORK". 44px is the comfortable minimum. */
+  html.js #site-nav a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* Header wordmark. Painted as a background rather than two <img> tags so the
+   browser fetches only the active theme's file, and a pinned theme never shows
+   the wrong logo for a frame. Width is the asset's 2390:482 ratio at h-9. */
+.logo-mark {
+  background-image: url('/img/logo_full.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.theme-light) .logo-mark {
+    background-image: url('/img/logo_full_dark.png');
+  }
+}
+html.theme-dark .logo-mark {
+  background-image: url('/img/logo_full_dark.png');
+}
+html.theme-light .logo-mark {
+  background-image: url('/img/logo_full.png');
 }
 
 @layer base {
@@ -64,7 +224,7 @@
   }
   .link-paper {
     text-decoration: underline;
-    text-decoration-color: color-mix(in oklab, var(--color-paper) 30%, transparent);
+    text-decoration-color: color-mix(in oklab, var(--color-block-fg) 30%, transparent);
     text-underline-offset: 0.24em;
     transition: color 150ms ease, text-decoration-color 150ms ease;
   }

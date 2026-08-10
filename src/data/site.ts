@@ -4,7 +4,7 @@ export const SITE = {
   email: 'support@vaiyu.solutions',
   emailDisplay: 'support [at] vaiyu [dot] solutions',
   tagline: 'AI from architecture to production, for industries where it has to be right.',
-  location: 'Worldwide',
+  location: 'Miami, Florida',
   linkedin: 'https://www.linkedin.com/company/vaiyu-solutions',
   github: 'https://github.com/Vaiyu-Solutions',
   scholar: 'https://scholar.google.com/citations?user=lL5jPysAAAAJ',
@@ -68,7 +68,7 @@ export const SERVICES: {
         fn: 'a',
       },
     ],
-    get: 'Datasets that are an asset on the balance sheet, not a liability in the audit.',
+    get: 'Data that holds up when someone audits how it was built.',
   },
   {
     slug: 'models',
@@ -84,7 +84,7 @@ export const SERVICES: {
         fn: 'b',
       },
     ],
-    get: 'Models that earn their place in production.',
+    get: 'A model that still holds up on next quarter’s data.',
   },
   {
     slug: 'deployment',
@@ -113,7 +113,7 @@ export const SERVICES: {
       { text: 'Privacy-preserving design: de-identification, federation, access control' },
       { text: 'Responsible-AI reviews calibrated to regulated environments, built on a decade of healthcare-grade rigor' },
     ],
-    get: 'Confidence that the system you ship is the system you can defend.',
+    get: 'When a regulator asks how it works, the answer is already written down.',
   },
   {
     slug: 'leadership',

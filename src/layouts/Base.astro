@@ -59,6 +59,23 @@ const ld = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    {/* Runs before first paint: without it a pinned theme flashes the system one. */}
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        try {
+          var pinned = localStorage.getItem('theme');
+          if (pinned === 'light' || pinned === 'dark') {
+            root.classList.add('theme-' + pinned);
+            document.querySelector('meta[name="color-scheme"]').content = pinned;
+          }
+        } catch (e) {
+          /* Storage blocked (private mode, locked-down enterprise policy): follow the system. */
+        }
+      })();
+    </script>
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
