@@ -23,6 +23,7 @@ Marketing site for Vaiyu Solutions, an AI operationalization consultancy founded
 ## Operating Context
 
 - Industries served (confirmed 2026-08-04): healthcare & pharma (anchor), financial services, energy & utilities, manufacturing, automotive, hospitality, and academia. Hospitality, academia, and energy & utilities have dedicated site pages; the others are covered on `/work`.
+- `/sovereign-ai` (added 2026-09-23) is a cross-industry capability page on air-gapped and sovereign AI deployment. It is not an industry, so it is linked from the footer rather than `INDUSTRIES`. It sits closest to VerySafe's territory: it sells deployment, MLOps, and documentation consulting on the client's own infrastructure, and must not describe attestation, signed audit chains, or policy-based routing between hosted and self-hosted models.
 - Site map: Home, Services, Work & Expertise, About, Contact, 404, plus Announcements (`/announcements` index + per-post pages from `src/content/announcements/`, filename = URL slug).
 - Announcements serve three jobs (confirmed 2026-08-04): credibility for prospects (press releases, milestones), thought leadership (perspective pieces shareable on LinkedIn for inbound), and SEO/discoverability.
 - Engagement models: discovery sprint → embedded advisory → fractional CAIO → build-and-handover.

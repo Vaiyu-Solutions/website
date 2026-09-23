@@ -2,8 +2,14 @@
 import { SITE, NAV } from '../data/site';
 
 const year = new Date().getFullYear();
-// Academia is intentionally kept out of the top nav; surface it in the footer for discoverability.
-const exploreLinks = [...NAV.slice(0, 2), { href: '/academia/', label: 'Academia' }, ...NAV.slice(2)];
+// Academia and Sovereign AI are intentionally kept out of the top nav; surface them in the footer
+// for discoverability.
+const exploreLinks = [
+  ...NAV.slice(0, 2),
+  { href: '/academia/', label: 'Academia' },
+  { href: '/sovereign-ai/', label: 'Sovereign AI' },
+  ...NAV.slice(2),
+];
 ---
 
 <footer class="bg-block text-block-fg/75">

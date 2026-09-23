@@ -43,7 +43,7 @@ founder's headshot. Proof is text: journal names, DOIs, repository links, footno
 ## 2. Principles
 
 1. **Rules, not boxes.** Structure comes from 1px dividers and 2px top rules. Borders on all four
-   sides exist in exactly two forms: the hero aside (four pages) and the founder photo. There is not
+   sides exist in exactly two forms: the hero aside (five pages) and the founder photo. There is not
    a single `shadow` in the codebase, and no border radius apart from the footer logo chip
    (`rounded-md`) and the 1px softening on the focus ring.
 2. **Every number has a source.** Any figure in body copy carries a `<sup class="fn">` linking to a
@@ -346,6 +346,7 @@ dense list rows, `gap-12` for the hero.
 | `md:grid-cols-[4rem_1fr]` | Numbered problem rows |
 | `md:grid-cols-[1fr_auto_1fr]` | Transfer rows: what we have → what it becomes |
 | `md:grid-cols-[12rem_1fr_10rem]` | Workflow rows: name, description and outcome, timing |
+| `md:grid-cols-[14rem_1fr] lg:grid-cols-[15rem_1fr_12rem]` | Tier rows on `/sovereign-ai`: tier and name, description with a Guards against / Trade-off `dl`, fit |
 | `md:grid-cols-[1.5fr_1fr_1fr]` | Footer |
 
 Every one of these collapses to a single stacked column below its breakpoint, with `gap-y` taking
@@ -365,13 +366,14 @@ The whole structural language, in five moves:
 | Card rule | `border-t-2 border-ink/80` → `hover:border-saffron` | An item you can act on, or a discrete commitment |
 | Quote rule | `border-l-2 border-saffron pl-6` | A claim stated in the brand's own voice |
 
-There is also `border-l-2 border-ink/15 pl-6` on `slate` text, used once on `/energy-and-utilities`
-for a disclaimer. It reads as the quiet inverse of the saffron pull quote.
+There is also `border-l-2 border-ink/15 pl-6` on `slate` text, used for the closing disclaimer on
+`/energy-and-utilities`, `/hospitality`, and `/sovereign-ai`. It reads as the quiet inverse of the
+saffron pull quote.
 
 Two bordered containers exist site-wide, both at `border-ink/15`:
 
-- The hero aside: `border border-ink/15 bg-paper/80 p-7`, on the home page and all three sector
-  pages. The 80% background lets the wind streamlines show through faintly.
+- The hero aside: `border border-ink/15 bg-paper/80 p-7`, on the home page, the three sector
+  pages, and `/sovereign-ai`. The 80% background lets the wind streamlines show through faintly.
 - The founder photo: `aspect-square w-full max-w-sm border border-ink/15 object-cover`, on `/about`.
 
 Nothing else on the site is boxed.
@@ -467,8 +469,8 @@ outside `/about`:
 
 > वायु, Sanskrit for wind: unseen, everywhere, load-bearing.
 
-`Academia` is injected into the footer link list at index 2. It is deliberately kept out of the top
-nav and surfaced here for discoverability.
+`Academia` and `Sovereign AI` are injected into the footer link list at indexes 2 and 3. Both are
+deliberately kept out of the top nav and surfaced here for discoverability.
 
 ### 8.4 `Eyebrow.astro`
 
@@ -584,8 +586,8 @@ Five stats, `grid-cols-2 md:grid-cols-5`, on `bg-cream` between `border-y border
 ```
 
 The optional `prefix` ("up to") is set in small mono so the numeral stays the thing you see. Data
-comes from `STATS` in `src/data/site.ts` and is shared across the home page and all three sector
-pages.
+comes from `STATS` in `src/data/site.ts` and is shared across the home page, the three sector
+pages, and `/sovereign-ai`.
 
 ### 8.12 Hero aside (the bridge card)
 
@@ -610,6 +612,10 @@ then a display-face phrase.
 The left column is `w-40` (10rem) on `/energy-and-utilities` and `w-36` (9rem) elsewhere. Because it
 is `whitespace-nowrap`, the source data has a hard character budget: keep the `from` string at or
 under roughly 20 characters, or it overflows. This constraint is documented in the page frontmatter.
+
+`/sovereign-ai` bends the card for phones: below `sm` the label takes the full row (`w-full`,
+`flex-wrap`) and the arrow and phrase sit underneath it, so the phrase stays on one line instead of
+wrapping into a 110px column. From `sm` up it is the standard `w-36` row.
 
 The home page runs a variant of this card listing industries with their tags.
 
@@ -643,6 +649,10 @@ thing being asserted, the credential supports it.
 
 One per section, at most. It states the section's argument in a single sentence, which makes it the
 line that gets quoted in a deck or lifted for social.
+
+`/sovereign-ai` puts the same classes on a `<p>`. A claim in the brand's own voice is not a quotation
+from another source, so `blockquote` semantics do not fit it; the other pages still use
+`<blockquote>`.
 
 ### 8.15 Ghost numeral
 
@@ -708,6 +718,14 @@ Used by `/services`, `/work`, `/about`, `/contact`, `/announcements`.
 ### 9.2 Sector page
 
 The full argument structure. `/energy-and-utilities`, `/hospitality`, and `/academia` all follow it.
+
+`/sovereign-ai` is a cross-industry capability page on the same grammar. It adds **The spectrum** at
+02: four deployment tiers as an ordered rule list, each with a decorative four-segment gauge
+(`h-0.5 w-4` segments, `bg-ink/80` filled over `bg-ink/15`, `aria-hidden`, with a screen-reader
+"of 4" on the tier label) and a `dl` of Guards against / Trade-off. A `label-mono` line above the
+list ("Ordered by isolation, least to most") says what the gauge measures, so it does not read as a
+score. Its lettered footnotes skip `l`
+and `o`, which read as `1` and `0` at superscript size.
 
 | # | Section | Job |
 | --- | --- | --- |
@@ -885,7 +903,8 @@ quote.
 `/energy-and-utilities` (878 lines, the most elaborate). Follow §9.2. Hold the page's content in
 typed `const` arrays in the frontmatter. Import `STATS`, `PROJECTS`, and `COMMUNITY` from
 `src/data/site.ts` and leave them alone. Add the sector to `INDUSTRIES` with an `href` so the home
-page aside and the `/work` list both link to it. Every number in the argument section needs a
+page aside and the `/work` list both link to it. A capability page that is not an industry
+(`/sovereign-ai`) goes in the footer's Explore list instead. Every number in the argument section needs a
 lettered footnote.
 
 **Adding an announcement.** `pnpm new:announcement "Headline"` creates the file. The filename is the
