@@ -3,11 +3,9 @@ import Base from '../layouts/Base.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import CTABand from '../components/CTABand.astro';
 import WindField from '../components/WindField.astro';
-import { SITE, STATS, PROJECTS, COMMUNITY } from '../data/site';
+import { STATS } from '../data/site';
 
-// Hero aside: what changes for the workloads that have to stay inside. The left column renders as a nowrap
-// 11px mono label in a 9rem column from `sm` up (stacked above the phrase on phones), so
-// keep `from` at or under ~18 characters.
+// Hero aside. `from` is a nowrap mono label in a 9rem column: keep it under ~18 characters.
 const BRIDGE = [
   { from: 'Public chatbots', to: 'A private assistant' },
   { from: 'Hosted model APIs', to: 'Weights you hold' },
@@ -16,48 +14,40 @@ const BRIDGE = [
   { from: 'Data sent abroad', to: 'Data kept in-country' },
 ];
 
-// The case for the page. Every claim carries its source; `fns` index the footnotes below.
-const EXPOSURE: { num: string; title: string; desc: string; fns?: string[] }[] = [
+const EXPOSURE: { num: string; title: string; desc: string; fns: string[] }[] = [
   {
     num: '01',
     title: 'Your staff already use AI tools you never approved.',
-    desc: 'In IBM’s 2025 study of 600 breached organizations, one in five reported a breach involving shadow AI, meaning AI tools staff used without approval. Organizations with heavy shadow-AI use paid about US$670,000 more per breach, on average, than those with little or none. Banning public tools doesn’t work when there is nothing approved to use instead.',
+    desc: 'In IBM’s 2025 study, one in five breached organizations reported a breach involving shadow AI, and heavy users paid about US$670,000 more per breach. A ban fails if staff have nothing approved to use.',
     fns: ['a'],
   },
   {
     num: '02',
-    title: 'Where your data is stored doesn’t decide who can reach it.',
-    desc: 'Under the US CLOUD Act, a US provider must answer US legal process for data in its possession, custody, or control, wherever the data is stored. In June 2025 a French Senate inquiry asked Microsoft France’s director of public and legal affairs, under oath, whether French citizens’ data entrusted to Microsoft through public contracts could reach US authorities without French consent. “No, I cannot guarantee it,” he said, adding that it had never happened. Picking a region settles residency, not jurisdiction.',
+    title: 'Storing data in a region doesn’t decide who can reach it.',
+    desc: 'Under the CLOUD Act, a US provider must hand over data it controls, wherever it sits. In 2025, Microsoft France told the French Senate under oath that it couldn’t rule this out for French public-sector data, though it had never happened.',
     fns: ['b', 'c'],
   },
   {
     num: '03',
     title: 'The model you validated retires on someone else’s schedule.',
-    desc: 'On Microsoft Foundry, a generally available model version is retired 18 months after launch, with at least 60 days’ notice, and standard deployments move to its replacement automatically. The date can’t be extended. Google keeps its long-term Gemini versions available for at least 12 months after release. Any workflow validated against one version, by a clinical reviewer, a model-risk team, or your own test set, has to be validated again when it goes. With weights you hold, the version changes when you decide.',
-    fns: ['d', 'e'],
+    desc: 'Microsoft retires a hosted model version 18 months after launch, with no extensions. Google’s long-term Gemini models get at least 12 months. Each retirement means validating your workflows again. Hold the weights and you choose when the model changes.',
+    fns: ['d'],
   },
   {
     num: '04',
     title: 'An air gap breaks every install script.',
-    desc: 'Installing the open-source inference server vLLM pulls in 196 Python packages on Linux, 27 of them NVIDIA GPU libraries, before the model weights, the container image, or the GPU driver. Behind an air gap each one has to be mirrored, scanned, approved, and carried across by hand, and again at every update.',
-    fns: ['f'],
+    desc: 'Installing the vLLM inference server pulls in 196 Python packages, 27 of them from NVIDIA. Behind an air gap, someone mirrors, scans, approves, and carries across each one, at every update.',
+    fns: ['e'],
   },
   {
     num: '05',
-    title: 'The model has to fit the hardware you can buy.',
-    desc: 'At 16-bit precision, a 70-billion-parameter model needs about 140 GB of GPU memory for its weights alone, more than a single 80 GB H100 holds, before the memory each request needs while it runs. Quantization and newer open models change that math: OpenAI says its open-weight gpt-oss-120b runs on a single 80 GB GPU. Sizing the model to the hardware is an engineering decision, and getting it wrong means buying hardware you didn’t need.',
-    fns: ['g', 'h'],
-  },
-  {
-    num: '06',
     title: 'The rules keep asking where the data is.',
-    desc: 'DORA has required EU financial firms to manage concentration risk in their ICT providers since January 2025, and in November 2025 supervisors named AWS, Google Cloud, and Microsoft among 19 critical providers. NERC says its CIP standards effectively prohibit all but basic cloud use on the bulk power system, and its July 2026 draft would change that no earlier than 2029. India requires payment data to be stored in India, and its data-protection obligations take effect in May 2027. Each rule is different; together they mean an AI program has to document who holds its data, under which law, and in which country.',
-    fns: ['i', 'j', 'k'],
+    desc: 'DORA makes EU financial firms manage their reliance on cloud providers. NERC rules keep US bulk-power systems largely off the public cloud. India requires payment data to be stored in India.',
+    fns: ['f', 'g', 'h'],
   },
 ];
 
-// Four deployment tiers, least to most isolated. `level` drives the four-segment isolation
-// gauge, which is decorative: the "Tier n of 4" text and the list label carry the same information.
+// Least to most isolated. `level` drives a decorative four-segment gauge.
 const TIERS: {
   level: number;
   name: string;
@@ -70,143 +60,111 @@ const TIERS: {
   {
     level: 1,
     name: 'Hosted API',
-    desc: 'A frontier model behind an enterprise agreement: regional processing, no training on your data, short or zero retention.',
-    protects: 'Long-term retention, and your data training someone else’s model.',
-    tradeoff: 'The provider’s jurisdiction and its retirement schedule still apply.',
+    desc: 'A frontier model under an enterprise contract.',
+    protects: 'Retention, and training on your data.',
+    tradeoff: 'Their jurisdiction and their retirement schedule.',
     fit: 'Most everyday work',
   },
   {
     level: 2,
     name: 'Sovereign cloud',
-    desc: 'Single-tenant capacity in your region, in some markets run by a local operator under local law.',
-    protects: 'Data leaving the region, and some foreign legal exposure when the operator is locally owned.',
-    tradeoff: 'Still reachable over a network, and you still don’t hold the weights.',
+    desc: 'Dedicated capacity in your region, sometimes run by a local operator.',
+    protects: 'Data leaving the region.',
+    tradeoff: 'Still networked, and you don’t hold the weights.',
     fit: 'In-region mandates',
   },
   {
     level: 3,
     name: 'Self-hosted',
-    desc: 'Open-weight models on hardware you own or lease, inside your network, with outbound traffic blocked by default.',
-    protects: 'Data leaving your network, forced model changes, and foreign legal process.',
-    tradeoff: 'You run the GPUs, and the best open model still trails the best closed one.',
+    desc: 'Open-weight models on your hardware, with outbound traffic blocked.',
+    protects: 'Data leaving, forced upgrades, and foreign legal process.',
+    tradeoff: 'You run the GPUs, and open models still trail the best closed ones.',
     fit: 'Sensitive data, validated workflows',
-    fns: ['n'],
+    fns: ['i'],
   },
   {
     level: 4,
     name: 'Air-gapped',
-    desc: 'No network path in or out. Models, packages, and updates cross on approved media under a written procedure.',
-    protects: 'Everything above, plus attacks that arrive over a network.',
-    tradeoff: 'Every update is a procedure, so iteration is slower.',
+    desc: 'No network path at all. Updates cross on approved media.',
+    protects: 'Everything above, plus attacks over the network.',
+    tradeoff: 'Every update becomes a procedure.',
     fit: 'Plant floors, isolated labs, trade secrets',
   },
 ];
 
-// Why a healthcare-AI team belongs in this room. Left: evidenced capability. Right: where it lands.
 const TRANSFERS: { have: string; apply: string; fns?: string[] }[] = [
   {
-    have: 'Federated training across 71 sites on six continents, with no patient record moved',
-    apply:
-      'One model trained across countries, subsidiaries, or partners, with each dataset staying where the law keeps it.',
+    have: 'Federated training across 71 sites on six continents',
+    apply: 'One model trained across countries or partners, each dataset kept where the law requires.',
     fns: ['3'],
   },
   {
-    have: 'Federated benchmarking: models scored on data the evaluator never sees',
-    apply: 'Evaluation inside your perimeter, on your own test cases, before anyone relies on a model.',
+    have: 'Inference tuned for limited clinical hardware',
+    apply: 'A useful model on GPUs you can actually buy and run on-site.',
+    fns: ['4', 'j'],
   },
   {
-    have: 'Inference optimization for constrained clinical hardware',
-    apply: 'A capable model on the GPUs you can actually buy, power, and cool on-site.',
-    fns: ['4', 'q'],
-  },
-  {
-    have: 'Packages maintained on conda-forge for reproducible scientific computing',
-    apply: 'Every dependency pinned, mirrored, and rebuildable on a network with no internet access.',
-  },
-  {
-    have: 'Validation protocols and audit-ready documentation for clinical review',
-    apply: 'A documentation package your security office can read before anything crosses the gap.',
-  },
-  {
-    have: 'Low-code frameworks so non-ML staff can run the model',
-    apply: 'Your team runs and updates it after we leave, and nothing in it calls home to us or anyone else.',
+    have: 'Reproducible builds and maintained conda-forge packages',
+    apply: 'Every dependency pinned and mirrored, so the stack rebuilds offline.',
   },
 ];
 
-// The six core services, in the nouns of a sovereign deployment. Nothing here is a new business line.
-const SOVEREIGN_SERVICES: { num: string; title: string; desc: string; fns?: string[] }[] = [
+const SERVICES = [
   {
     num: '01',
     title: 'Readiness & architecture sprint',
-    desc: 'Two to four weeks, fixed scope and fee: every candidate workload placed on a tier, hardware and models sized to it, and a build-vs-buy verdict per workload, including, wherever it is true, “a hosted API is fine for this one.”',
+    desc: 'Every workload placed on a tier, with hardware sized and a build-or-buy call.',
   },
   {
     num: '02',
     title: 'Data engineering inside the perimeter',
-    desc: 'Ingestion, curation, and harmonization built where the data lives, plus the search indexes a private assistant reads from. No copy leaves the perimeter to make the work easier.',
+    desc: 'Pipelines and search indexes built where the data lives, never copied out.',
   },
   {
     num: '03',
-    title: 'Model selection, adaptation & evaluation',
-    desc: 'Open-weight models shortlisted against your tasks and their license terms, fine-tuned on your data inside the perimeter, and scored by a harness built from your own test cases.',
+    title: 'Model selection & evaluation',
+    desc: 'Open-weight models tuned on your data and tested on cases you write.',
   },
   {
     num: '04',
     title: 'Air-gapped deployment & MLOps',
-    desc: 'Mirrored package and model registries, a written procedure for carrying updates across the gap, serving on your GPUs, and monitoring and drift detection that send nothing outside.',
+    desc: 'Mirrored registries, a written transfer procedure, and monitoring that sends nothing out.',
   },
   {
     num: '05',
     title: 'Governance & documentation',
-    desc: 'Data-flow maps, model and license records, validation protocols, and access-control design: the documents your security office, assessor, or regulator will ask for, written while the system is built.',
+    desc: 'Data-flow maps and validation files, written for your assessor.',
   },
   {
     num: '06',
     title: 'Fractional AI leadership',
-    desc: 'Senior AI leadership a few days a month: vendor vetting (plenty of datasheets say “sovereign”; fewer products are), roadmap governance, and board reporting.',
+    desc: 'A senior AI lead a few days a month, testing every vendor’s “sovereign” claim.',
   },
 ];
 
-// Engagement models sized to how a sovereign AI program actually starts.
-// Copy is length-tuned to ~3 lines of `desc` and ~2 lines of `outcome`; the card markup
-// reserves exactly that height so every card aligns on the grid.
-const SOVEREIGN_MODELS = [
+// Copy is tuned to ~2 lines of `desc`; the card reserves that height so dividers line up.
+const MODELS = [
   {
     title: 'Readiness sprint',
-    desc: 'Two to four weeks, fixed scope and fee. You get a tier for every candidate workload, and the hardware, models, and budget each one implies.',
+    desc: 'Two to four weeks at a fixed fee, covering every workload you’re weighing.',
     outcome: 'A costed plan your security office has already read.',
   },
   {
     title: 'Private assistant pilot',
-    desc: 'One team and one document collection, served by an open-weight model on your hardware and measured against how that team works today.',
-    outcome: 'A visible win, and the offline stack underneath it.',
-  },
-  {
-    title: 'Model fit & optimization',
-    desc: 'The model works in the cloud but not on your hardware. We quantize, distill, and re-evaluate it until it fits the GPUs you have.',
-    outcome: 'A model sized to your hardware, with the accuracy cost measured.',
-  },
-  {
-    title: 'Offline MLOps build & handover',
-    desc: 'Mirrors, registries, transfer procedure, serving, monitoring, and runbooks, built on your network and taught to the team that will run it.',
-    outcome: 'An air-gapped stack your own team can update.',
-  },
-  {
-    title: 'Cross-border federated program',
-    desc: 'One model trained or evaluated across countries, subsidiaries, or partners, while every dataset stays in its own jurisdiction.',
-    outcome: 'A shared model, and no raw data crossing a border.',
+    desc: 'One team and one document set, on an open-weight model running on your hardware.',
+    outcome: 'A visible win, and an offline stack you keep.',
   },
   {
     title: 'Stalled-pilot rescue',
-    desc: 'A private-AI pilot that impressed in the demo and stalled at security review. We close the findings and rebuild what can’t pass inside the perimeter.',
-    outcome: 'The pilot back in front of the reviewers, with every finding answered.',
+    desc: 'For a pilot stuck at security review. We close the findings and rebuild what can’t pass.',
+    outcome: 'The pilot back in front of the reviewers.',
   },
 ];
 ---
 
 <Base
   title="Air-Gapped & Sovereign AI"
-  description="Vaiyu Solutions builds AI that runs entirely on infrastructure you control: open-weight models sized to your hardware, air-gapped deployment and MLOps, private assistants, and cross-border federated training, from a team that spent a decade building AI inside hospitals."
+  description="Vaiyu Solutions builds AI that runs on infrastructure you control: open-weight models on your hardware, air-gapped deployment, and private assistants for regulated teams."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden">
@@ -218,12 +176,9 @@ const SOVEREIGN_MODELS = [
           Your data stays put. The model <em>comes to it</em>.
         </h1>
         <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
-          Most AI products assume they can reach the internet: to fetch weights and packages, check a
-          license, or call a hosted model. On an air-gapped network none of that works, and a strict
-          residency rule can forbid it. Vaiyu builds AI that runs entirely on infrastructure you
-          control, with a written procedure for everything that crosses the gap, and tells you which
-          workloads don’t need any of this. We learned how in hospitals, where patient data usually
-          can’t leave the building.
+          Most AI tools assume they can reach the internet. On an air-gapped network they can’t, and a
+          residency rule may forbid it. We build AI that runs entirely on infrastructure you control,
+          and we’ll tell you which workloads don’t need that. We learned how in hospitals.
         </p>
         <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 reveal reveal-4">
           <a
@@ -294,11 +249,6 @@ const SOVEREIGN_MODELS = [
       <h2 class="h-display mt-4 max-w-3xl text-3xl md:text-4xl">
         Every default in the AI stack assumes your data can leave.
       </h2>
-      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
-        Hosted models, copilots, package registries, telemetry, and evaluation dashboards were built
-        for organizations whose data can move. For a hospital, a bank, a drug-discovery lab, a grid
-        operator, or a manufacturer, that assumption is where the exposure starts.
-      </p>
       <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
         {
           EXPOSURE.map((b) => (
@@ -312,18 +262,16 @@ const SOVEREIGN_MODELS = [
                 </h3>
                 <p class="mt-2.5 max-w-3xl leading-relaxed text-ink-soft">
                   {b.desc}
-                  {b.fns && (
-                    <sup class="fn">
-                      {b.fns.map((f, i) => (
-                        <Fragment>
-                          {i > 0 && <span aria-hidden="true">,</span>}
-                          <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
-                            {f}
-                          </a>
-                        </Fragment>
-                      ))}
-                    </sup>
-                  )}
+                  <sup class="fn">
+                    {b.fns.map((f, i) => (
+                      <Fragment>
+                        {i > 0 && <span aria-hidden="true">,</span>}
+                        <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
+                          {f}
+                        </a>
+                      </Fragment>
+                    ))}
+                  </sup>
                 </p>
               </div>
             </li>
@@ -342,12 +290,8 @@ const SOVEREIGN_MODELS = [
         <span class="inline-block">An air gap is the far end of it.</span>
       </h2>
       <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
-        “Sovereign AI” is usually sold as one product. It works more like a scale: the European
-        Commission now grades cloud providers from SEAL-0 to SEAL-4 in its own procurement.<sup
-          class="fn"><a href="#fn-m" aria-label="Footnote m">m</a></sup
-        > For AI workloads we use four tiers. Each protects against something the one before it does
-        not, and each asks more of the team that runs it. In our work, most organizations need two: one
-        for everyday work, and a stricter one for the few workloads that carry real risk.
+        Most teams we work with need two: one for everyday work, and a stricter one for the workloads
+        that carry real risk.
       </p>
       <p class="label-mono mt-12 text-slate">Ordered by isolation, least to most</p>
       <ol class="mt-4 divide-y divide-ink/10 border-y border-ink/10">
@@ -384,14 +328,9 @@ const SOVEREIGN_MODELS = [
                     {t.tradeoff}
                     {t.fns && (
                       <sup class="fn">
-                        {t.fns.map((f, i) => (
-                          <Fragment>
-                            {i > 0 && <span aria-hidden="true">,</span>}
-                            <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
-                              {f}
-                            </a>
-                          </Fragment>
-                        ))}
+                        <a href={`#fn-${t.fns[0]}`} aria-label={`Footnote ${t.fns[0]}`}>
+                          {t.fns[0]}
+                        </a>
                       </sup>
                     )}
                   </dd>
@@ -405,14 +344,6 @@ const SOVEREIGN_MODELS = [
           ))
         }
       </ol>
-      <p class="mt-10 max-w-2xl leading-relaxed text-ink-soft">
-        The big clouds have moved too: AWS opened its European Sovereign Cloud in January 2026, Google
-        sells Gemini on air-gapped hardware, and Microsoft offers disconnected editions of its
-        stack.<sup class="fn"><a href="#fn-p" aria-label="Footnote p">p</a></sup> So you choose a tier
-        per workload rather than per company. The expensive mistakes sit at the two ends:
-        air-gapping work a hosted API would have handled well, and sending the one dataset that
-        mattered to a hosted API.
-      </p>
       <p class="mt-12 max-w-2xl border-l-2 border-saffron pl-6 font-display text-2xl italic leading-snug text-pretty md:text-[1.75rem]">
         We will tell you which tier each workload needs, including when the answer is the cloud.
       </p>
@@ -426,11 +357,6 @@ const SOVEREIGN_MODELS = [
       <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
         We learned this in hospitals, where the data can’t leave either.
       </h2>
-      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
-        For a decade we have built AI for hospitals, where patient records stay on the hospital’s own
-        network and regulators ask for evidence rather than a demo. Each row starts with work built for
-        that setting and ends where it lands in yours.
-      </p>
       <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
         {
           TRANSFERS.map((t) => (
@@ -463,127 +389,29 @@ const SOVEREIGN_MODELS = [
           ))
         }
       </ul>
-      <p class="mt-12 max-w-2xl border-l-2 border-saffron pl-6 font-display text-2xl italic leading-snug text-pretty md:text-[1.75rem]">
-        Seventy-one sites on six continents trained one model, and no patient record left the site
-        that held it.<sup class="fn"><a href="#fn-3" aria-label="Footnote 3">3</a></sup>
-      </p>
     </div>
   </section>
 
-  <!-- What we do for sovereign deployments -->
-  <section class="relative border-t border-ink/10">
+  <!-- What we do -->
+  <section class="relative border-t border-ink/10 bg-cream">
     <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
       <Eyebrow num="04" label="What we do for sovereign deployments" />
       <h2 class="h-display mt-4 max-w-2xl text-3xl md:text-4xl">
         Six services, run inside your perimeter.
       </h2>
       <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
-        We don’t sell GPUs, models, or a platform license. We design and build the system on hardware
-        you own and models you are licensed to run, then hand it to the team that will operate it.
+        We don’t sell GPUs, models, or licenses. We build on what you own and hand it to your team.
       </p>
       <div class="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {
-          SOVEREIGN_SERVICES.map((s) => (
+          SERVICES.map((s) => (
             <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
               <p class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron">{s.num}</p>
               <h3 class="font-display mt-3 text-xl transition-colors group-hover:text-saffron">{s.title}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-ink-soft">
-                {s.desc}
-                {s.fns && (
-                  <sup class="fn">
-                    {s.fns.map((f, i) => (
-                      <Fragment>
-                        {i > 0 && <span aria-hidden="true">,</span>}
-                        <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
-                          {f}
-                        </a>
-                      </Fragment>
-                    ))}
-                  </sup>
-                )}
-              </p>
+              <p class="mt-3 text-sm leading-relaxed text-ink-soft">{s.desc}</p>
             </div>
           ))
         }
-      </div>
-    </div>
-  </section>
-
-  <!-- Credibility band -->
-  <section class="relative overflow-hidden border-t-4 border-saffron bg-cream">
-    <WindField class="text-ink" />
-    <div class="relative mx-auto max-w-6xl px-5 py-20 md:py-24">
-      <div class="grid gap-12 lg:grid-cols-12">
-        <div class="lg:col-span-7">
-          <Eyebrow num="05" label="Credibility" />
-          <h2 class="h-display mt-4 text-4xl md:text-5xl">
-            Peer-reviewed, cited, and <em>standard-setting</em>.
-          </h2>
-          <p class="mt-6 max-w-xl leading-relaxed text-ink-soft">
-            Our team’s research appears in <strong class="text-ink">Nature Communications</strong> and <strong class="text-ink">Nature Machine Intelligence</strong>, and has been covered
-            by <strong class="text-ink">The Wall Street Journal</strong>. We’ve led more than <strong class="text-ink">$9M</strong> in NIH/NCI-funded R&D, and we hold the Vice Chair
-            for Algorithmic Development of the <a href={SITE.mlcommons} class="link-ink" rel="noopener">MLCommons Medical Working Group</a>, helping write the standards medical AI is
-            measured against.
-          </p>
-          <a href="/work/" class="link-ink label-mono mt-8 inline-block text-slate">
-            Publications & standards work →
-          </a>
-        </div>
-        <div class="self-end lg:col-span-5">
-          <ul class="divide-y divide-ink/10 border-y border-ink/10">
-            {
-              COMMUNITY.map((c) => (
-                <li class="py-4 leading-relaxed text-ink-soft">
-                  {c.href ? (
-                    <a href={c.href} rel="noopener" class="link-ink">
-                      {c.text}
-                    </a>
-                  ) : (
-                    c.text
-                  )}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-
-      <div class="mt-20">
-        <p class="label-mono text-slate">Built in the open</p>
-        <p class="mt-4 max-w-2xl leading-relaxed text-ink-soft">
-          These frameworks were built so hospitals could train and benchmark models without moving
-          patient data off their own networks. The same machinery lets a model be trained or
-          evaluated across countries, subsidiaries, or partners that cannot pool their data.
-        </p>
-        <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
-          {
-            PROJECTS.map((p) => (
-              <li>
-                <a
-                  href={p.href}
-                  rel="noopener"
-                  class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[9rem_1fr_auto]"
-                >
-                  <span class="font-display text-xl transition-colors group-hover:text-saffron">
-                    {p.name}
-                  </span>
-                  <span class="leading-relaxed text-ink-soft">
-                    {p.desc}
-                    <span class="mt-1.5 block font-mono text-[11px] uppercase tracking-[0.14em] text-slate">
-                      {p.meta} · {p.role}
-                    </span>
-                  </span>
-                  <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
-                    GitHub ↗
-                  </span>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-        <p class="mt-6 font-mono text-xs text-slate">
-          Plus 40+ conda-forge packages maintained for reproducible scientific computing.
-        </p>
       </div>
     </div>
   </section>
@@ -591,47 +419,40 @@ const SOVEREIGN_MODELS = [
   <!-- How we engage -->
   <section class="border-t border-ink/10">
     <div class="mx-auto max-w-6xl px-5 py-20 md:py-24">
-      <Eyebrow num="06" label="How we engage" />
+      <Eyebrow num="05" label="How we engage" />
       <h2 class="h-display mt-4 max-w-2xl text-4xl md:text-5xl">
         Start with one workload, on one tier.
       </h2>
       <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">
-        Every engagement is scoped and priced on its own, with exit criteria agreed up front. Most
-        teams begin with the readiness sprint or the private assistant pilot.
+        Each engagement has its own scope, fee, and exit criteria.
       </p>
       <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {
-          SOVEREIGN_MODELS.map((m) => (
+          MODELS.map((m) => (
             <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
               <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
                 {m.title}
               </h3>
-              <p class="mt-3 min-h-[4.27rem] text-sm leading-relaxed text-ink-soft">
-                {m.desc}
+              <p class="mt-3 min-h-[2.84rem] text-sm leading-relaxed text-ink-soft">{m.desc}</p>
+              <p class="mt-4 flex items-baseline gap-2 border-t border-ink/10 pt-4">
+                <span aria-hidden="true" class="shrink-0 text-saffron transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+                <span class="font-display text-[0.95rem] italic leading-snug text-pretty text-ink">{m.outcome}</span>
               </p>
-              <div class="mt-4 border-t border-ink/10 pt-4">
-                <p class="flex min-h-[2.62rem] items-baseline gap-2">
-                  <span aria-hidden="true" class="shrink-0 text-saffron transition-transform group-hover:translate-x-0.5">
-                    →
-                  </span>
-                  <span class="font-display text-[0.95rem] italic leading-snug text-pretty text-ink">{m.outcome}</span>
-                </p>
-              </div>
             </div>
           ))
         }
       </div>
       <p class="mt-12 max-w-2xl border-l-2 border-ink/15 pl-6 text-sm leading-relaxed text-slate">
-        We design, build, and document the controls. We don’t certify them: an authority to operate,
-        a certification audit, or a regulator’s sign-off stays with your security office and your
-        assessor, and we build to their requirements.
+        We build and document the controls. Your security office and your assessor sign off on them.
       </p>
     </div>
   </section>
 
   <CTABand
     heading="Bring the model to the data."
-    sub="Start with a readiness sprint or a single-workload pilot on your own hardware. If a private assistant, an offline deployment, or training across borders without moving data is on your roadmap, write to us."
+    sub="Start with a readiness sprint or a one-workload pilot on your own hardware."
   />
 
   <!-- Footnotes -->
@@ -655,107 +476,30 @@ const SOVEREIGN_MODELS = [
         compute requirements by 10–50%, in clinical research environments.
       </li>
       <li id="fn-a">
-        a. IBM with the Ponemon Institute, <em>Cost of a Data Breach Report 2025</em>, July 2025: 600
-        breached organizations, breaches from March 2024 to February 2025. 20% reported a breach
-        involving shadow AI; average breach cost was USD 4.74M at organizations with high shadow-AI
-        use against USD 4.07M with low or none, a correlation rather than an isolated effect. The
-        sample is nonstatistical, and the sponsor sells AI security products. The 2026 edition (July
-        2026) reports roughly one in five organizations with an AI-related breach, 92% of which
-        lacked proper AI access controls.
+        a. IBM and Ponemon Institute, <em>Cost of a Data Breach Report 2025</em>: 600 breached
+        organizations; 20% reported a shadow-AI breach; average cost USD 4.74M with high shadow-AI use,
+        USD 4.07M with low or none.
       </li>
-      <li id="fn-b">
-        b. CLOUD Act (2018), 18 U.S.C. § 2713: a provider must meet its obligations to preserve or
-        disclose data “within such provider’s possession, custody, or control, regardless of whether
-        such communication, record, or other information is located within or outside of the United
-        States.” A provider can move to quash in narrow cases involving countries that hold a CLOUD
-        Act executive agreement with the US (18 U.S.C. § 2703(h)).
-      </li>
+      <li id="fn-b">b. CLOUD Act, 18 U.S.C. § 2713: data in a provider’s “possession, custody, or control,” wherever located.</li>
       <li id="fn-c">
-        c. Sénat, commission d’enquête sur la commande publique, hearing of Microsoft France, 10 June
-        2025, official record. Asked whether he could guarantee under oath that French citizens’ data
-        entrusted to Microsoft through UGAP, the state purchasing agency, would never be transmitted
-        to US authorities without the explicit agreement of the French authorities, Anton Carniaux
-        replied: “Non, je ne peux pas le garantir, mais, encore une fois, cela ne s’est encore jamais
-        produit” (“No, I cannot guarantee it but, once again, this has never yet happened”). The
-        committee’s report (Rapport n° 830, July 2025) summarizes the exchange in broader terms.
+        c. French Senate inquiry on public procurement, Microsoft France hearing, 10 June 2025: “Non, je
+        ne peux pas le garantir, mais […] cela ne s’est encore jamais produit.”
       </li>
       <li id="fn-d">
-        d. Microsoft Learn, “Foundry Models lifecycle and support policy,” updated 24 July 2026: a
-        generally available model version’s retirement date is set 18 months after launch (12 months
-        for generally available models from Anthropic, DeepSeek, Fireworks, and Mistral AI); new
-        customers lose access at 12 months; notice is at least 60 days; “Retirement dates aren’t
-        extendable”; standard deployments are upgraded automatically at retirement. Microsoft
-        reserves the right to retire a model early in an emergency.
+        d. Microsoft Learn, Foundry Models lifecycle policy, July 2026: retirement 18 months after
+        launch (12 for some partner models), not extendable. Google Cloud, model lifecycle, September
+        2026: long-term Gemini models available at least 12 months.
       </li>
-      <li id="fn-e">
-        e. Google Cloud, “Model versions and lifecycle,” updated 22 September 2026: long-term Gemini
-        models are “available for at least 12 months after initial release”; short-term models get
-        at least 45 days to migrate once a retirement date is posted. Anthropic, “Model
-        deprecations”: “at least 60 days’ notice before model retirement for publicly released
-        models.”
-      </li>
-      <li id="fn-f">
-        f. Measured by Vaiyu, 23 September 2026: <code>uv pip compile</code> for <code>vllm</code> (resolving to 0.30.0) on
-        CPython 3.12, x86-64 Linux, returns 196 pinned packages including
-        vLLM itself; 27 are NVIDIA GPU libraries (CUDA, cuDNN, NCCL, CUTLASS). The count changes with
-        each release.
-      </li>
-      <li id="fn-g">
-        g. Weights only, at 2 bytes per parameter in FP16 or BF16: 70 × 10⁹ × 2 bytes ≈ 140 GB
-        (Hugging Face Transformers documentation, “Optimizing LLMs for Speed and Memory”: “Llama-2-70b
-        requires 2 * 70 GB = 140 GB VRAM”). The KV cache and runtime overhead come on top. NVIDIA H100
-        SXM and PCIe: 80 GB (NVIDIA H100 product page; H100 PCIe product brief).
-      </li>
-      <li id="fn-h">
-        h. OpenAI, “Introducing gpt-oss,” 5 August 2025: gpt-oss-120b (117B parameters) runs
-        “efficiently on a single 80 GB GPU,” and gpt-oss-20b “on edge devices with just 16 GB of
-        memory,” both natively quantized in MXFP4 and released under Apache 2.0. Those figures cover
-        the weights; long contexts and many concurrent users need more memory.
-      </li>
+      <li id="fn-e">e. Measured by Vaiyu, 23 September 2026: <code>uv pip compile</code> for vllm 0.30.0, Python 3.12, x86-64 Linux.</li>
+      <li id="fn-f">f. DORA, Regulation (EU) 2022/2554, applicable 17 January 2025, Article 29. It does not require data localization.</li>
+      <li id="fn-g">g. NERC Project 2023-09 white paper, December 2025: current CIP rules are “effectively prohibiting” all but basic cloud use.</li>
+      <li id="fn-h">h. Reserve Bank of India circular, 6 April 2018: payment data “stored in a system only in India.”</li>
       <li id="fn-i">
-        i. Regulation (EU) 2022/2554 (DORA), applicable from 17 January 2025; Article 29 requires a
-        preliminary assessment of ICT concentration risk. The European Supervisory Authorities
-        published the first list of 19 designated critical ICT third-party providers on 18 November
-        2025, including Amazon Web Services EMEA, Google Cloud EMEA, and Microsoft Ireland Operations.
-        DORA imposes no data-localization obligation (Recital 82).
+        i. Stanford HAI, <em>AI Index Report 2026</em>: the top closed model led the top open model by
+        3.3% on the Arena leaderboard in March 2026.
       </li>
       <li id="fn-j">
-        j. NERC, Project 2023-09 white paper, December 2025: the current CIP structure is “effectively
-        prohibiting industry from using cloud technologies in any except the most basic cloud use
-        cases.” NERC’s July 2026 draft implementation plan proposes cloud-capable CIP standards
-        effective no earlier than 1 January 2029, subject to ballot and FERC approval.
-      </li>
-      <li id="fn-k">
-        k. Reserve Bank of India, circular of 6 April 2018 on storage of payment system data: “the
-        entire data relating to payment systems operated by them are stored in a system only in
-        India.” Processing abroad is permitted if the data comes back within one business day or 24
-        hours (RBI FAQ, June 2019). India’s Digital Personal Data Protection Rules were notified on 13
-        November 2025, and the substantive obligations commence eighteen months later, in May 2027;
-        Section 16 of the Act lets the government restrict transfers to countries it notifies.
-      </li>
-      <li id="fn-m">
-        m. European Commission, 10 October 2025: a EUR 180 million cloud tender scoring bids against
-        its Cloud Sovereignty Framework on assurance levels from SEAL-0 (“complete lack of
-        sovereignty”) to SEAL-4 (a full EU supply chain, “from chips to software”), with SEAL-2 the
-        minimum to qualify. Contracts were awarded on 17 April 2026.
-      </li>
-      <li id="fn-n">
-        n. Stanford HAI, <em>AI Index Report 2026</em>, April 2026: “As of March 2026, the top closed
-        model leads the top open model by 3.3%, up from 0.5% in August 2024” on the Arena leaderboard.
-        The gap is between Elo-style preference ratings, not accuracy scores, and it reopened in 2025
-        after nearly closing in 2024.
-      </li>
-      <li id="fn-p">
-        p. Amazon, 15 January 2026: AWS European Sovereign Cloud generally available, first region in
-        Brandenburg, Germany, operated by EU residents; the parent company remains US-based. Google
-        Cloud, 28 August 2025: general availability of Gemini on Google Distributed Cloud air-gapped.
-        Microsoft, 24 February 2026: Azure Local disconnected operations and Microsoft 365 Local
-        disconnected available, with large models on Foundry Local limited to qualified customers.
-      </li>
-      <li id="fn-q">
-        q. Thakur, S., Pati, S. et al. “Optimization of deep learning models for inference in low
-        resource environments.” Computers in Biology and Medicine 196 (2025). <a href="https://doi.org/10.1016/j.compbiomed.2025.110615" class="link-ink" rel="noopener">doi:10.1016/j.compbiomed.2025.110615</a>; medical-imaging models optimized for CPU and integrated-GPU inference, where “optimization
-        techniques can substantially improve model runtime, without compromising model utility.”
+        j. Thakur, S., Pati, S. et al. Computers in Biology and Medicine 196 (2025). <a href="https://doi.org/10.1016/j.compbiomed.2025.110615" class="link-ink" rel="noopener">doi:10.1016/j.compbiomed.2025.110615</a>.
       </li>
     </ol>
   </section>

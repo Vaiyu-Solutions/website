@@ -724,8 +724,9 @@ The full argument structure. `/energy-and-utilities`, `/hospitality`, and `/acad
 (`h-0.5 w-4` segments, `bg-ink/80` filled over `bg-ink/15`, `aria-hidden`, with a screen-reader
 "of 4" on the tier label) and a `dl` of Guards against / Trade-off. A `label-mono` line above the
 list ("Ordered by isolation, least to most") says what the gauge measures, so it does not read as a
-score. Its lettered footnotes skip `l`
-and `o`, which read as `1` and `0` at superscript size.
+score. It leaves out the credibility band: the proof bar and the transfer rows carry the evidence,
+and the hero links to `/work`. Without the band, the services section moves to `cream` to keep the
+paper/cream alternation.
 
 | # | Section | Job |
 | --- | --- | --- |
