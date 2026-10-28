@@ -110,8 +110,9 @@ html.theme-dark { /* dark tokens */ }            /* pinned choice wins */
 - The dark token list is duplicated between the media query and the class rule. CSS has no portable
   way to apply one declaration block from two conditions. **Edit both.**
 
-Per-theme assets use the same pattern: `.on-light` / `.on-dark` toggle the sun and moon glyphs, and
-`.logo-mark` swaps a CSS `background-image` so the browser only fetches the active theme's file.
+Per-theme assets use the same pattern: `.on-light` / `.on-dark` toggle the sun and moon glyphs and the
+light and dark screen figures on `/crm` (§8.18), and `.logo-mark` swaps a CSS `background-image` so
+the browser only fetches the active theme's file.
 
 ### 3.3 Usage rules
 
@@ -712,12 +713,16 @@ illustrates.
 <figure class="mt-6 min-w-0">
   <div class="border border-ink/15">
     <img src="/img/crm/pipeline.webp" alt="…" width="1280" height="720"
-         loading="lazy" decoding="async" class="block h-auto w-full" />
+         loading="lazy" decoding="async" class="on-light block h-auto w-full align-top" />
+    <img src="/img/crm/pipeline-dark.webp" alt="…" width="1280" height="720"
+         loading="lazy" decoding="async" class="on-dark block h-auto w-full align-top" />
   </div>
   <figcaption class="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-1 text-sm leading-relaxed text-slate">
     <span><span class="label-mono mr-2.5">Fig. 2</span>Caption.</span>
     <a href="/img/crm/pipeline.webp" target="_blank" rel="noopener"
-       class="link-ink label-mono shrink-0">Full size ↗</a>
+       class="on-light link-ink label-mono shrink-0">Full size ↗</a>
+    <a href="/img/crm/pipeline-dark.webp" target="_blank" rel="noopener"
+       class="on-dark link-ink label-mono shrink-0">Full size ↗</a>
   </figcaption>
 </figure>
 ```
@@ -733,8 +738,20 @@ illustrates.
   own screens or data, and never imply the screens show the customized frontend.
 - **On phones a screen is a thumbnail.** `Full size ↗` opens the same file in a new tab for
   pinch-zoom; the caption and the step text carry the meaning on their own.
-- **Files:** 1280×720 PNG captures re-encoded as lossless WebP in `public/img/crm/` and checked
-  pixel-identical to the source. `astro:assets` is not used (§13).
+- **A light and a dark capture swap with the theme.** Each figure is an `.on-light` / `.on-dark` pair
+  of `<img>`, and of `Full size ↗` links, using the same three-layer mechanism as the toggle glyphs
+  (§3.2). The system setting, the pinned toggle and no-JS all work. Both images are
+  `loading="lazy"`, and a lazy image inside `display: none` is not fetched, so only the active
+  theme's file downloads. Verified in Chromium for all four combinations of system and pinned theme
+  and for a live toggle click with the figure on screen: the newly shown image loads and nothing
+  shifts, because `width` and `height` reserve the frame.
+- **Both captures show the same data in the same 1280×720 frame**, so a theme change moves nothing.
+- **Why `align-top`:** the `.on-dark` rule is unlayered and uses `display: unset`, so it beats
+  Tailwind's `block` and the active image resolves to `inline`. Without `align-top` an inline image
+  leaves a baseline gap under the frame.
+- **Files:** 1280×720 PNG captures, one light and one dark per screen, re-encoded as lossless WebP in
+  `public/img/crm/` (`name.webp` and `name-dark.webp`) and checked pixel-identical to the source.
+  `astro:assets` is not used (§13).
 
 ---
 
@@ -768,9 +785,10 @@ paper/cream alternation.
 
 `/crm` is a capability page on the same grammar, built around one engagement rather than a sector
 argument. Its hero is the standard bridge aside. The proof bar is three facts about the delivered
-system (`3 custom objects`, `4 workflows`, `5–25 cold leads a week`, all footnoted to the engagement)
-in a `grid-cols-3`, not the shared `STATS`, which are about AI research and do not support a CRM
-claim. **How a lead moves** at 01 is a numbered rule list of five steps; each row carries a mono `by`
+system (`3 custom objects`, `4 workflows`, `5–25 cold leads a week`) in a `grid-cols-3`, not the
+shared `STATS`, which are about AI research and do not support a CRM claim. Its numerals carry no
+footnote markers, an exception to principle 2; footnote `b` (the engagement) is cited from the 01 lede
+and the closing note instead. **How a lead moves** at 01 is a numbered rule list of five steps; each row carries a mono `by`
 label (Workflow, or a person) so the reader can see where the people are, and the three rows that have
 a demo-workspace screen place a screen figure (§8.18) under the step. **What we build** at 02 is a
 text-only rule list, **Where it runs** at 03 is a two-column section with a `dl`, **Why an AI team** at
@@ -829,7 +847,7 @@ the right.
 | `public/img/openai-select-partner.svg` | 375 × 177 | OpenAI Select Partner badge |
 | `public/img/openai-select-partner.png` | 1125 × 531 | Same badge, for social cards |
 | `public/img/sarthak-pati.jpg` | 800 × 800 | Founder headshot |
-| `public/img/crm/intake.webp`, `pipeline.webp`, `drafts.webp` | 1280 × 720 each | Demo-workspace screens on `/crm`, lossless (§8.18) |
+| `public/img/crm/intake.webp`, `pipeline.webp`, `drafts.webp`, each with a `-dark` twin | 1280 × 720 each | Demo-workspace screens on `/crm`, light and dark, lossless (§8.18) |
 
 Notes:
 
@@ -923,8 +941,9 @@ every `Eyebrow` on the site. This is the one thing to fix before making an unqua
   `Base.astro` (roughly 15 lines) and the toggle plus mobile-nav handlers in `Header.astro`. No
   framework islands, no hydration.
 - Fonts self-hosted through `@fontsource`, so there are no third-party requests at all.
-- Images: the product screens on `/crm` are lossless WebP in `public/img/crm/`, lazy-loaded with
-  explicit `width` and `height`. `astro:assets` is not used: Astro 7 does not bundle `sharp`, so a
+- Images: the product screens on `/crm` are lossless WebP in `public/img/crm/`, a light and a dark
+  capture of each so only the active theme's file downloads, lazy-loaded with explicit `width` and
+  `height`. `astro:assets` is not used: Astro 7 does not bundle `sharp`, so a
   build with `<Image>` fails with `MissingSharp` until it is added as a dependency.
 - Budget: Lighthouse ≥ 95 across the board.
 - Deployed to GitHub Pages by `.github/workflows/deploy.yml` on push to `main`. The custom domain is

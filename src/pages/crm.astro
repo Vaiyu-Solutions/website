@@ -13,7 +13,8 @@ const BRIDGE = [
   { from: 'Vendor cloud', to: 'Your infrastructure' },
 ];
 
-// Proof bar: facts about the one delivered system. All three carry footnote `b`.
+// Proof bar: facts about the one delivered system. The numerals carry no markers; footnote `b` is
+// cited from the 01 lede and the closing note.
 const FACTS = [
   { value: '3', label: 'custom objects' },
   { value: '4', label: 'workflows' },
@@ -21,13 +22,14 @@ const FACTS = [
 ];
 
 // `by` says who does the step, so the reader can see where the people are.
-// `fig` is a 1280x720 screen from the demo workspace, shown full width under its step.
+// `fig` is a 1280x720 screen from the demo workspace, shown full width under its step. Each has a
+// light and a dark capture; `.on-light` / `.on-dark` (global.css) show the one that matches the theme.
 const STEPS: {
   num: string;
   title: string;
   desc: string;
   by: string;
-  fig?: { n: number; src: string; alt: string; cap: string };
+  fig?: { n: number; src: string; srcDark: string; alt: string; cap: string };
 }[] = [
   {
     num: '01',
@@ -37,6 +39,7 @@ const STEPS: {
     fig: {
       n: 1,
       src: '/img/crm/intake.webp',
+      srcDark: '/img/crm/intake-dark.webp',
       alt: 'Lead intake in the workflow builder: New lead received, Check for duplicate, Stop if duplicate, Enrich lead, then Create lead. The open panel shows the duplicate check filtering leads by email.',
       cap: 'Lead intake: the workflow checks for a duplicate, enriches the lead and creates the record.',
     },
@@ -49,6 +52,7 @@ const STEPS: {
     fig: {
       n: 2,
       src: '/img/crm/pipeline.webp',
+      srcDark: '/img/crm/pipeline-dark.webp',
       alt: 'Board of leads in five columns: New, Assigned, Draft ready, Contacted and Replied. Each card shows the contact, company, job title and sales owner.',
       cap: 'The pipeline board. New leads sit with the sales manager until a rep is assigned.',
     },
@@ -61,6 +65,7 @@ const STEPS: {
     fig: {
       n: 3,
       src: '/img/crm/drafts.webp',
+      srcDark: '/img/crm/drafts-dark.webp',
       alt: 'Table of outreach messages with columns for subject, lead, status, reviewer, model and the start of the message. Each row is Draft or Reviewed, and the model is GPT-5.6 Terra on every row.',
       cap: 'Drafts written by GPT-5.6 Terra, with each draft’s review status and the rep who reviewed it.',
     },
@@ -153,7 +158,7 @@ const MODELS = [
         </h1>
         <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
           Most off-the-shelf CRMs assume a sales process, and your team either adopts it or works around
-          it. We build the CRM around yours on Twenty<sup class="fn"
+          it. We build the CRM around yours on <a href="https://twenty.com" class="link-ink" rel="noopener">Twenty</a><sup class="fn"
             ><a href="#fn-a" aria-label="Footnote a">a</a></sup
           >, an open-source CRM you can host yourself: a data model that fits, workflows for the clerical
           work, and AI-drafted messages that a rep reviews before they go out.
@@ -196,14 +201,7 @@ const MODELS = [
       {
         FACTS.map((f) => (
           <div>
-            <p class="font-display text-4xl leading-none md:text-[2.6rem]">
-              {f.value}
-              <sup class="fn">
-                <a href="#fn-b" aria-label="Footnote b">
-                  b
-                </a>
-              </sup>
-            </p>
+            <p class="font-display text-4xl leading-none md:text-[2.6rem]">{f.value}</p>
             <p class="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-slate">
               {f.label}
             </p>
@@ -254,7 +252,16 @@ const MODELS = [
                       height="720"
                       loading="lazy"
                       decoding="async"
-                      class="block h-auto w-full"
+                      class="on-light block h-auto w-full align-top"
+                    />
+                    <img
+                      src={s.fig.srcDark}
+                      alt={s.fig.alt}
+                      width="1280"
+                      height="720"
+                      loading="lazy"
+                      decoding="async"
+                      class="on-dark block h-auto w-full align-top"
                     />
                   </div>
                   <figcaption class="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-1 text-sm leading-relaxed text-slate">
@@ -262,7 +269,10 @@ const MODELS = [
                       <span class="label-mono mr-2.5">Fig. {s.fig.n}</span>
                       {s.fig.cap}
                     </span>
-                    <a href={s.fig.src} target="_blank" rel="noopener" class="link-ink label-mono shrink-0">
+                    <a href={s.fig.src} target="_blank" rel="noopener" class="on-light link-ink label-mono shrink-0">
+                      Full size ↗
+                    </a>
+                    <a href={s.fig.srcDark} target="_blank" rel="noopener" class="on-dark link-ink label-mono shrink-0">
                       Full size ↗
                     </a>
                   </figcaption>

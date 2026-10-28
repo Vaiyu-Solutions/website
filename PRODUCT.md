@@ -52,7 +52,7 @@ Marketing site for Vaiyu Solutions, an AI operationalization consultancy founded
 - Open source: GaNDLF, GaNDLF-Synth, MedPerf, FeTS, OpenFL, CaPTk, 40+ conda-forge recipes.
 - Standards & community: MLCommons Medical WG Vice Chair; BraTS/FeTS challenge organization; IBSI and AI-RANO contributions; tutorials at MICCAI, AAAI, ISBI, RSNA.
 - OpenAI Select Partner press release (`src/content/announcements/20260727-openai-select-partner.md`) with cover image `public/img/openai-select-partner.png`.
-- Custom CRM engagement (client not named): `D:\Projects\resume_pati\materials\20261028_twenty` holds the Twenty partner application text and ten demo-workspace screens, each at 1920×1080 and at 1280×720 (`screenshots/720p`). `/crm` uses three of the 720p screens (03 pipeline, 05 drafts, 07 intake); the other seven are available.
+- Custom CRM engagement (client not named): `D:\Projects\resume_pati\materials\20261028_twenty` holds the Twenty partner application text and ten demo-workspace screens, each at 1920×1080 and at 1280×720 (`screenshots/720p`). `/crm` uses three of the 720p screens (03 pipeline, 05 drafts, 07 intake), each as a light capture and a dark capture (`screenshots/720p/dark`) that swap with the site theme; the other seven are available.
 - **Attribution rule (do not fabricate beyond it):** client-derived numbers say "for clients" (e.g. up to 50% training-cost reduction); employment-derived numbers say "our team's track record" (e.g. up to 70% latency reduction); research claims carry links/DOIs. No client names, no invented testimonials, no logos without confirmed rights.
 
 ## Product Principles
