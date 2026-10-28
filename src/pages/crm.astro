@@ -1,0 +1,443 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CTABand from '../components/CTABand.astro';
+import WindField from '../components/WindField.astro';
+
+// Hero aside. `from` is a nowrap mono label in a 9rem column: keep it under ~18 characters.
+const BRIDGE = [
+  { from: 'Generic fields', to: 'Your data model' },
+  { from: 'Manual intake', to: 'Checked and enriched' },
+  { from: 'Blank-page emails', to: 'Drafts a rep reviews' },
+  { from: 'Missed follow-ups', to: 'A reminder per owner' },
+  { from: 'Vendor cloud', to: 'Your infrastructure' },
+];
+
+// Proof bar: facts about the one delivered system. All three carry footnote `b`.
+const FACTS = [
+  { value: '3', label: 'custom objects' },
+  { value: '4', label: 'workflows' },
+  { value: '5–25', label: 'cold leads a week' },
+];
+
+// `by` says who does the step, so the reader can see where the people are.
+// `fig` is a 1280x720 screen from the demo workspace, shown full width under its step.
+const STEPS: {
+  num: string;
+  title: string;
+  desc: string;
+  by: string;
+  fig?: { n: number; src: string; alt: string; cap: string };
+}[] = [
+  {
+    num: '01',
+    title: 'A lead arrives',
+    desc: 'A workflow brings each new lead into the CRM. It checks for a duplicate and enriches the lead before the record is saved.',
+    by: 'Workflow',
+    fig: {
+      n: 1,
+      src: '/img/crm/intake.webp',
+      alt: 'Lead intake in the workflow builder: New lead received, Check for duplicate, Stop if duplicate, Enrich lead, then Create lead. The open panel shows the duplicate check filtering leads by email.',
+      cap: 'Lead intake: the workflow checks for a duplicate, enriches the lead and creates the record.',
+    },
+  },
+  {
+    num: '02',
+    title: 'A manager triages it',
+    desc: 'A second workflow routes the lead to the sales manager, who triages it and assigns a sales rep by hand.',
+    by: 'Workflow, then a person',
+    fig: {
+      n: 2,
+      src: '/img/crm/pipeline.webp',
+      alt: 'Board of leads in five columns: New, Assigned, Draft ready, Contacted and Replied. Each card shows the contact, company, job title and sales owner.',
+      cap: 'The pipeline board. New leads sit with the sales manager until a rep is assigned.',
+    },
+  },
+  {
+    num: '03',
+    title: 'AI drafts the first message',
+    desc: 'Once a rep is assigned, a third workflow sends the lead’s details to a hosted LLM. The draft is saved with the lead, and the rep reviews it before it goes out.',
+    by: 'Workflow, then a person',
+    fig: {
+      n: 3,
+      src: '/img/crm/drafts.webp',
+      alt: 'Table of outreach messages with columns for subject, lead, status, reviewer, model and the start of the message. Each row is Draft or Reviewed, and the model is GPT-5.6 Terra on every row.',
+      cap: 'Drafts written by GPT-5.6 Terra, with each draft’s review status and the rep who reviewed it.',
+    },
+  },
+  {
+    num: '04',
+    title: 'The reply is logged',
+    desc: 'When the lead replies by email, the reply is logged on the lead’s record and a workflow updates the lead’s status.',
+    by: 'Workflow',
+  },
+  {
+    num: '05',
+    title: 'The rep follows up',
+    desc: 'Reps work from pipeline views that show each lead’s stage, and get an email reminder to follow up.',
+    by: 'A person',
+  },
+];
+
+const AREAS = [
+  {
+    title: 'Data model',
+    desc: 'Custom objects for Lead, Outreach Message and Reply sit beside Twenty’s standard ones. Fields and relations tie each lead to its sales owner, its drafts and its replies.',
+  },
+  {
+    title: 'Workflows',
+    desc: 'Intake, routing, drafting and reply handling, each a short sequence of steps in Twenty’s workflow builder.',
+  },
+  {
+    title: 'Pipeline',
+    desc: 'Views by stage, plus a follow-up reminder emailed to each sales owner.',
+  },
+  {
+    title: 'Review trail',
+    desc: 'Each draft is stored with its lead, the model that wrote it, its review status and the rep who reviewed it.',
+  },
+  {
+    title: 'Frontend',
+    desc: 'Our own version of Twenty’s open-source frontend, customized for the client and deployed alongside the server.',
+  },
+];
+
+const TRANSFERS: { have: string; apply: string; fns?: string[] }[] = [
+  {
+    have: 'Validation and audit-ready documentation, built for clinical review',
+    apply: 'Every draft is stored with its model, its review status and its reviewer.',
+  },
+  {
+    have: 'Federated training across 71 sites on six continents',
+    apply: 'Lead records stored on your own servers, as patient data stayed at each hospital.',
+    fns: ['3'],
+  },
+  {
+    have: 'Reproducible pipelines with documented lineage',
+    apply: 'Workflows your team can read, with versions and a run history.',
+  },
+];
+
+// Copy is tuned to ~2 lines of `desc`; the card reserves that height so dividers line up.
+const MODELS = [
+  {
+    title: 'Discovery sprint',
+    desc: 'Two to four weeks. We map how your team sells, draft the data model and cost the build.',
+    outcome: 'A costed plan you keep either way.',
+  },
+  {
+    title: 'Build and handover',
+    desc: 'We build the data model, workflows and hosting, then document them and train your team.',
+    outcome: 'A CRM your team can run without us.',
+  },
+  {
+    title: 'Embedded advisory',
+    desc: 'Recurring senior engineering as your process changes: new fields, workflows and views.',
+    outcome: 'A CRM that keeps up with how you sell.',
+  },
+];
+---
+
+<Base
+  title="Custom CRM Development"
+  description="Custom CRMs built on open-source Twenty: your data model, workflows that handle the clerical work, and AI-drafted outreach a rep reviews. Hosted on infrastructure you control."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <WindField class="text-ink" />
+    <div class="relative mx-auto grid max-w-6xl gap-12 px-5 pb-16 pt-20 md:pb-24 md:pt-28 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <Eyebrow label="Custom CRM development" class="reveal" />
+        <h1 class="h-display mt-5 text-[2.6rem] md:text-6xl reveal reveal-2">
+          Your sales process, built into a CRM <em>you control</em>.
+        </h1>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
+          Most off-the-shelf CRMs assume a sales process, and your team either adopts it or works around
+          it. We build the CRM around yours on Twenty<sup class="fn"
+            ><a href="#fn-a" aria-label="Footnote a">a</a></sup
+          >, an open-source CRM you can host yourself: a data model that fits, workflows for the clerical
+          work, and AI-drafted messages that a rep reviews before they go out.
+        </p>
+        <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 reveal reveal-4">
+          <a
+            href="/contact/"
+            class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
+          >
+            <span class="label-mono">Start a conversation</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="#how-a-lead-moves" class="link-ink label-mono text-ink-soft">See how a lead moves</a>
+        </div>
+      </div>
+      <aside class="self-center lg:col-span-5 reveal reveal-5">
+        <div class="border border-ink/15 bg-paper/80 p-7">
+          <p class="label-mono text-slate">What changes</p>
+          <ul class="mt-4 divide-y divide-ink/10">
+            {
+              BRIDGE.map((b) => (
+                <li class="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-3 sm:flex-nowrap">
+                  <span class="w-full shrink-0 whitespace-nowrap font-mono text-[11px] uppercase tracking-widest text-slate sm:w-36">
+                    {b.from}
+                  </span>
+                  <span aria-hidden="true" class="shrink-0 text-saffron">→</span>
+                  <span class="font-display text-lg">{b.to}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Proof bar -->
+  <section aria-label="The build in numbers" class="border-y border-ink/10 bg-cream">
+    <div class="mx-auto grid max-w-6xl grid-cols-3 gap-x-4 px-5 py-12 sm:gap-x-6">
+      {
+        FACTS.map((f) => (
+          <div>
+            <p class="font-display text-4xl leading-none md:text-[2.6rem]">
+              {f.value}
+              <sup class="fn">
+                <a href="#fn-b" aria-label="Footnote b">
+                  b
+                </a>
+              </sup>
+            </p>
+            <p class="mt-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-slate">
+              {f.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- How a lead moves -->
+  <section id="how-a-lead-moves" class="relative scroll-mt-20 border-t border-ink/10">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="01" label="How a lead moves" />
+      <h2 class="h-display mt-4 max-w-3xl text-3xl md:text-4xl">
+        From cold lead to logged reply, in five steps.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        This is the flow we built for a sales team that generates its own cold leads, 5 to 25 a week<sup
+          class="fn"><a href="#fn-b" aria-label="Footnote b">b</a></sup
+        >. The screens come from a demo workspace with dummy data, on stock Twenty<sup class="fn"
+          ><a href="#fn-c" aria-label="Footnote c">c</a></sup
+        >. The client’s own interface is our customized version of Twenty’s open-source frontend, and it
+        isn’t shown here.
+      </p>
+      <ol class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          STEPS.map((s) => (
+            <li class="py-7">
+              <div class="group grid gap-x-8 gap-y-2 md:grid-cols-[4rem_1fr_11rem]">
+                <span class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron">
+                  {s.num}
+                </span>
+                <div>
+                  <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
+                    {s.title}
+                  </h3>
+                  <p class="mt-2.5 max-w-2xl leading-relaxed text-ink-soft">{s.desc}</p>
+                </div>
+                <p class="label-mono text-slate md:pt-1.5">{s.by}</p>
+              </div>
+              {s.fig && (
+                <figure class="mt-6 min-w-0">
+                  <div class="border border-ink/15">
+                    <img
+                      src={s.fig.src}
+                      alt={s.fig.alt}
+                      width="1280"
+                      height="720"
+                      loading="lazy"
+                      decoding="async"
+                      class="block h-auto w-full"
+                    />
+                  </div>
+                  <figcaption class="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-1 text-sm leading-relaxed text-slate">
+                    <span>
+                      <span class="label-mono mr-2.5">Fig. {s.fig.n}</span>
+                      {s.fig.cap}
+                    </span>
+                    <a href={s.fig.src} target="_blank" rel="noopener" class="link-ink label-mono shrink-0">
+                      Full size ↗
+                    </a>
+                  </figcaption>
+                </figure>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+      <p class="mt-12 max-w-2xl border-l-2 border-saffron pl-6 font-display text-2xl italic leading-snug text-pretty md:text-[1.75rem]">
+        The workflows do the clerical work. A person decides who works each lead and what goes out.
+      </p>
+    </div>
+  </section>
+
+  <!-- What we build -->
+  <section class="relative border-t border-ink/10 bg-cream">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="02" label="What we build" />
+      <h2 class="h-display mt-4 max-w-3xl text-3xl md:text-4xl">
+        Five parts, each built around the client’s sales process.
+      </h2>
+      <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          AREAS.map((a) => (
+            <li class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[12rem_1fr]">
+              <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
+                {a.title}
+              </h3>
+              <p class="max-w-2xl leading-relaxed text-ink-soft">{a.desc}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Where it runs -->
+  <section class="relative border-t border-ink/10">
+    <div class="relative mx-auto grid max-w-6xl gap-x-12 gap-y-10 px-5 py-16 md:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-6">
+        <Eyebrow num="03" label="Where it runs" />
+        <h2 class="h-display mt-4 max-w-xl text-3xl md:text-4xl">
+          The CRM runs on infrastructure you control.
+        </h2>
+        <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">
+          In this build, the Twenty server, its database and our frontend build all run on the client’s own
+          infrastructure instead of Twenty Cloud, and lead records are stored in a database the client
+          hosts.
+        </p>
+      </div>
+      <div class="lg:col-span-6 lg:pt-9">
+        <dl class="divide-y divide-ink/10 border-y border-ink/10">
+          <div class="grid gap-x-8 gap-y-1.5 py-5 sm:grid-cols-[11rem_1fr]">
+            <dt class="label-mono leading-[1.625rem] text-slate">On the client’s infrastructure</dt>
+            <dd class="leading-relaxed text-ink-soft">The Twenty server, its database and our frontend build.</dd>
+          </div>
+          <div class="grid gap-x-8 gap-y-1.5 py-5 sm:grid-cols-[11rem_1fr]">
+            <dt class="label-mono leading-[1.625rem] text-slate">Also calls out</dt>
+            <dd class="leading-relaxed text-ink-soft">
+              Outreach drafting, which sends a lead’s details to a hosted LLM API (GPT-5.6 Terra).
+            </dd>
+          </div>
+        </dl>
+        <p class="mt-6 max-w-xl text-sm leading-relaxed text-ink-soft">
+          If lead details can’t go to a hosted model, the drafting step’s endpoint can be a model you host
+          instead. <a href="/sovereign-ai/" class="link-ink">See our sovereign AI work</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why an AI team -->
+  <section class="relative border-t border-ink/10 bg-cream">
+    <div class="relative mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <Eyebrow num="04" label="Why an AI team" />
+      <h2 class="h-display mt-4 max-w-3xl text-3xl md:text-4xl">
+        Writing the draft is the easy part. <em>The process around it</em> is the work.
+      </h2>
+      <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+        Our team’s background is AI in hospitals, where someone has to answer for the result. A sales CRM
+        is a smaller version of that problem.
+      </p>
+      <ul class="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+        {
+          TRANSFERS.map((t) => (
+            <li class="group grid items-baseline gap-x-10 gap-y-2 py-5 md:grid-cols-[1fr_auto_1fr]">
+              <span class="leading-relaxed text-slate">
+                {t.have}
+                {t.fns && (
+                  <sup class="fn">
+                    {t.fns.map((f, i) => (
+                      <Fragment>
+                        {i > 0 && <span aria-hidden="true">,</span>}
+                        <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
+                          {f}
+                        </a>
+                      </Fragment>
+                    ))}
+                  </sup>
+                )}
+              </span>
+              <span
+                aria-hidden="true"
+                class="hidden shrink-0 text-saffron transition-transform group-hover:translate-x-0.5 md:block"
+              >
+                →
+              </span>
+              <span class="font-display text-lg leading-snug transition-colors group-hover:text-saffron">
+                {t.apply}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- How we engage -->
+  <section class="border-t border-ink/10">
+    <div class="mx-auto max-w-6xl px-5 py-20 md:py-24">
+      <Eyebrow num="05" label="How we engage" />
+      <h2 class="h-display mt-4 max-w-2xl text-4xl md:text-5xl">Start with how your team sells.</h2>
+      <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">
+        The usual path is a short sprint, then a scoped build.
+      </p>
+      <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          MODELS.map((m) => (
+            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
+              <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
+                {m.title}
+              </h3>
+              <p class="mt-3 min-h-[2.84rem] text-sm leading-relaxed text-ink-soft">{m.desc}</p>
+              <p class="mt-4 flex items-baseline gap-2 border-t border-ink/10 pt-4">
+                <span aria-hidden="true" class="shrink-0 text-saffron transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+                <span class="font-display text-[0.95rem] italic leading-snug text-pretty text-ink">{m.outcome}</span>
+              </p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mt-12 max-w-2xl border-l-2 border-ink/15 pl-6 text-sm leading-relaxed text-slate">
+        A custom CRM is not always the right call. This build serves a team with 5 to 25 cold leads a
+        week<sup class="fn"><a href="#fn-b" aria-label="Footnote b">b</a></sup>, each getting a personal
+        message. If a standard SaaS CRM fits how you sell, we will say so on the first call.
+      </p>
+    </div>
+  </section>
+
+  <CTABand
+    heading="Tell us how your team sells."
+    sub="Start with a 30-minute call. If a custom CRM fits, the next step is a 2–4 week discovery sprint that ends in a costed plan you keep either way."
+  />
+
+  <!-- Footnotes -->
+  <section aria-label="Sources and attribution" class="mx-auto max-w-6xl px-5 py-12">
+    <p class="label-mono text-slate">Sources & attribution</p>
+    <ol class="mt-4 max-w-3xl space-y-2 font-mono text-xs leading-relaxed text-slate">
+      <li id="fn-3">
+        3. Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
+        Nature Communications 13 (2022). <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">doi:10.1038/s41467-022-33407-5</a>; 71 sites across 6 continents, the largest real-world federated learning study to date.
+      </li>
+      <li id="fn-a">
+        a. Twenty is an independent open-source CRM project, <a href="https://twenty.com" class="link-ink" rel="noopener">twenty.com</a>.
+      </li>
+      <li id="fn-b">
+        b. Vaiyu client engagement; the client is not named. Counts and lead volume describe that one system.
+      </li>
+      <li id="fn-c">
+        c. Demo workspace with dummy data, built on stock Twenty. It does not show the client’s customized
+        frontend.
+      </li>
+    </ol>
+  </section>
+</Base>

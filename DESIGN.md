@@ -36,16 +36,18 @@ the page-load rise come from. The motif stays decorative and quiet; it never com
 
 **Deliberately absent:** stock photography, client logos, gradients, drop shadows, rounded cards,
 illustration, testimonials, cookie banners, analytics. The only photograph on the site is the
-founder's headshot. Proof is text: journal names, DOIs, repository links, footnotes.
+founder's headshot. Proof is mostly text: journal names, DOIs, repository links, footnotes. The one
+exception is `/crm`, where captioned screens of the delivered system stand in for a client
+reference (§8.18).
 
 ---
 
 ## 2. Principles
 
 1. **Rules, not boxes.** Structure comes from 1px dividers and 2px top rules. Borders on all four
-   sides exist in exactly two forms: the hero aside (five pages) and the founder photo. There is not
-   a single `shadow` in the codebase, and no border radius apart from the footer logo chip
-   (`rounded-md`) and the 1px softening on the focus ring.
+   sides exist in exactly three forms: the hero aside (six pages), the founder photo and the screen
+   figures on `/crm`. There is not a single `shadow` in the codebase, and no border radius apart from
+   the footer logo chip (`rounded-md`) and the 1px softening on the focus ring.
 2. **Every number has a source.** Any figure in body copy carries a `<sup class="fn">` linking to a
    `Sources & attribution` block at the foot of the page. This is a design commitment, not just an
    editorial one: the superscript is a visible saffron mark, so the discipline is legible at a glance.
@@ -370,11 +372,14 @@ There is also `border-l-2 border-ink/15 pl-6` on `slate` text, used for the clos
 `/energy-and-utilities`, `/hospitality`, and `/sovereign-ai`. It reads as the quiet inverse of the
 saffron pull quote.
 
-Two bordered containers exist site-wide, both at `border-ink/15`:
+Three bordered containers exist site-wide, all at `border-ink/15`:
 
 - The hero aside: `border border-ink/15 bg-paper/80 p-7`, on the home page, the three sector
-  pages, and `/sovereign-ai`. The 80% background lets the wind streamlines show through faintly.
+  pages, `/sovereign-ai` and `/crm`. The 80% background lets the wind streamlines show through
+  faintly.
 - The founder photo: `aspect-square w-full max-w-sm border border-ink/15 object-cover`, on `/about`.
+- The screen figure: `border border-ink/15` with no padding, on `/crm` (§8.18). The screenshot's own
+  edge is the frame.
 
 Nothing else on the site is boxed.
 
@@ -469,8 +474,8 @@ outside `/about`:
 
 > वायु, Sanskrit for wind: unseen, everywhere, load-bearing.
 
-`Academia` and `Sovereign AI` are injected into the footer link list at indexes 2 and 3. Both are
-deliberately kept out of the top nav and surfaced here for discoverability.
+`Academia`, `Sovereign AI` and `Custom CRM` are injected into the footer link list at indexes 2, 3
+and 4. All three are deliberately kept out of the top nav and surfaced here for discoverability.
 
 ### 8.4 `Eyebrow.astro`
 
@@ -698,6 +703,39 @@ The block always sits **after** `CTABand`, at the very bottom of the page.
 `Read →`. Drafts get a saffron chip below the date (`bg-saffron px-2 py-0.5 font-mono text-[10px]`),
 visible in `pnpm dev` only. Empty state is a top-rule card reading "Nothing yet".
 
+### 8.18 Screen figure
+
+The one place the site shows its own work as an image. Used on `/crm`, full width under the step it
+illustrates.
+
+```html
+<figure class="mt-6 min-w-0">
+  <div class="border border-ink/15">
+    <img src="/img/crm/pipeline.webp" alt="…" width="1280" height="720"
+         loading="lazy" decoding="async" class="block h-auto w-full" />
+  </div>
+  <figcaption class="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-1 text-sm leading-relaxed text-slate">
+    <span><span class="label-mono mr-2.5">Fig. 2</span>Caption.</span>
+    <a href="/img/crm/pipeline.webp" target="_blank" rel="noopener"
+       class="link-ink label-mono shrink-0">Full size ↗</a>
+  </figcaption>
+</figure>
+```
+
+- **Full container width, never a side column.** A 1280px capture reads at about 0.87x there and
+  about 0.57x in a seven-column slot, where UI text drops below 9px.
+- **Hairline frame, no padding, no radius, no shadow.** The screenshot's own edge does the work.
+- **`Fig. n` is `slate`, not saffron.** §3.3 lists every place saffron appears; a figure label is not
+  one of them.
+- **No numerals in captions**, because every number needs a footnote. The demo-workspace disclosure
+  sits in the section lede, with a footnote, rather than being repeated under each figure.
+- **Screens come from a demo workspace with dummy data, on stock Twenty.** Never publish a client's
+  own screens or data, and never imply the screens show the customized frontend.
+- **On phones a screen is a thumbnail.** `Full size ↗` opens the same file in a new tab for
+  pinch-zoom; the caption and the step text carry the meaning on their own.
+- **Files:** 1280×720 PNG captures re-encoded as lossless WebP in `public/img/crm/` and checked
+  pixel-identical to the source. `astro:assets` is not used (§13).
+
 ---
 
 ## 9. Page grammar
@@ -727,6 +765,17 @@ list ("Ordered by isolation, least to most") says what the gauge measures, so it
 score. It leaves out the credibility band: the proof bar and the transfer rows carry the evidence,
 and the hero links to `/work`. Without the band, the services section moves to `cream` to keep the
 paper/cream alternation.
+
+`/crm` is a capability page on the same grammar, built around one engagement rather than a sector
+argument. Its hero is the standard bridge aside. The proof bar is three facts about the delivered
+system (`3 custom objects`, `4 workflows`, `5–25 cold leads a week`, all footnoted to the engagement)
+in a `grid-cols-3`, not the shared `STATS`, which are about AI research and do not support a CRM
+claim. **How a lead moves** at 01 is a numbered rule list of five steps; each row carries a mono `by`
+label (Workflow, or a person) so the reader can see where the people are, and the three rows that have
+a demo-workspace screen place a screen figure (§8.18) under the step. **What we build** at 02 is a
+text-only rule list, **Where it runs** at 03 is a two-column section with a `dl`, **Why an AI team** at
+04 carries the transfer rows, and **How we engage** at 05 reuses the site's engagement models. It
+leaves out the credibility band.
 
 | # | Section | Job |
 | --- | --- | --- |
@@ -780,6 +829,7 @@ the right.
 | `public/img/openai-select-partner.svg` | 375 × 177 | OpenAI Select Partner badge |
 | `public/img/openai-select-partner.png` | 1125 × 531 | Same badge, for social cards |
 | `public/img/sarthak-pati.jpg` | 800 × 800 | Founder headshot |
+| `public/img/crm/intake.webp`, `pipeline.webp`, `drafts.webp` | 1280 × 720 each | Demo-workspace screens on `/crm`, lossless (§8.18) |
 
 Notes:
 
@@ -873,6 +923,9 @@ every `Eyebrow` on the site. This is the one thing to fix before making an unqua
   `Base.astro` (roughly 15 lines) and the toggle plus mobile-nav handlers in `Header.astro`. No
   framework islands, no hydration.
 - Fonts self-hosted through `@fontsource`, so there are no third-party requests at all.
+- Images: the product screens on `/crm` are lossless WebP in `public/img/crm/`, lazy-loaded with
+  explicit `width` and `height`. `astro:assets` is not used: Astro 7 does not bundle `sharp`, so a
+  build with `<Image>` fails with `MissingSharp` until it is added as a dependency.
 - Budget: Lighthouse ≥ 95 across the board.
 - Deployed to GitHub Pages by `.github/workflows/deploy.yml` on push to `main`. The custom domain is
   pinned by `public/CNAME`.
@@ -905,7 +958,7 @@ quote.
 typed `const` arrays in the frontmatter. Import `STATS`, `PROJECTS`, and `COMMUNITY` from
 `src/data/site.ts` and leave them alone. Add the sector to `INDUSTRIES` with an `href` so the home
 page aside and the `/work` list both link to it. A capability page that is not an industry
-(`/sovereign-ai`) goes in the footer's Explore list instead. Every number in the argument section needs a
+(`/sovereign-ai`, `/crm`) goes in the footer's Explore list instead. Every number in the argument section needs a
 lettered footnote.
 
 **Adding an announcement.** `pnpm new:announcement "Headline"` creates the file. The filename is the
