@@ -2,19 +2,19 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 /**
- * Announcements — the single public feed for press releases, partnerships, and
- * company news. One markdown file in `src/content/announcements/` becomes one
+ * Blog: the single public feed for press releases, partnerships, and
+ * company news. One markdown file in `src/content/blog/` becomes one
  * page at build time, and the URL is the filename verbatim:
  *
  *   20260727-openai-select-partner.md
- *   → vaiyu.solutions/announcements/20260727-openai-select-partner
+ *   → vaiyu.solutions/blog/20260727-openai-select-partner
  *
  * Files whose name starts with `_` (e.g. `_TEMPLATE.md`) are never published.
  */
-const announcements = defineCollection({
+const blog = defineCollection({
   loader: glob({
     pattern: '**/[^_]*.md',
-    base: './src/content/announcements',
+    base: './src/content/blog',
     // Default behaviour also slugifies; do it literally so the URL is always
     // exactly what the file is called.
     generateId: ({ entry }) => entry.replace(/\.md$/, ''),
@@ -34,4 +34,4 @@ const announcements = defineCollection({
   }),
 });
 
-export const collections = { announcements };
+export const collections = { blog };

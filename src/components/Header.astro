@@ -3,7 +3,7 @@ import { NAV } from '../data/site';
 
 const path = Astro.url.pathname;
 const norm = (p: string) => p.replace(/\/+$/, '') || '/';
-// Prefix match so nested pages (e.g. /announcements/<slug>/) still light up their section.
+// Prefix match so nested pages (e.g. /blog/<slug>/) still light up their section.
 const isActive = (href: string) =>
   norm(path) === norm(href) || norm(path).startsWith(`${norm(href)}/`);
 ---

@@ -233,7 +233,7 @@ html.theme-light .logo-mark {
     text-decoration-color: var(--color-saffron-bright);
   }
 
-  /* Long-form markdown body (announcements). Editorial measure, no typography plugin. */
+  /* Long-form markdown body (blog posts). Editorial measure, no typography plugin. */
   .prose-editorial {
     max-width: 44rem;
     color: var(--color-ink-soft);

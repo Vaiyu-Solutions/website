@@ -1,20 +1,20 @@
 #!/usr/bin/env node
-// Scaffold a new announcement:
+// Scaffold a new blog post:
 //
-//   pnpm new:announcement "Vaiyu Solutions Named an OpenAI Select Partner"
+//   pnpm new:post "Vaiyu Solutions Named an OpenAI Select Partner"
 //
-// Creates src/content/announcements/<YYYYMMDD>-<slug>.md with front matter filled
-// in. Non-terminal alternative: copy src/content/announcements/_TEMPLATE.md.
+// Creates src/content/blog/<YYYYMMDD>-<slug>.md with front matter filled
+// in. Non-terminal alternative: copy src/content/blog/_TEMPLATE.md.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const DIR = path.resolve(here, '../src/content/announcements');
+const DIR = path.resolve(here, '../src/content/blog');
 
 const title = process.argv.slice(2).join(' ').trim();
 if (!title) {
-  console.error('Usage: pnpm new:announcement "Your headline"');
+  console.error('Usage: pnpm new:post "Your headline"');
   process.exit(1);
 }
 
@@ -27,7 +27,7 @@ const slug =
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-    .slice(0, 60) || 'announcement';
+    .slice(0, 60) || 'post';
 
 // The filename IS the public URL, date prefix included.
 const name = `${compact}-${slug}`;
@@ -51,5 +51,5 @@ tags: [press release]
 
 fs.mkdirSync(DIR, { recursive: true });
 fs.writeFileSync(filepath, content);
-console.log(`✓ Created src/content/announcements/${filename}`);
-console.log(`  URL when published: https://vaiyu.solutions/announcements/${name}`);
+console.log(`✓ Created src/content/blog/${filename}`);
+console.log(`  URL when published: https://vaiyu.solutions/blog/${name}`);

@@ -456,7 +456,7 @@ Wordmark (`.logo-mark`, `h-9 w-[178px]`, screen-reader text only) with `mr-auto`
 the theme toggle, then the mobile trigger. Items are `items-baseline` so the mono nav labels sit on
 the same baseline as the wordmark.
 
-Active state is a prefix match, so `/announcements/some-post/` still lights up `Announcements`.
+Active state is a prefix match, so `/blog/some-post/` still lights up `Blog`.
 Active gets `text-saffron` plus `aria-current="page"`; inactive is `text-ink-soft`.
 
 Below `md`, the nav collapses behind a hamburger. The panel styling lives in `global.css` under
@@ -950,7 +950,7 @@ every `Eyebrow` on the site. This is the one thing to fix before making an unqua
   pinned by `public/CNAME`.
 - Sitemap via `@astrojs/sitemap`, `robots.txt` in `public/`.
 - SEO: per-page title and description, canonical URLs, Open Graph and Twitter cards,
-  `ProfessionalService` JSON-LD site-wide plus `NewsArticle` JSON-LD on announcements.
+  `ProfessionalService` JSON-LD site-wide plus `NewsArticle` JSON-LD on blog posts.
 
 **Commands**
 
@@ -960,7 +960,7 @@ pnpm build          # static build to dist/
 pnpm preview        # serve the build
 pnpm lint:firewall  # brand-firewall check on dist/
 pnpm verify         # build + firewall lint; the pre-launch gate
-pnpm new:announcement "Headline"
+pnpm new:post "Headline"
 ```
 
 ---
@@ -980,7 +980,7 @@ page aside and the `/work` list both link to it. A capability page that is not a
 (`/sovereign-ai`, `/crm`) goes in the footer's Explore list instead. Every number in the argument section needs a
 lettered footnote.
 
-**Adding an announcement.** `pnpm new:announcement "Headline"` creates the file. The filename is the
+**Adding a blog post.** `pnpm new:post "Headline"` creates the file. The filename is the
 URL verbatim, so name it well and do not rename it after sharing. Files starting with `_` and posts
 with `draft: true` never reach production. Markdown renders inside `.prose-editorial`, which already
 styles headings, lists, quotes, code, and the blockquote attribution line.

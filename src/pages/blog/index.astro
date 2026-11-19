@@ -3,25 +3,25 @@ import Base from '../../layouts/Base.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import CTABand from '../../components/CTABand.astro';
 import WindField from '../../components/WindField.astro';
-import { getAnnouncements, announcementHref, formatDate, isoDate } from '../../lib/announcements';
+import { getBlogPosts, blogPostHref, formatDate, isoDate } from '../../lib/blog';
 
-const items = await getAnnouncements();
+const items = await getBlogPosts();
 ---
 
 <Base
-  title="Announcements"
-  description="Press releases, partnerships, and company news from Vaiyu Solutions."
+  title="Blog"
+  description="Press releases, partnerships, and perspective from Vaiyu Solutions."
 >
   <!-- Hero -->
   <section class="relative overflow-hidden border-b border-ink/10">
     <WindField class="text-ink" />
     <div class="relative mx-auto max-w-6xl px-5 pb-14 pt-20 md:pb-16 md:pt-24">
-      <Eyebrow label="Announcements" class="reveal" />
+      <Eyebrow label="Blog" class="reveal" />
       <h1 class="h-display mt-5 max-w-3xl text-[2.6rem] md:text-6xl reveal reveal-2">
-        Everything we announce, in <em>one place</em>.
+        Everything we publish, in <em>one place</em>.
       </h1>
       <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
-        Press releases, partnerships, and company news. This page is the canonical link, so
+        Press releases, partnerships, and perspective. This page is the canonical link, so
         anything we post elsewhere points back here.
       </p>
     </div>
@@ -34,7 +34,7 @@ const items = await getAnnouncements();
         <div class="border-t-2 border-ink/80 pt-6">
           <p class="label-mono text-slate">Nothing yet</p>
           <p class="h-display mt-4 max-w-xl text-3xl">
-            The first announcement will land here.
+            The first post will land here.
           </p>
         </div>
       ) : (
@@ -42,7 +42,7 @@ const items = await getAnnouncements();
           {items.map((a) => (
             <li>
               <a
-                href={announcementHref(a)}
+                href={blogPostHref(a)}
                 class="group grid gap-x-10 gap-y-3 py-9 md:grid-cols-[11rem_1fr_auto]"
               >
                 <span class="self-baseline">
@@ -83,7 +83,7 @@ const items = await getAnnouncements();
   </section>
 
   <CTABand
-    heading="Want to talk about what we just announced?"
+    heading="Want to talk about what we just published?"
     sub="We read every note. Tell us what you’re trying to ship and we’ll tell you whether we’re the right team for it."
   />
 </Base>
