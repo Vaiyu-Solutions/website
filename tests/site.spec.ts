@@ -136,13 +136,14 @@ test.describe('motion and touch', () => {
     const values = await page.evaluate(() =>
       [...document.querySelectorAll('a, button')].map((el) => {
         const cs = getComputedStyle(el);
-        return [cs.touchAction, cs.getPropertyValue('-webkit-tap-highlight-color')];
+        return [cs.touchAction, (cs as CSSStyleDeclaration & { webkitTapHighlightColor?: string }).webkitTapHighlightColor ?? 'unsupported'];
       }),
     );
     expect(values.length).toBeGreaterThan(0);
     for (const [touch, tap] of values) {
       expect(touch).toBe('manipulation');
-      expect(tap).toBe('rgba(0, 0, 0, 0)');
+      // Firefox has no tap highlight property; where it exists it must be transparent.
+      if (tap !== 'unsupported') expect(tap).toBe('rgba(0, 0, 0, 0)');
     }
   });
 });

@@ -161,6 +161,15 @@ const isActive = (href: string) =>
       navTrigger?.focus();
     }
   });
+  // Tab from an open trigger enters its panel (Navigation Menu rule). WebKit's forward focus
+  // order skips the panel from the trigger, so the step is taken here; other engines do it anyway.
+  navTrigger?.addEventListener('keydown', (event) => {
+    if (event.key !== 'Tab' || event.shiftKey || !menu?.open || wide.matches) return;
+    const first = document.querySelector<HTMLElement>('#site-nav nav a');
+    if (!first) return;
+    event.preventDefault();
+    first.focus();
+  });
   // Focus leaving the panel closes it. The trigger and the panel keep focus in the navigation.
   menu?.addEventListener('focusout', (event) => {
     const next = event.relatedTarget as Node | null;
