@@ -415,3 +415,33 @@ test.describe('text contrast sweep', () => {
     }
   }
 });
+
+test.describe('web component lifecycle and pre-upgrade rendering', () => {
+  test('the menu keeps working after its elements are removed and put back', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    await page.evaluate(() => {
+      const menu = document.getElementById('site-menu') as HTMLElement;
+      document.body.appendChild(menu);
+    });
+    await page.locator('#nav-trigger').click();
+    await expect(page.locator('#nav-trigger')).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.locator('#site-nav')).toHaveAttribute('data-open', '');
+  });
+
+  test('before the scripts run, mobile hides the panel and keeps the trigger; desktop keeps the nav', async ({ browser }) => {
+    for (const [width, expectNavVisible] of [[390, false], [1280, true]] as const) {
+      const context = await browser.newContext({ viewport: { width, height: 844 } });
+      const page = await context.newPage();
+      await page.route(/\/_astro\/.*\.js(\?.*)?$/, (route) => route.abort());
+      await page.goto('/');
+      await expect(page.locator('#site-nav nav')).toHaveCount(1);
+      await expect(page.locator('#site-nav')).toBeVisible({ visible: expectNavVisible });
+      if (width === 390) {
+        await expect(page.locator('#nav-trigger')).toBeVisible();
+        await expect(page.locator('#nav-trigger')).toHaveAttribute('aria-controls', 'site-nav');
+      }
+      await context.close();
+    }
+  });
+});

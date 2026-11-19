@@ -16,8 +16,8 @@ const isActive = (href: string) =>
     <ui-collapsible-trigger for="site-menu" class="contents">
       <button
         type="button"
-        type="button"
         id="nav-trigger"
+        aria-controls="site-nav"
         class="nav-trigger order-last -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron-text md:order-none"
         aria-expanded="false"
         aria-label="Menu"
@@ -66,7 +66,6 @@ const isActive = (href: string) =>
     </ui-collapsible>
     <ui-toggle class="contents">
       <button
-        type="button"
         type="button"
         id="theme-toggle"
         class="theme-toggle -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron-text"
