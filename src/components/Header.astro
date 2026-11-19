@@ -162,4 +162,11 @@ const isActive = (href: string) =>
       navTrigger?.focus();
     }
   });
+  // Focus leaving the panel closes it. The trigger and the panel keep focus in the navigation.
+  menu?.addEventListener('focusout', (event) => {
+    const next = event.relatedTarget as Node | null;
+    if (!menu || wide.matches) return;
+    if (next && (menu.contains(next) || next === navTrigger)) return;
+    setMenu(false);
+  });
 </script>

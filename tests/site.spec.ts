@@ -313,3 +313,105 @@ test.describe('interactive colour contrast', () => {
     expect(contrast(color, bg)).toBeGreaterThanOrEqual(4.5);
   });
 });
+
+test.describe('menu focus rules', () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test('Shift+Tab from the first link returns to the trigger and keeps the menu open', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('#nav-trigger').focus();
+    await page.keyboard.press('Enter');
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#site-nav nav a').first()).toBeFocused();
+    await page.keyboard.press('Shift+Tab');
+    await expect(page.locator('#nav-trigger')).toBeFocused();
+    await expect(page.locator('#nav-trigger')).toHaveAttribute('aria-expanded', 'true');
+  });
+
+  test('focus leaving the open menu closes it', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('#nav-trigger').focus();
+    await page.keyboard.press('Enter');
+    const linkCount = await page.locator('#site-nav nav a').count();
+    for (let i = 0; i <= linkCount; i++) await page.keyboard.press('Tab');
+    await expect(page.locator('#nav-trigger')).toHaveAttribute('aria-expanded', 'false');
+    await expect(page.locator('#site-nav')).toHaveAttribute('data-closed', '');
+  });
+});
+
+test.describe('text contrast sweep', () => {
+  const sweep = () =>
+    document.body
+      ? (() => {
+          const ctx = document.createElement('canvas').getContext('2d') as CanvasRenderingContext2D;
+          // The browser converts any colour syntax (color-mix, oklab) to sRGB, so no string parsing.
+          const parse = (c: string) => {
+            ctx.clearRect(0, 0, 1, 1);
+            ctx.fillStyle = c;
+            ctx.fillRect(0, 0, 1, 1);
+            const d = ctx.getImageData(0, 0, 1, 1).data;
+            return { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
+          };
+          const lum = (c: { r: number; g: number; b: number }) => {
+            const [R, G, B] = [c.r, c.g, c.b].map((v) => {
+              const x = v / 255;
+              return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4;
+            });
+            return 0.2126 * R + 0.7152 * G + 0.0722 * B;
+          };
+          const hidden = (el: Element) => !!el.closest('[aria-hidden="true"]');
+          const opacityOf = (el: Element) => {
+            let o = 1;
+            for (let e: Element | null = el; e; e = e.parentElement) o *= parseFloat(getComputedStyle(e).opacity);
+            return o;
+          };
+          const backdrop = (el: Element) => {
+            const layers: { r: number; g: number; b: number; a: number }[] = [];
+            let base: { r: number; g: number; b: number } | null = null;
+            for (let e: Element | null = el; e && !base; e = e.parentElement) {
+              const c = parse(getComputedStyle(e).backgroundColor);
+              if (c.a === 0) continue;
+              if (c.a >= 1) base = c;
+              else layers.push(c);
+            }
+            let out = base ?? { r: 248, g: 249, b: 251 };
+            for (const l of layers.reverse()) {
+              out = { r: l.a * l.r + (1 - l.a) * out.r, g: l.a * l.g + (1 - l.a) * out.g, b: l.a * l.b + (1 - l.a) * out.b };
+            }
+            return out;
+          };
+          const failures: { text: string; ratio: number; color: string }[] = [];
+          for (const el of Array.from(document.querySelectorAll('body *'))) {
+            if (['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(el.tagName) || hidden(el)) continue;
+            const ownText = Array.from(el.childNodes).some((n) => n.nodeType === 3 && (n.textContent ?? '').trim() !== '');
+            if (!ownText) continue;
+            const rect = el.getBoundingClientRect();
+            if (rect.width < 2 || rect.height < 2) continue;
+            const fg = parse(getComputedStyle(el).color);
+            const alpha = fg.a * opacityOf(el);
+            if (alpha === 0) continue;
+            const bg = backdrop(el);
+            const mixed = { r: alpha * fg.r + (1 - alpha) * bg.r, g: alpha * fg.g + (1 - alpha) * bg.g, b: alpha * fg.b + (1 - alpha) * bg.b };
+            const [a, b] = [lum(mixed), lum(bg)].sort((x, y) => y - x);
+            const ratio = (a + 0.05) / (b + 0.05);
+            if (ratio < 4.5) {
+              failures.push({ text: (el.textContent ?? '').trim().slice(0, 50), ratio: Math.round(ratio * 100) / 100, color: getComputedStyle(el).color });
+            }
+          }
+          return failures;
+        })()
+      : [];
+
+  for (const scheme of ['light', 'dark'] as const) {
+    for (const route of routes) {
+      test(`${route} text meets 4.5:1 in ${scheme} mode`, async ({ page }) => {
+        test.skip(route.startsWith('/announcements/'), 'redirect stub; its target is checked under /blog/');
+        await page.emulateMedia({ colorScheme: scheme, reducedMotion: 'reduce' });
+        await page.setViewportSize({ width: 1280, height: 900 });
+        await page.goto(route);
+        const failures = await page.evaluate(sweep);
+        expect(failures).toEqual([]);
+      });
+    }
+  }
+});

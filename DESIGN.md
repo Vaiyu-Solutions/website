@@ -163,14 +163,14 @@ Computed from the shipping hex values (WCAG 2.x relative luminance).
 
 ### 3.5 Known contrast gaps
 
-`PLAN.md` §8 and `PRODUCT.md` commit to WCAG AA. The interactive gaps below are fixed. The rest are
-non-interactive text and stay open until someone decides the brand question.
+`PLAN.md` §8 and `PRODUCT.md` commit to WCAG AA. Every gap below is closed. The browser suite sweeps
+every visible text element on every page in both themes, and it fails on anything under 4.5:1.
 
 | Gap | Measured | Where it shows | Suggested fix |
 | --- | --- | --- | --- |
-| `text-saffron` on `paper` / `cream`, non-interactive | 2.90 / 2.65 | `Eyebrow` labels, the italic outcome line on `/services`, publication notes. Open. | Interactive uses now take `text-saffron-text` (5.62 / 5.14). Applying it to eyebrows changes the accent in non-interactive text, so it is a brand call. |
+| `text-saffron` on `paper` / `cream` | 2.90 / 2.65 | `Eyebrow` labels, the italic outcome line on `/services`, publication notes. Fixed. | Text takes `text-saffron-text` (5.62 / 5.14). Arrows and rules keep `saffron`, since they are not text. |
 | Primary button hover: `text-paper` on `bg-saffron` | 2.90 | Every primary CTA on the site, hover only. Fixed. | Hover foreground is `ink` (5.58), so the fill stays `saffron` |
-| Footer `text-block-fg/45` and `/40`, non-interactive | 4.26 / 3.65 | Footer column labels, email display, bottom bar. Open. | Raise to `/60` or above for the 11–12px mono runs |
+| Footer `text-block-fg/45` and `/40` | 4.26 / 3.65 | Footer column labels, email display, bottom bar. Fixed. | Raised to `/60` |
 
 Dark mode passes everywhere, including saffron, because the dark saffron (`#f2914a`) sits on a much
 darker ground.
@@ -928,7 +928,7 @@ Committed baseline: WCAG AA contrast, semantic landmarks, keyboard navigation, m
 - Mobile nav: `ui-collapsible` supplies `aria-controls` and `aria-expanded`. The panel is `keep-mounted`,
   so the trigger keeps `aria-controls` while the menu is closed. The label stays "Menu"
   in both states, since `aria-expanded` carries the state. `Escape` closes and returns focus to the
-  trigger. The trigger comes before the panel in the DOM, so Tab from the open trigger enters the
+  trigger, and focus leaving the panel closes it. The trigger comes before the panel in the DOM, so Tab from the open trigger enters the
   links. The menu is held open at `md` and up, where the trigger is hidden. On mobile the theme
   toggle paints before the trigger but is reached after the menu links, so Tab order and the visual
   row differ there. Desktop has no such gap: the nav paints and tabs before the theme toggle.
