@@ -5,8 +5,9 @@ is the source of truth for the design: every value here is extracted from the sh
 from intent. Use it to extend the site, to rebuild the look somewhere else (deck, PDF, product UI),
 or as the reference layer for slides and documentation.
 
-**Implementation:** Astro 7 + Tailwind 4.3, fully static, self-hosted fonts, zero runtime JS beyond
-two inline scripts (theme toggle, mobile nav). Tokens live in `src/styles/global.css`; copy and
+**Implementation:** Astro 7 + Tailwind 4.3, fully static, self-hosted fonts, and no runtime JS beyond
+the header's two `@ui-sdk/web` elements (the theme toggle and the mobile nav disclosure), which
+bundle with the page. Tokens live in `src/styles/global.css`; copy and
 structured data live in `src/data/site.ts`.
 
 > `README.md` and `PLAN.md` still say "Astro 5". The installed and shipping version is Astro 7.
@@ -459,10 +460,11 @@ the same baseline as the wordmark.
 Active state is a prefix match, so `/blog/some-post/` still lights up `Blog`.
 Active gets `text-saffron` plus `aria-current="page"`; inactive is `text-ink-soft`.
 
-Below `md`, the nav collapses behind a hamburger. The panel styling lives in `global.css` under
-`html.js`, not on the markup, so the no-JS header keeps its wrapping row instead of a stack it
-cannot collapse. Nav links get `min-height: 44px` in the panel: the tap target is the full row, not
-the four characters of "WORK".
+Below `md`, the nav collapses behind a hamburger. The nav is a `ui-collapsible` panel, and the
+trigger is a `ui-collapsible-trigger` around the menu button. The panel is `display: contents`, so
+without JS the no-JS header keeps its wrapping row. With JS, the panel's block styling lives in
+`global.css` under `html.js.nav-open`, which the header script sets. Nav links get `min-height: 44px`
+in the panel: the tap target is the full row, not the four characters of "WORK".
 
 ### 8.3 `Footer.astro`
 
@@ -511,12 +513,16 @@ Sector pages override both props with sector-specific copy.
 ### 8.7 Primary button (inline pattern)
 
 ```html
-<a href="/contact/"
-   class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron">
-  <span class="label-mono">Start with a 30-minute call</span>
-  <span aria-hidden="true">→</span>
-</a>
+<ui-button>
+  <a href="/contact/"
+     class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron">
+    <span class="label-mono">Start with a 30-minute call</span>
+    <span aria-hidden="true">→</span>
+  </a>
+</ui-button>
 ```
+
+The link sits inside `<ui-button>` from `@ui-sdk/web/button`, which is registered once in `Base.astro`. The wrapper keeps the link's semantics and adds nothing visible.
 
 Square, no radius, no shadow. Always paired with a secondary text link at `gap-x-8`:
 
@@ -915,11 +921,15 @@ Committed baseline: WCAG AA contrast, semantic landmarks, keyboard navigation, m
 - `:focus-visible { outline: 2px solid var(--color-saffron); outline-offset: 3px; border-radius: 1px; }`
   globally, never removed.
 - `aria-current="page"` on the active nav item, alongside the color change.
-- Mobile nav: `aria-controls`, `aria-expanded`, a label that flips between "Open menu" and
-  "Close menu", `Escape` closes and returns focus to the trigger, and the trigger resets when the
-  viewport crosses back above `md`.
-- Theme toggle `aria-label` flips between "Switch to dark theme" and "Switch to light theme", and
-  stays correct when the system preference changes under a visitor who has not pinned a choice.
+- Mobile nav: `ui-collapsible` supplies `aria-controls` and `aria-expanded`. The label stays "Menu"
+  in both states, since `aria-expanded` carries the state. `Escape` closes and returns focus to the
+  trigger. The trigger comes before the panel in the DOM, so Tab from the open trigger enters the
+  links. The menu is held open at `md` and up, where the trigger is hidden. On mobile the theme
+  toggle paints before the trigger but is reached after the menu links, so Tab order and the visual
+  row differ there. Desktop has no such gap: the nav paints and tabs before the theme toggle.
+- Theme toggle: a `ui-toggle` around the button, with the constant label "Dark theme" and
+  `aria-pressed` on while dark is active. It stays correct when the system preference changes under a
+  visitor who has not pinned a choice.
 - Decorative elements are hidden properly: `WindField` and every arrow glyph carry `aria-hidden`,
   the `§ nn ·` prefix in `Eyebrow` is hidden so screen readers get the label alone, and the
   announcement cover image is `alt="" aria-hidden="true"` since the headline already says it.

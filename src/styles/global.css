@@ -1,3 +1,5 @@
+@layer ui-sdk;
+
 @import "tailwindcss";
 
 @theme {
@@ -125,6 +127,11 @@ html.js .theme-toggle {
 #nav-trigger[aria-expanded='true'] .nav-trigger-close {
   display: unset;
 }
+/* Tailwind's preflight sets [hidden] to display: none !important, which no override
+   beats. The menu therefore stays open at md and up instead of hiding the nav. */
+#site-nav {
+  display: contents;
+}
 @media (width < 48rem) {
   html.js .nav-trigger {
     display: inline-flex;
@@ -132,9 +139,7 @@ html.js .theme-toggle {
   html.js #site-nav {
     display: none;
   }
-  /* Panel styling lives here rather than on the markup so the no-JS header keeps
-     the wrapping row it has always had, instead of a stack it cannot collapse. */
-  html.js #site-nav.is-open {
+  html.js.nav-open #site-nav {
     display: block;
     margin-top: 1rem;
     border-top: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
@@ -186,6 +191,10 @@ html.theme-light .logo-mark {
     outline: 2px solid var(--color-saffron);
     outline-offset: 3px;
     border-radius: 1px;
+  }
+  a,
+  button {
+    touch-action: manipulation;
   }
 }
 

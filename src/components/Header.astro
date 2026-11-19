@@ -13,154 +13,155 @@ const isActive = (href: string) =>
     <a href="/" class="logo-mark mr-auto block h-9 w-[178px] shrink-0">
       <span class="sr-only">Vaiyu Solutions, home</span>
     </a>
-    <nav id="site-nav" aria-label="Main" class="order-last w-full md:order-none md:w-auto">
-      <ul class="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-        {
-          NAV.map((l) => (
-            <li>
-              <a
-                href={l.href}
-                aria-current={isActive(l.href) ? 'page' : undefined}
-                class:list={[
-                  'label-mono transition-colors hover:text-saffron',
-                  isActive(l.href) ? 'text-saffron' : 'text-ink-soft',
-                ]}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
-    <button
-      type="button"
-      id="theme-toggle"
-      class="theme-toggle -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron"
-      aria-label="Switch to dark theme"
-    >
-      <svg
-        class="on-light h-[1.05rem] w-[1.05rem]"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.7"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
+    <ui-collapsible-trigger for="site-menu" class="contents">
+      <button
+        type="button"
+        id="nav-trigger"
+        class="nav-trigger order-last -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron md:order-none"
+        aria-expanded="false"
+        aria-label="Menu"
       >
-        <path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a7 7 0 0 0 10.7 10.7z"></path>
-      </svg>
-      <svg
-        class="on-dark h-[1.05rem] w-[1.05rem]"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.7"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
+        <svg
+          class="h-[1.15rem] w-[1.15rem]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path class="nav-trigger-open" d="M3.5 7h17M3.5 12h17M3.5 17h17"></path>
+          <path class="nav-trigger-close" d="M5.5 5.5l13 13M18.5 5.5l-13 13"></path>
+        </svg>
+      </button>
+    </ui-collapsible-trigger>
+    <ui-collapsible id="site-menu" class="contents">
+      <ui-collapsible-panel
+        id="site-nav"
+        class="order-last w-full md:order-none md:w-auto"
       >
-        <circle cx="12" cy="12" r="4"></circle>
-        <path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"
-        ></path>
-      </svg>
-    </button>
-    <button
-      type="button"
-      id="nav-trigger"
-      class="nav-trigger -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron"
-      aria-controls="site-nav"
-      aria-expanded="false"
-      aria-label="Open menu"
-    >
-      <svg
-        class="h-[1.15rem] w-[1.15rem]"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.7"
-        stroke-linecap="round"
-        aria-hidden="true"
+        <nav aria-label="Main" class="order-last w-full md:order-none md:w-auto">
+          <ul class="flex flex-wrap items-baseline gap-x-6 gap-y-2">
+            {
+              NAV.map((l) => (
+                <li>
+                  <a
+                    href={l.href}
+                    aria-current={isActive(l.href) ? 'page' : undefined}
+                    class:list={[
+                      'label-mono transition-colors hover:text-saffron',
+                      isActive(l.href) ? 'text-saffron' : 'text-ink-soft',
+                    ]}
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </ui-collapsible-panel>
+    </ui-collapsible>
+    <ui-toggle class="contents">
+      <button
+        type="button"
+        id="theme-toggle"
+        class="theme-toggle -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron"
+        aria-label="Dark theme"
       >
-        <path class="nav-trigger-open" d="M3.5 7h17M3.5 12h17M3.5 17h17"></path>
-        <path class="nav-trigger-close" d="M5.5 5.5l13 13M18.5 5.5l-13 13"></path>
-      </svg>
-    </button>
+        <svg
+          class="on-light h-[1.05rem] w-[1.05rem]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a7 7 0 0 0 10.7 10.7z"></path>
+        </svg>
+        <svg
+          class="on-dark h-[1.05rem] w-[1.05rem]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"
+          ></path>
+        </svg>
+      </button>
+    </ui-toggle>
   </div>
 </header>
 
-<script is:inline>
-  (function () {
-    var root = document.documentElement;
-    var btn = document.getElementById('theme-toggle');
-    var meta = document.querySelector('meta[name="color-scheme"]');
-    var mq = window.matchMedia('(prefers-color-scheme: dark)');
-    if (!btn) return;
+<script>
+  import '@ui-sdk/web/toggle';
+  import '@ui-sdk/web/collapsible';
 
-    function active() {
-      if (root.classList.contains('theme-dark')) return 'dark';
-      if (root.classList.contains('theme-light')) return 'light';
-      return mq.matches ? 'dark' : 'light';
+  type Pressable = HTMLElement & { pressed: boolean };
+  type Disclosure = HTMLElement & { open: boolean; api: { close: () => void } };
+
+  const root = document.documentElement;
+  const themeButton = document.getElementById('theme-toggle');
+  const themeToggle = themeButton?.closest<Pressable>('ui-toggle') ?? null;
+  const meta = document.querySelector<HTMLMetaElement>('meta[name="color-scheme"]');
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function activeTheme(): 'dark' | 'light' {
+    if (root.classList.contains('theme-dark')) return 'dark';
+    if (root.classList.contains('theme-light')) return 'light';
+    return mq.matches ? 'dark' : 'light';
+  }
+
+  // Pressed means dark is on; the label stays constant (APG toggle button).
+  function syncPressed() {
+    if (themeToggle) themeToggle.pressed = activeTheme() === 'dark';
+  }
+
+  themeToggle?.addEventListener('pressedchange', (e) => {
+    const next = (e as CustomEvent<{ value: boolean }>).detail.value ? 'dark' : 'light';
+    root.classList.remove('theme-light', 'theme-dark');
+    root.classList.add('theme-' + next);
+    if (meta) meta.content = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch (err) {
+      /* Storage blocked: the choice holds for this page only. */
     }
+  });
 
-    function label() {
-      btn.setAttribute(
-        'aria-label',
-        active() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
-      );
+  // Keeps the pressed state right when the system preference changes.
+  mq.addEventListener('change', syncPressed);
+  syncPressed();
+
+  // Held open at md and up, where the trigger is hidden.
+  const menu = document.getElementById('site-menu') as Disclosure | null;
+  const navTrigger = document.getElementById('nav-trigger');
+  const wide = window.matchMedia('(width >= 48rem)');
+
+  function setMenu(open: boolean) {
+    if (!menu) return;
+    menu.open = open;
+    root.classList.toggle('nav-open', open);
+  }
+
+  menu?.addEventListener('openchange', (e) => {
+    root.classList.toggle('nav-open', (e as CustomEvent<{ value: boolean }>).detail.value);
+  });
+
+  wide.addEventListener('change', () => setMenu(wide.matches));
+  setMenu(wide.matches);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !wide.matches && menu?.open) {
+      menu.api.close();
+      navTrigger?.focus();
     }
-
-    btn.addEventListener('click', function () {
-      var next = active() === 'dark' ? 'light' : 'dark';
-      root.classList.remove('theme-light', 'theme-dark');
-      root.classList.add('theme-' + next);
-      if (meta) meta.content = next;
-      try {
-        localStorage.setItem('theme', next);
-      } catch (e) {
-        /* Storage blocked: the choice holds for this page only. */
-      }
-      label();
-    });
-
-    // Only fires while the visitor is still following the system setting; the
-    // palette itself is handled by CSS, this just keeps the button honest.
-    mq.addEventListener('change', label);
-    label();
-  })();
-</script>
-
-<script is:inline>
-  (function () {
-    var trigger = document.getElementById('nav-trigger');
-    var nav = document.getElementById('site-nav');
-    if (!trigger || !nav) return;
-
-    // Matches the `md` breakpoint the stylesheet collapses the nav at.
-    var wide = window.matchMedia('(width >= 48rem)');
-
-    function set(open) {
-      nav.classList.toggle('is-open', open);
-      trigger.setAttribute('aria-expanded', String(open));
-      trigger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    }
-
-    trigger.addEventListener('click', function () {
-      set(trigger.getAttribute('aria-expanded') !== 'true');
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
-        set(false);
-        trigger.focus();
-      }
-    });
-
-    // Past the breakpoint the links are visible again regardless of state, so
-    // reset the trigger rather than leave it advertising a stale one.
-    wide.addEventListener('change', function (e) {
-      if (e.matches) set(false);
-    });
-  })();
+  });
 </script>

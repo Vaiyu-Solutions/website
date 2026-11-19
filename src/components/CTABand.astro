@@ -16,13 +16,15 @@ const {
     <h2 class="h-display max-w-2xl text-4xl md:text-5xl">{heading}</h2>
     <p class="mt-5 max-w-xl leading-relaxed text-ink-soft">{sub}</p>
     <div class="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-      <a
-        href={`mailto:${SITE.email}`}
-        class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
-      >
-        <span class="label-mono">Write to us</span>
-        <span aria-hidden="true">→</span>
-      </a>
+      <ui-button>
+        <a
+          href={`mailto:${SITE.email}`}
+          class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
+        >
+          <span class="label-mono">Write to us</span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </ui-button>
       <span class="font-mono text-sm text-slate">{SITE.emailDisplay}</span>
     </div>
   </div>
