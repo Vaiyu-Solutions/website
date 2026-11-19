@@ -10,9 +10,9 @@ const isActive = (href: string) =>
 
 <header class="border-b border-ink/10 bg-paper">
   <div class="mx-auto flex max-w-6xl flex-wrap items-baseline gap-x-6 px-5 py-5">
-    <a href="/" class="logo-mark mr-auto block h-9 w-[178px] shrink-0">
+    <ui-button><a href="/" class="logo-mark mr-auto block h-9 w-[178px] shrink-0">
       <span class="sr-only">Vaiyu Solutions, home</span>
-    </a>
+    </a></ui-button>
     <ui-collapsible-trigger for="site-menu" class="contents">
       <button
         type="button"
@@ -45,7 +45,7 @@ const isActive = (href: string) =>
             {
               NAV.map((l) => (
                 <li>
-                  <a
+                  <ui-button><a
                     href={l.href}
                     aria-current={isActive(l.href) ? 'page' : undefined}
                     class:list={[
@@ -54,7 +54,7 @@ const isActive = (href: string) =>
                     ]}
                   >
                     {l.label}
-                  </a>
+                  </a></ui-button>
                 </li>
               ))
             }

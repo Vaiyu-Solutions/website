@@ -94,12 +94,12 @@ const ld = {
     <slot name="head" />
   </head>
   <body class="flex min-h-screen flex-col bg-paper font-sans text-ink antialiased">
-    <a
+    <ui-button><a
       href="#main"
       class="label-mono sr-only bg-ink px-4 py-3 text-paper focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50"
     >
       Skip to content
-    </a>
+    </a></ui-button>
     <Header />
     <main id="main" class="flex-1">
       <slot />

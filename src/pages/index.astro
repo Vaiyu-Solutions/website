@@ -33,7 +33,7 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
               <span aria-hidden="true">→</span>
             </a>
           </ui-button>
-          <a href="/services/" class="link-ink label-mono text-ink-soft">How we work</a>
+          <ui-button><a href="/services/" class="link-ink label-mono text-ink-soft">How we work</a></ui-button>
         </div>
       </div>
       <aside class="self-center lg:col-span-5 reveal reveal-5">
@@ -44,9 +44,9 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
               INDUSTRIES.map((i) => (
                 <li class="flex items-baseline justify-between gap-4 py-3">
                   {i.href ? (
-                    <a href={i.href} class="font-display text-xl transition-colors hover:text-saffron">
+                    <ui-button><a href={i.href} class="font-display text-xl transition-colors hover:text-saffron">
                       {i.name}
-                    </a>
+                    </a></ui-button>
                   ) : (
                     <span class="font-display text-xl">{i.name}</span>
                   )}
@@ -71,7 +71,7 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
               {s.value}
               {s.fn && (
                 <sup class="fn">
-                  <a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>{s.fn}</a>
+                  <ui-button><a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>{s.fn}</a></ui-button>
                 </sup>
               )}
             </p>
@@ -93,7 +93,7 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
     <div class="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
       {
         SERVICES.map((s) => (
-          <a
+          <ui-button><a
             href={`/services/#${s.slug}`}
             class="group border-t-2 border-ink/80 pt-5 transition-colors hover:border-saffron"
           >
@@ -105,7 +105,7 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
             <p class="label-mono mt-4 text-saffron opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
               Detail <span aria-hidden="true">→</span>
             </p>
-          </a>
+          </a></ui-button>
         ))
       }
     </div>
@@ -121,13 +121,13 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
           Look us up <em>first</em>.
         </h2>
         <p class="mt-6 max-w-xl leading-relaxed text-ink-soft">
-          Our team’s research has appeared in <strong class="text-ink">Nature Communications</strong>, <strong class="text-ink">Nature Machine Intelligence</strong>, <strong class="text-ink">The Lancet Oncology</strong>, and <strong class="text-ink">Radiology</strong>, and been covered by <strong class="text-ink">The Wall Street Journal</strong>. We actively contribute towards Algorithmic Development of the <a href={SITE.mlcommons} class="link-ink" rel="noopener">MLCommons Medical Working Group</a>,
+          Our team’s research has appeared in <strong class="text-ink">Nature Communications</strong>, <strong class="text-ink">Nature Machine Intelligence</strong>, <strong class="text-ink">The Lancet Oncology</strong>, and <strong class="text-ink">Radiology</strong>, and been covered by <strong class="text-ink">The Wall Street Journal</strong>. We actively contribute towards Algorithmic Development of the <ui-button><a href={SITE.mlcommons} class="link-ink" rel="noopener">MLCommons Medical Working Group</a></ui-button>,
           helping set the standards medical AI is measured against.
         </p>
       </div>
       <div class="lg:col-span-5">
         <!-- The badge asset ships with its own white card + border; don't box it again. -->
-        <a href="/blog/20260727-openai-select-partner/" class="group block max-w-[19rem]">
+        <ui-button><a href="/blog/20260727-openai-select-partner/" class="group block max-w-[19rem]">
           <img
             src="/img/openai-select-partner.svg"
             alt="OpenAI Partner Network Select Partner badge"
@@ -138,7 +138,7 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
           <span class="label-mono mt-4 block text-slate transition-colors group-hover:text-saffron">
             Announced July 2026 · read the release <span aria-hidden="true">→</span>
           </span>
-        </a>
+        </a></ui-button>
         <ul class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
           <li class="flex items-baseline justify-between gap-6 py-4">
             <span class="label-mono shrink-0 text-slate">Editor’s Choice</span>
@@ -171,7 +171,7 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
       {
         PROJECTS.map((p) => (
           <li>
-            <a
+            <ui-button><a
               href={p.href}
               rel="noopener"
               class="group grid gap-x-8 gap-y-2 py-6 transition-colors md:grid-cols-[9rem_1fr_auto]"
@@ -188,7 +188,7 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
               <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
                 GitHub <span aria-hidden="true">↗</span>
               </span>
-            </a>
+            </a></ui-button>
           </li>
         ))
       }
@@ -234,9 +234,9 @@ import { SITE, STATS, SERVICES, PROJECTS, MODELS, INDUSTRIES } from '../data/sit
       <li id="fn-3">
         3. Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
         Nature Communications 13 (2022).
-        <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">
+        <ui-button><a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">
           doi:10.1038/s41467-022-33407-5</a
-        >; 71 sites across 6 continents, the largest real-world federated learning study to date.
+        ></ui-button>; 71 sites across 6 continents, the largest real-world federated learning study to date.
       </li>
       <li id="fn-4">
         4. Founder track record at Indiana University: inference latency reduced by up to 70%, compute

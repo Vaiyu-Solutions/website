@@ -33,9 +33,9 @@ const exploreLinks = [
         {
           exploreLinks.map((l) => (
             <li>
-              <a href={l.href} class="link-paper">
+              <ui-button><a href={l.href} class="link-paper">
                 {l.label}
-              </a>
+              </a></ui-button>
             </li>
           ))
         }
@@ -45,12 +45,12 @@ const exploreLinks = [
       <p class="label-mono text-block-fg/45">Connect</p>
       <ul class="mt-5 space-y-3">
         <li>
-          <a href={`mailto:${SITE.email}`} class="link-paper">Email</a>
+          <ui-button><a href={`mailto:${SITE.email}`} class="link-paper">Email</a></ui-button>
           <span class="ml-2 font-mono text-xs text-block-fg/40">{SITE.emailDisplay}</span>
         </li>
-        <li><a href={SITE.linkedin} class="link-paper" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
-        <li><a href={SITE.github} class="link-paper" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
-        <li><a href={SITE.scholar} class="link-paper" rel="noopener">Google Scholar <span aria-hidden="true">↗</span></a></li>
+        <li><ui-button><a href={SITE.linkedin} class="link-paper" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></ui-button></li>
+        <li><ui-button><a href={SITE.github} class="link-paper" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></ui-button></li>
+        <li><ui-button><a href={SITE.scholar} class="link-paper" rel="noopener">Google Scholar <span aria-hidden="true">↗</span></a></ui-button></li>
       </ul>
     </div>
   </div>

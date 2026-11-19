@@ -41,7 +41,7 @@ const items = await getBlogPosts();
         <ul class="divide-y divide-ink/10 border-y border-ink/10">
           {items.map((a) => (
             <li>
-              <a
+              <ui-button><a
                 href={blogPostHref(a)}
                 class="group grid gap-x-10 gap-y-3 py-9 md:grid-cols-[11rem_1fr_auto]"
               >
@@ -74,7 +74,7 @@ const items = await getBlogPosts();
                 <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
                   Read <span aria-hidden="true">→</span>
                 </span>
-              </a>
+              </a></ui-button>
             </li>
           ))}
         </ul>

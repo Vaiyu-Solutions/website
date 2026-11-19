@@ -190,7 +190,7 @@ const MODELS = [
               <span aria-hidden="true">→</span>
             </a>
           </ui-button>
-          <a href="/work/" class="link-ink label-mono text-ink-soft">See the track record</a>
+          <ui-button><a href="/work/" class="link-ink label-mono text-ink-soft">See the track record</a></ui-button>
         </div>
       </div>
       <aside class="self-center lg:col-span-5 reveal reveal-5">
@@ -229,9 +229,9 @@ const MODELS = [
               {s.value}
               {s.fn && (
                 <sup class="fn">
-                  <a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>
+                  <ui-button><a href={`#fn-${s.fn}`} aria-label={`Footnote ${s.fn}`}>
                     {s.fn}
-                  </a>
+                  </a></ui-button>
                 </sup>
               )}
             </p>
@@ -268,9 +268,9 @@ const MODELS = [
                     {b.fns.map((f, i) => (
                       <Fragment>
                         {i > 0 && <span aria-hidden="true">,</span>}
-                        <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
+                        <ui-button><a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
                           {f}
-                        </a>
+                        </a></ui-button>
                       </Fragment>
                     ))}
                   </sup>
@@ -330,9 +330,9 @@ const MODELS = [
                     {t.tradeoff}
                     {t.fns && (
                       <sup class="fn">
-                        <a href={`#fn-${t.fns[0]}`} aria-label={`Footnote ${t.fns[0]}`}>
+                        <ui-button><a href={`#fn-${t.fns[0]}`} aria-label={`Footnote ${t.fns[0]}`}>
                           {t.fns[0]}
-                        </a>
+                        </a></ui-button>
                       </sup>
                     )}
                   </dd>
@@ -370,9 +370,9 @@ const MODELS = [
                     {t.fns.map((f, i) => (
                       <Fragment>
                         {i > 0 && <span aria-hidden="true">,</span>}
-                        <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
+                        <ui-button><a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
                           {f}
-                        </a>
+                        </a></ui-button>
                       </Fragment>
                     ))}
                   </sup>
@@ -471,7 +471,7 @@ const MODELS = [
       </li>
       <li id="fn-3">
         3. Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
-        Nature Communications 13 (2022). <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">doi:10.1038/s41467-022-33407-5</a>; 71 sites across 6 continents, the largest real-world federated learning study to date.
+        Nature Communications 13 (2022). <ui-button><a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">doi:10.1038/s41467-022-33407-5</a></ui-button>; 71 sites across 6 continents, the largest real-world federated learning study to date.
       </li>
       <li id="fn-4">
         4. Founder track record at Indiana University: inference latency reduced by up to 70%,
@@ -501,7 +501,7 @@ const MODELS = [
         3.3% on the Arena leaderboard in March 2026.
       </li>
       <li id="fn-j">
-        j. Thakur, S., Pati, S. et al. Computers in Biology and Medicine 196 (2025). <a href="https://doi.org/10.1016/j.compbiomed.2025.110615" class="link-ink" rel="noopener">doi:10.1016/j.compbiomed.2025.110615</a>.
+        j. Thakur, S., Pati, S. et al. Computers in Biology and Medicine 196 (2025). <ui-button><a href="https://doi.org/10.1016/j.compbiomed.2025.110615" class="link-ink" rel="noopener">doi:10.1016/j.compbiomed.2025.110615</a></ui-button>.
       </li>
     </ol>
   </section>

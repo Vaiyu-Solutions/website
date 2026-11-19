@@ -38,12 +38,12 @@ const STEPS = [
       <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
         One email starts it.
       </p>
-      <a
+      <ui-button><a
         href={`mailto:${SITE.email}`}
         class="link-ink mt-10 inline-block break-all font-display text-2xl sm:text-3xl md:text-5xl reveal reveal-4"
       >
         {SITE.emailDisplay}
-      </a>
+      </a></ui-button>
       <p class="mt-8 font-mono text-xs text-slate reveal reveal-5">
         Based in {SITE.location}, working with teams worldwide.
       </p>
@@ -74,28 +74,28 @@ const STEPS = [
       <Eyebrow num="02" label="Elsewhere" />
       <ul class="mt-8 divide-y divide-ink/10 border-y border-ink/10 max-w-xl">
         <li>
-          <a href={SITE.linkedin} rel="noopener" class="group flex items-baseline justify-between py-4">
+          <ui-button><a href={SITE.linkedin} rel="noopener" class="group flex items-baseline justify-between py-4">
             <span class="font-display text-xl transition-colors group-hover:text-saffron">LinkedIn</span>
             <span class="label-mono text-slate">vaiyu-solutions <span aria-hidden="true">↗</span></span>
-          </a>
+          </a></ui-button>
         </li>
         <li>
-          <a href={SITE.github} rel="noopener" class="group flex items-baseline justify-between py-4">
+          <ui-button><a href={SITE.github} rel="noopener" class="group flex items-baseline justify-between py-4">
             <span class="font-display text-xl transition-colors group-hover:text-saffron">GitHub</span>
             <span class="label-mono text-slate">Vaiyu-Solutions <span aria-hidden="true">↗</span></span>
-          </a>
+          </a></ui-button>
         </li>
         <li>
-          <a href={SITE.bluesky} rel="noopener" class="group flex items-baseline justify-between py-4">
+          <ui-button><a href={SITE.bluesky} rel="noopener" class="group flex items-baseline justify-between py-4">
             <span class="font-display text-xl transition-colors group-hover:text-saffron">Bluesky</span>
             <span class="label-mono text-slate">vaiyusolutions.bsky.social <span aria-hidden="true">↗</span></span>
-          </a>
+          </a></ui-button>
         </li>
         <li>
-          <a href={SITE.x} rel="noopener" class="group flex items-baseline justify-between py-4">
+          <ui-button><a href={SITE.x} rel="noopener" class="group flex items-baseline justify-between py-4">
             <span class="font-display text-xl transition-colors group-hover:text-saffron">X</span>
             <span class="label-mono text-slate">VaiyuSolutions <span aria-hidden="true">↗</span></span>
-          </a>
+          </a></ui-button>
         </li>
       </ul>
     </div>

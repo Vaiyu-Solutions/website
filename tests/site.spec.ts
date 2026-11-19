@@ -48,6 +48,19 @@ test.describe('desktop', () => {
       }
     });
 
+    test(`${route} wraps every link in a ui-button`, async ({ page }) => {
+      test.skip(route.startsWith('/announcements/'), 'redirect stub; its target is checked under /blog/');
+      await page.goto(route);
+      const unwrapped = await page.evaluate(() =>
+        [...document.querySelectorAll('a[href]')]
+          .filter((a) => !a.closest('ui-button'))
+          .map((a) => a.outerHTML.slice(0, 120)),
+      );
+      expect(unwrapped).toEqual([]);
+      const upgraded = await page.evaluate(() => customElements.get('ui-button') !== undefined);
+      expect(upgraded).toBe(true);
+    });
+
     test(`${route} gives every tab stop a visible focus ring`, async ({ page }) => {
       test.skip(route.startsWith('/announcements/'), 'redirect stub; its target is checked under /blog/');
       await page.goto(route);
@@ -182,14 +195,14 @@ test.describe('primary call to action', () => {
 
   test('Enter follows the link', async ({ page }) => {
     await page.goto('/');
-    await page.locator('ui-button a').first().focus();
+    await page.locator('main ui-button a').first().focus();
     await page.keyboard.press('Enter');
     await expect(page).toHaveURL(/\/contact\/$/);
   });
 
   test('Space does not follow the link', async ({ page }) => {
     await page.goto('/');
-    await page.locator('ui-button a').first().focus();
+    await page.locator('main ui-button a').first().focus();
     await page.keyboard.press('Space');
     await page.waitForTimeout(300);
     await expect(page).toHaveURL(/\/$/);
@@ -205,6 +218,6 @@ test.describe('without JavaScript', () => {
     await expect(page.locator('#site-nav nav a').first()).toBeVisible();
     await expect(page.locator('#nav-trigger')).toBeHidden();
     await expect(page.locator('#theme-toggle')).toBeHidden();
-    await expect(page.locator('ui-button a').first()).toHaveAttribute('href', '/contact/');
+    await expect(page.locator('main ui-button a').first()).toHaveAttribute('href', '/contact/');
   });
 });

@@ -522,7 +522,10 @@ Sector pages override both props with sector-specific copy.
 </ui-button>
 ```
 
-The link sits inside `<ui-button>` from `@ui-sdk/web/button`, which is registered once in `Base.astro`. The wrapper keeps the link's semantics and adds nothing visible.
+The link sits inside `<ui-button>` from `@ui-sdk/web/button`, which is registered once in `Base.astro`. The wrapper keeps the link's semantics and adds nothing visible. Every link on the site uses this
+wrapper: the templates wrap each `<a>` by hand, and a Sätteri hast plugin in `astro.config.mjs`
+wraps the links in Markdown content. `global.css` sets `ui-button { display: contents }`, so the
+wrapper has no box before or after the element upgrades.
 
 Square, no radius, no shadow. Always paired with a secondary text link at `gap-x-8`:
 

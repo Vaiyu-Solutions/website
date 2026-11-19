@@ -158,8 +158,8 @@ const MODELS = [
         </h1>
         <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft reveal reveal-3">
           Most off-the-shelf CRMs assume a sales process, and your team either adopts it or works around
-          it. We build the CRM around yours on <a href="https://twenty.com" class="link-ink" rel="noopener">Twenty</a><sup class="fn"
-            ><a href="#fn-a" aria-label="Footnote a">a</a></sup
+          it. We build the CRM around yours on <ui-button><a href="https://twenty.com" class="link-ink" rel="noopener">Twenty</a></ui-button><sup class="fn"
+            ><ui-button><a href="#fn-a" aria-label="Footnote a">a</a></ui-button></sup
           >, an open-source CRM you can host yourself: a data model that fits, workflows for the clerical
           work, and AI-drafted messages that a rep reviews before they go out.
         </p>
@@ -173,7 +173,7 @@ const MODELS = [
               <span aria-hidden="true">→</span>
             </a>
           </ui-button>
-          <a href="#how-a-lead-moves" class="link-ink label-mono text-ink-soft">See how a lead moves</a>
+          <ui-button><a href="#how-a-lead-moves" class="link-ink label-mono text-ink-soft">See how a lead moves</a></ui-button>
         </div>
       </div>
       <aside class="self-center lg:col-span-5 reveal reveal-5">
@@ -222,9 +222,9 @@ const MODELS = [
       </h2>
       <p class="mt-5 max-w-2xl leading-relaxed text-ink-soft">
         This is the flow we built for a sales team that generates its own cold leads, 5 to 25 a week<sup
-          class="fn"><a href="#fn-b" aria-label="Footnote b">b</a></sup
+          class="fn"><ui-button><a href="#fn-b" aria-label="Footnote b">b</a></ui-button></sup
         >. The screens come from a demo workspace with dummy data, on stock Twenty<sup class="fn"
-          ><a href="#fn-c" aria-label="Footnote c">c</a></sup
+          ><ui-button><a href="#fn-c" aria-label="Footnote c">c</a></ui-button></sup
         >. The client’s own interface is our customized version of Twenty’s open-source frontend, and it
         isn’t shown here.
       </p>
@@ -271,12 +271,12 @@ const MODELS = [
                       <span class="label-mono mr-2.5">Fig. {s.fig.n}</span>
                       {s.fig.cap}
                     </span>
-                    <a href={s.fig.src} target="_blank" rel="noopener" class="on-light link-ink label-mono shrink-0">
+                    <ui-button><a href={s.fig.src} target="_blank" rel="noopener" class="on-light link-ink label-mono shrink-0">
                       Full size <span aria-hidden="true">↗</span>
-                    </a>
-                    <a href={s.fig.srcDark} target="_blank" rel="noopener" class="on-dark link-ink label-mono shrink-0">
+                    </a></ui-button>
+                    <ui-button><a href={s.fig.srcDark} target="_blank" rel="noopener" class="on-dark link-ink label-mono shrink-0">
                       Full size <span aria-hidden="true">↗</span>
-                    </a>
+                    </a></ui-button>
                   </figcaption>
                 </figure>
               )}
@@ -341,7 +341,7 @@ const MODELS = [
         </dl>
         <p class="mt-6 max-w-xl text-sm leading-relaxed text-ink-soft">
           If lead details can’t go to a hosted model, the drafting step’s endpoint can be a model you host
-          instead. <a href="/sovereign-ai/" class="link-ink">See our sovereign AI work</a>.
+          instead. <ui-button><a href="/sovereign-ai/" class="link-ink">See our sovereign AI work</a></ui-button>.
         </p>
       </div>
     </div>
@@ -369,9 +369,9 @@ const MODELS = [
                     {t.fns.map((f, i) => (
                       <Fragment>
                         {i > 0 && <span aria-hidden="true">,</span>}
-                        <a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
+                        <ui-button><a href={`#fn-${f}`} aria-label={`Footnote ${f}`}>
                           {f}
-                        </a>
+                        </a></ui-button>
                       </Fragment>
                     ))}
                   </sup>
@@ -421,7 +421,7 @@ const MODELS = [
       </div>
       <p class="mt-12 max-w-2xl border-l-2 border-ink/15 pl-6 text-sm leading-relaxed text-slate">
         A custom CRM is not always the right call. This build serves a team with 5 to 25 cold leads a
-        week<sup class="fn"><a href="#fn-b" aria-label="Footnote b">b</a></sup>, each getting a personal
+        week<sup class="fn"><ui-button><a href="#fn-b" aria-label="Footnote b">b</a></ui-button></sup>, each getting a personal
         message. If a standard SaaS CRM fits how you sell, we will say so on the first call.
       </p>
     </div>
@@ -438,10 +438,10 @@ const MODELS = [
     <ol class="mt-4 max-w-3xl space-y-2 font-mono text-xs leading-relaxed text-slate">
       <li id="fn-3">
         3. Pati, S. et al. “Federated learning enables big data for rare cancer boundary detection.”
-        Nature Communications 13 (2022). <a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">doi:10.1038/s41467-022-33407-5</a>; 71 sites across 6 continents, the largest real-world federated learning study to date.
+        Nature Communications 13 (2022). <ui-button><a href="https://doi.org/10.1038/s41467-022-33407-5" class="link-ink" rel="noopener">doi:10.1038/s41467-022-33407-5</a></ui-button>; 71 sites across 6 continents, the largest real-world federated learning study to date.
       </li>
       <li id="fn-a">
-        a. Twenty is an independent open-source CRM project, <a href="https://twenty.com" class="link-ink" rel="noopener">twenty.com</a>.
+        a. Twenty is an independent open-source CRM project, <ui-button><a href="https://twenty.com" class="link-ink" rel="noopener">twenty.com</a></ui-button>.
       </li>
       <li id="fn-b">
         b. Vaiyu client engagement; the client is not named. Counts and lead volume describe that one system.

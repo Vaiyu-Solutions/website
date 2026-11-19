@@ -196,6 +196,9 @@ html.theme-light .logo-mark {
     outline-offset: 3px;
     border-radius: 1px;
   }
+  ui-button {
+    display: contents;
+  }
   a,
   button {
     touch-action: manipulation;

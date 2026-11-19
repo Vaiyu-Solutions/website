@@ -65,9 +65,9 @@ import { SITE, INDUSTRIES, ENGAGEMENTS, PROJECTS, PUBS, COMMUNITY } from '../dat
                 {e.desc}
                 {e.fn && (
                   <sup class="fn">
-                    <a href={`#fn-${e.fn}`} aria-label={`Footnote ${e.fn}`}>
+                    <ui-button><a href={`#fn-${e.fn}`} aria-label={`Footnote ${e.fn}`}>
                       {e.fn}
-                    </a>
+                    </a></ui-button>
                   </sup>
                 )}
               </p>
@@ -89,7 +89,7 @@ import { SITE, INDUSTRIES, ENGAGEMENTS, PROJECTS, PUBS, COMMUNITY } from '../dat
         {
           PROJECTS.map((p) => (
             <li>
-              <a
+              <ui-button><a
                 href={p.href}
                 rel="noopener"
                 class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[9rem_1fr_auto]"
@@ -106,7 +106,7 @@ import { SITE, INDUSTRIES, ENGAGEMENTS, PROJECTS, PUBS, COMMUNITY } from '../dat
                 <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
                   GitHub <span aria-hidden="true">↗</span>
                 </span>
-              </a>
+              </a></ui-button>
             </li>
           ))
         }
@@ -127,9 +127,9 @@ import { SITE, INDUSTRIES, ENGAGEMENTS, PROJECTS, PUBS, COMMUNITY } from '../dat
           PUBS.map((pub) => (
             <li class="py-5">
               {pub.href ? (
-                <a href={pub.href} rel="noopener" class="link-ink font-display text-lg leading-snug">
+                <ui-button><a href={pub.href} rel="noopener" class="link-ink font-display text-lg leading-snug">
                   {pub.title}
-                </a>
+                </a></ui-button>
               ) : (
                 <span class="font-display text-lg leading-snug">{pub.title}</span>
               )}
@@ -141,9 +141,9 @@ import { SITE, INDUSTRIES, ENGAGEMENTS, PROJECTS, PUBS, COMMUNITY } from '../dat
           ))
         }
       </ol>
-      <a href={SITE.scholar} rel="noopener" class="link-ink label-mono mt-8 inline-block text-ink-soft">
+      <ui-button><a href={SITE.scholar} rel="noopener" class="link-ink label-mono mt-8 inline-block text-ink-soft">
         Full list on Google Scholar <span aria-hidden="true">↗</span>
-      </a>
+      </a></ui-button>
     </div>
   </section>
 
@@ -159,9 +159,9 @@ import { SITE, INDUSTRIES, ENGAGEMENTS, PROJECTS, PUBS, COMMUNITY } from '../dat
           COMMUNITY.map((c) => (
             <li class="border-l-2 border-saffron/60 pl-5 leading-relaxed text-ink-soft">
               {c.href ? (
-                <a href={c.href} rel="noopener" class="link-ink">
+                <ui-button><a href={c.href} rel="noopener" class="link-ink">
                   {c.text}
-                </a>
+                </a></ui-button>
               ) : (
                 c.text
               )}
