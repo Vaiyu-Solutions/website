@@ -272,10 +272,10 @@ const MODELS = [
                       {s.fig.cap}
                     </span>
                     <a href={s.fig.src} target="_blank" rel="noopener" class="on-light link-ink label-mono shrink-0">
-                      Full size ↗
+                      Full size <span aria-hidden="true">↗</span>
                     </a>
                     <a href={s.fig.srcDark} target="_blank" rel="noopener" class="on-dark link-ink label-mono shrink-0">
-                      Full size ↗
+                      Full size <span aria-hidden="true">↗</span>
                     </a>
                   </figcaption>
                 </figure>
@@ -379,7 +379,7 @@ const MODELS = [
               </span>
               <span
                 aria-hidden="true"
-                class="hidden shrink-0 text-saffron transition-transform group-hover:translate-x-0.5 md:block"
+                class="hidden shrink-0 text-saffron transition-transform motion-safe:group-hover:translate-x-0.5 md:block"
               >
                 →
               </span>
@@ -404,13 +404,13 @@ const MODELS = [
       <div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {
           MODELS.map((m) => (
-            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 hover:-translate-y-1 hover:border-saffron">
+            <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 motion-safe:hover:-translate-y-1 hover:border-saffron">
               <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
                 {m.title}
               </h3>
               <p class="mt-3 min-h-[2.84rem] text-sm leading-relaxed text-ink-soft">{m.desc}</p>
               <p class="mt-4 flex items-baseline gap-2 border-t border-ink/10 pt-4">
-                <span aria-hidden="true" class="shrink-0 text-saffron transition-transform group-hover:translate-x-0.5">
+                <span aria-hidden="true" class="shrink-0 text-saffron transition-transform motion-safe:group-hover:translate-x-0.5">
                   →
                 </span>
                 <span class="font-display text-[0.95rem] italic leading-snug text-pretty text-ink">{m.outcome}</span>

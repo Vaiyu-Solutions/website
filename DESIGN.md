@@ -422,15 +422,15 @@ section further down the page.
 | Transition | Duration | Where |
 | --- | --- | --- |
 | `transition-colors` | 150ms (link recipes) or Tailwind default | Text going saffron, card rules going saffron, button fill |
-| `transition duration-200 hover:-translate-y-1` | 200ms | Engagement-model cards and the OpenAI badge lift 4px |
-| `transition-transform group-hover:translate-x-0.5` | default | Arrows nudge 2px right |
+| `transition duration-200 motion-safe:hover:-translate-y-1` | 200ms | Engagement-model cards and the OpenAI badge lift 4px, under `motion-safe` only |
+| `transition-transform motion-safe:group-hover:translate-x-0.5` | default | Arrows nudge 2px right, under `motion-safe` only |
 
 Also: `Detail →` on a home services card is `opacity-0` and appears on `group-hover` **and**
 `group-focus-visible`, so keyboard users get it too.
 
 **Reduced motion.** `prefers-reduced-motion: reduce` disables every `.reveal` variant and `.windline`
-with `!important`, and turns off `scroll-behavior: smooth`. Hover transitions are left alone, which
-is the right call: they are color changes under 200ms.
+with `!important`, and turns off `scroll-behavior: smooth`. The card lift and arrow nudge are
+`motion-safe:` variants, so they stop too. Colour transitions stay: they are not motion.
 
 ---
 

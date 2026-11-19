@@ -44,10 +44,94 @@ test.describe('desktop', () => {
         await expect(button).toHaveAccessibleName(/\S/);
       }
       for (const link of await page.getByRole('link').all()) {
-        await expect(link).toHaveAccessibleName(/\S/);
+        await expect(link).toHaveAccessibleName(/^(?!.*[↗→]).*\S/);
+      }
+    });
+
+    test(`${route} gives every tab stop a visible focus ring`, async ({ page }) => {
+      test.skip(route.startsWith('/announcements/'), 'redirect stub; its target is checked under /blog/');
+      await page.goto(route);
+      for (let i = 0; i < 80; i++) {
+        await page.keyboard.press('Tab');
+        const focused = await page.evaluate(() => {
+          const el = document.activeElement as HTMLElement;
+          return {
+            label: `${el.tagName} ${(el.textContent || '').trim().slice(0, 40)}`,
+            isBody: el === document.body,
+            focusVisible: el.matches(':focus-visible'),
+            outlineStyle: getComputedStyle(el).outlineStyle,
+          };
+        });
+        if (focused.isBody) break;
+        expect(focused.focusVisible, focused.label).toBe(true);
+        expect(focused.outlineStyle, focused.label).toBe('solid');
+      }
+    });
+
+    test(`${route} changes every link and button on hover`, async ({ page }) => {
+      test.skip(route.startsWith('/announcements/'), 'redirect stub; its target is checked under /blog/');
+      await page.goto(route);
+      await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; }' });
+      const controls = page.locator('main a, header a, header button, footer a');
+      const count = Math.min(await controls.count(), 12);
+      const signature = (i: number) =>
+        controls.nth(i).evaluate((el) => {
+          const sig = (e: Element) => {
+            const s = getComputedStyle(e);
+            return [s.color, s.textDecorationColor, s.translate, s.transform, s.filter, s.textDecorationLine, s.backgroundColor, s.opacity, s.borderTopColor].join('|');
+          };
+          const group = el.closest('.group');
+          const inside = [...el.querySelectorAll('*')].map(sig).join(';');
+          return [sig(el), group ? sig(group) : '', inside].join('#');
+        });
+      for (let i = 0; i < count; i++) {
+        const control = controls.nth(i);
+        if (!(await control.isVisible())) continue;
+        const before = await signature(i);
+        await control.hover();
+        const after = await signature(i);
+        const label = (await control.textContent())?.trim().slice(0, 40);
+        expect(after, `no hover change: ${label}`).not.toBe(before);
       }
     });
   }
+});
+
+test.describe('motion and touch', () => {
+  test.use({ viewport: { width: 1280, height: 900 } });
+
+  test('card lift is off under reduced motion', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/services/');
+    const card = page.locator('div.group.border-t-2').first();
+    await card.hover();
+    await page.waitForTimeout(300);
+    expect(await card.evaluate((el) => getComputedStyle(el).translate)).toBe('none');
+  });
+
+  test('card lift is on without reduced motion', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'no-preference' });
+    await page.goto('/services/');
+    const card = page.locator('div.group.border-t-2').first();
+    await card.hover();
+    await page.waitForTimeout(300);
+    expect(await card.evaluate((el) => getComputedStyle(el).translate)).not.toBe('none');
+  });
+
+  test('links and buttons set touch action and tap highlight', async ({ page }) => {
+    await page.goto('/');
+    const values = await page.evaluate(() =>
+      [...document.querySelectorAll('a, button')].map((el) => {
+        const cs = getComputedStyle(el);
+        return [cs.touchAction, cs.getPropertyValue('-webkit-tap-highlight-color')];
+      }),
+    );
+    expect(values.length).toBeGreaterThan(0);
+    for (const [touch, tap] of values) {
+      expect(touch).toBe('manipulation');
+      expect(tap).toBe('rgba(0, 0, 0, 0)');
+    }
+  });
 });
 
 test.describe('mobile', () => {

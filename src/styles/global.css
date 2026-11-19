@@ -167,6 +167,10 @@ html.js .theme-toggle {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left center;
+  transition: filter 150ms ease;
+}
+.logo-mark:hover {
+  filter: contrast(1.08);
 }
 @media (prefers-color-scheme: dark) {
   :root:not(.theme-light) .logo-mark {
@@ -195,6 +199,12 @@ html.theme-light .logo-mark {
   a,
   button {
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  @media (pointer: fine) {
+    html {
+      overscroll-behavior: none;
+    }
   }
 }
 

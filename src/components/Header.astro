@@ -49,7 +49,7 @@ const isActive = (href: string) =>
                     href={l.href}
                     aria-current={isActive(l.href) ? 'page' : undefined}
                     class:list={[
-                      'label-mono transition-colors hover:text-saffron',
+                      'label-mono transition-colors hover:text-saffron hover:underline underline-offset-4',
                       isActive(l.href) ? 'text-saffron' : 'text-ink-soft',
                     ]}
                   >
