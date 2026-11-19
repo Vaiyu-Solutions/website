@@ -7,6 +7,8 @@ export const SITE = {
   location: 'Miami, Florida',
   linkedin: 'https://www.linkedin.com/company/vaiyu-solutions',
   github: 'https://github.com/Vaiyu-Solutions',
+  bluesky: 'https://bsky.app/profile/vaiyusolutions.bsky.social',
+  x: 'https://x.com/VaiyuSolutions',
   scholar: 'https://scholar.google.com/citations?user=lL5jPysAAAAJ',
   mlcommons: 'https://mlcommons.org/working-groups/data/medical/',
 };
