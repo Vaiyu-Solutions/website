@@ -80,6 +80,7 @@ full utility family: `bg-x`, `text-x`, `border-x`, `divide-x`.
 | `brand-blue` | `#1e5ebb` | `#82adef` | Reserved. Declared but not currently used in markup. |
 | `saffron` | `#e87228` | `#f2914a` | The accent: eyebrows, hover, footnote marks, arrows, focus ring |
 | `saffron-bright` | `#f09040` | `#f8ab6e` | Accent on dark surfaces, selection highlight |
+| `saffron-text` | `#a34a10` | `#f2914a` | Saffron for interactive text and focus rings. Light mode darkens it to 5.62:1 on `paper`, where `saffron` is 2.90:1 |
 | `block` | `#191c22` | `#191e26` | Footer surface |
 | `block-fg` | `#f8f9fb` | `#eef1f6` | Footer foreground |
 | `--windline-accent` | `#b25415` | `#f0913f` | The one lit streamline in `WindField` |
@@ -162,14 +163,14 @@ Computed from the shipping hex values (WCAG 2.x relative luminance).
 
 ### 3.5 Known contrast gaps
 
-`PLAN.md` §8 and `PRODUCT.md` commit to WCAG AA. Three places currently fall short, all in the
-light theme. Documented here rather than papered over.
+`PLAN.md` §8 and `PRODUCT.md` commit to WCAG AA. The interactive gaps below are fixed. The rest are
+non-interactive text and stay open until someone decides the brand question.
 
 | Gap | Measured | Where it shows | Suggested fix |
 | --- | --- | --- | --- |
-| `text-saffron` on `paper` / `cream` | 2.90 / 2.65 | `Eyebrow` labels, the italic outcome line on `/services`, `sup.fn` marks, publication notes | Add a light-only `--color-saffron-text`. `#a34a10` gives 5.62 / 5.14 and holds the hue. `#b25415` (the existing light `--windline-accent`) gives 4.78 / 4.37, so it passes on `paper` but not on `cream`. |
-| Primary button hover: `text-paper` on `bg-saffron` | 2.90 | Every primary CTA on the site, hover only | Swap the hover foreground to `ink` (5.58) rather than darkening the fill |
-| Footer `text-block-fg/45` and `/40` | 4.26 / 3.65 | Footer column labels, email display, bottom bar | Raise to `/60` or above for the 11–12px mono runs |
+| `text-saffron` on `paper` / `cream`, non-interactive | 2.90 / 2.65 | `Eyebrow` labels, the italic outcome line on `/services`, publication notes. Open. | Interactive uses now take `text-saffron-text` (5.62 / 5.14). Applying it to eyebrows changes the accent in non-interactive text, so it is a brand call. |
+| Primary button hover: `text-paper` on `bg-saffron` | 2.90 | Every primary CTA on the site, hover only. Fixed. | Hover foreground is `ink` (5.58), so the fill stays `saffron` |
+| Footer `text-block-fg/45` and `/40`, non-interactive | 4.26 / 3.65 | Footer column labels, email display, bottom bar. Open. | Raise to `/60` or above for the 11–12px mono runs |
 
 Dark mode passes everywhere, including saffron, because the dark saffron (`#f2914a`) sits on a much
 darker ground.
@@ -463,7 +464,7 @@ Active gets `text-saffron` plus `aria-current="page"`; inactive is `text-ink-sof
 Below `md`, the nav collapses behind a hamburger. The nav is a `ui-collapsible` panel, and the
 trigger is a `ui-collapsible-trigger` around the menu button. The panel is `display: contents`, so
 without JS the no-JS header keeps its wrapping row. With JS, the panel's block styling lives in
-`global.css` under `html.js.nav-open`, which the header script sets. Nav links get `min-height: 44px`
+`global.css` under `html.js #site-nav[data-open]`, keyed to the collapsible's own state attribute. Nav links get `min-height: 44px`
 in the panel: the tap target is the full row, not the four characters of "WORK".
 
 ### 8.3 `Footer.astro`
@@ -924,7 +925,8 @@ Committed baseline: WCAG AA contrast, semantic landmarks, keyboard navigation, m
 - `:focus-visible { outline: 2px solid var(--color-saffron); outline-offset: 3px; border-radius: 1px; }`
   globally, never removed.
 - `aria-current="page"` on the active nav item, alongside the color change.
-- Mobile nav: `ui-collapsible` supplies `aria-controls` and `aria-expanded`. The label stays "Menu"
+- Mobile nav: `ui-collapsible` supplies `aria-controls` and `aria-expanded`. The panel is `keep-mounted`,
+  so the trigger keeps `aria-controls` while the menu is closed. The label stays "Menu"
   in both states, since `aria-expanded` carries the state. `Escape` closes and returns focus to the
   trigger. The trigger comes before the panel in the DOM, so Tab from the open trigger enters the
   links. The menu is held open at `md` and up, where the trigger is hidden. On mobile the theme

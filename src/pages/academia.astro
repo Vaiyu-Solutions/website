@@ -110,7 +110,7 @@ const ACADEMIC_MODELS = [
           <ui-button>
             <a
               href="/contact/"
-              class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron"
+              class="inline-flex items-center gap-3 bg-ink px-7 py-3.5 text-paper transition-colors hover:bg-saffron hover:text-ink"
             >
               <span class="label-mono">Start a conversation</span>
               <span aria-hidden="true">→</span>
@@ -205,8 +205,8 @@ const ACADEMIC_MODELS = [
         {
           ACADEMIC_SERVICES.map((s) => (
             <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 motion-safe:hover:-translate-y-1 hover:border-saffron">
-              <p class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron">{s.num}</p>
-              <h3 class="font-display mt-3 text-xl transition-colors group-hover:text-saffron">{s.title}</h3>
+              <p class="font-mono text-[11px] text-slate transition-colors group-hover:text-saffron-text">{s.num}</p>
+              <h3 class="font-display mt-3 text-xl transition-colors group-hover:text-saffron-text">{s.title}</h3>
               <p class="mt-3 text-sm leading-relaxed text-ink-soft">
                 {s.desc}
                 {s.fn && (
@@ -245,7 +245,7 @@ const ACADEMIC_MODELS = [
                 rel="noopener"
                 class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[9rem_1fr_auto]"
               >
-                <span class="font-display text-xl transition-colors group-hover:text-saffron">
+                <span class="font-display text-xl transition-colors group-hover:text-saffron-text">
                   {p.name}
                 </span>
                 <span class="leading-relaxed text-ink-soft">
@@ -254,7 +254,7 @@ const ACADEMIC_MODELS = [
                     {p.meta} · {p.role}
                   </span>
                 </span>
-                <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
+                <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron-text">
                   GitHub <span aria-hidden="true">↗</span>
                 </span>
               </a></ui-button>
@@ -320,7 +320,7 @@ const ACADEMIC_MODELS = [
         {
           ACADEMIC_MODELS.map((m) => (
             <div class="group border-t-2 border-ink/80 pt-5 transition duration-200 motion-safe:hover:-translate-y-1 hover:border-saffron">
-              <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron">
+              <h3 class="font-display text-xl leading-snug transition-colors group-hover:text-saffron-text">
                 {m.title}
               </h3>
               <p class="mt-3 min-h-[4.27rem] text-sm leading-relaxed text-ink-soft">

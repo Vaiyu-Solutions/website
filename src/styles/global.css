@@ -11,6 +11,8 @@
   --color-brand-blue: #1e5ebb;
   --color-saffron: #e87228;
   --color-saffron-bright: #f09040;
+  /* Saffron for interactive text and focus rings in light mode: 5.6:1 on paper. */
+  --color-saffron-text: #a34a10;
 
   /* The inverted block (footer). Kept separate from `ink` because in dark mode
      `ink` becomes the text colour and can no longer double as a surface. */
@@ -58,6 +60,7 @@ html.theme-dark {
     --color-brand-blue: #82adef;
     --color-saffron: #f2914a;
     --color-saffron-bright: #f8ab6e;
+    --color-saffron-text: #f2914a;
     --color-block: #191e26;
     --color-block-fg: #eef1f6;
     --windline-accent: #f0913f;
@@ -73,6 +76,7 @@ html.theme-dark {
   --color-brand-blue: #82adef;
   --color-saffron: #f2914a;
   --color-saffron-bright: #f8ab6e;
+  --color-saffron-text: #f2914a;
   --color-block: #191e26;
   --color-block-fg: #eef1f6;
   --windline-accent: #f0913f;
@@ -139,11 +143,11 @@ html.js .theme-toggle {
   html.js #site-nav {
     display: none;
   }
-  html.js.nav-open #site-nav {
+  html.js #site-nav[data-open] {
     display: block;
-    margin-top: 1rem;
-    border-top: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
-    padding-top: 0.75rem;
+    margin-block-start: 1rem;
+    border-block-start: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
+    padding-block-start: 0.75rem;
   }
   html.js #site-nav ul {
     flex-direction: column;
@@ -192,7 +196,7 @@ html.theme-light .logo-mark {
     background: color-mix(in oklab, var(--color-saffron-bright) 45%, transparent);
   }
   :focus-visible {
-    outline: 2px solid var(--color-saffron);
+    outline: 2px solid var(--color-saffron-text);
     outline-offset: 3px;
     border-radius: 1px;
   }
@@ -241,7 +245,7 @@ html.theme-light .logo-mark {
     transition: color 150ms ease, text-decoration-color 150ms ease;
   }
   .link-ink:hover {
-    color: var(--color-saffron);
+    color: var(--color-saffron-text);
     text-decoration-color: var(--color-saffron);
   }
   .link-paper {
@@ -356,8 +360,8 @@ html.theme-light .logo-mark {
 sup.fn {
   font-family: var(--font-mono);
   font-size: 0.55em;
-  color: var(--color-saffron);
-  margin-left: 0.15em;
+  color: var(--color-saffron-text);
+  margin-inline-start: 0.15em;
 }
 sup.fn a {
   text-decoration: none;

@@ -48,7 +48,7 @@ const items = await getBlogPosts();
                 <span class="self-baseline">
                   <time
                     datetime={isoDate(a.data.date)}
-                    class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate transition-colors group-hover:text-saffron"
+                    class="block font-mono text-[11px] uppercase tracking-[0.16em] text-slate transition-colors group-hover:text-saffron-text"
                   >
                     {formatDate(a.data.date)}
                   </time>
@@ -59,7 +59,7 @@ const items = await getBlogPosts();
                   )}
                 </span>
                 <span>
-                  <span class="h-display block text-2xl transition-colors group-hover:text-saffron md:text-[1.75rem]">
+                  <span class="h-display block text-2xl transition-colors group-hover:text-saffron-text md:text-[1.75rem]">
                     {a.data.title}
                   </span>
                   <span class="mt-3 block max-w-2xl leading-relaxed text-ink-soft">
@@ -71,7 +71,7 @@ const items = await getBlogPosts();
                     </span>
                   )}
                 </span>
-                <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron">
+                <span class="label-mono self-baseline text-slate transition-colors group-hover:text-saffron-text">
                   Read <span aria-hidden="true">→</span>
                 </span>
               </a></ui-button>

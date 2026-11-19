@@ -10,14 +10,15 @@ const isActive = (href: string) =>
 
 <header class="border-b border-ink/10 bg-paper">
   <div class="mx-auto flex max-w-6xl flex-wrap items-baseline gap-x-6 px-5 py-5">
-    <ui-button><a href="/" class="logo-mark mr-auto block h-9 w-[178px] shrink-0">
+    <ui-button><a href="/" class="logo-mark me-auto block h-9 w-[178px] shrink-0">
       <span class="sr-only">Vaiyu Solutions, home</span>
     </a></ui-button>
     <ui-collapsible-trigger for="site-menu" class="contents">
       <button
         type="button"
+        type="button"
         id="nav-trigger"
-        class="nav-trigger order-last -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron md:order-none"
+        class="nav-trigger order-last -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron-text md:order-none"
         aria-expanded="false"
         aria-label="Menu"
       >
@@ -38,6 +39,7 @@ const isActive = (href: string) =>
     <ui-collapsible id="site-menu" class="contents">
       <ui-collapsible-panel
         id="site-nav"
+        keep-mounted
         class="order-last w-full md:order-none md:w-auto"
       >
         <nav aria-label="Main" class="order-last w-full md:order-none md:w-auto">
@@ -49,8 +51,8 @@ const isActive = (href: string) =>
                     href={l.href}
                     aria-current={isActive(l.href) ? 'page' : undefined}
                     class:list={[
-                      'label-mono transition-colors hover:text-saffron hover:underline underline-offset-4',
-                      isActive(l.href) ? 'text-saffron' : 'text-ink-soft',
+                      'label-mono transition-colors hover:text-saffron-text hover:underline underline-offset-4',
+                      isActive(l.href) ? 'text-saffron-text' : 'text-ink-soft',
                     ]}
                   >
                     {l.label}
@@ -65,8 +67,9 @@ const isActive = (href: string) =>
     <ui-toggle class="contents">
       <button
         type="button"
+        type="button"
         id="theme-toggle"
-        class="theme-toggle -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron"
+        class="theme-toggle -my-1 h-8 w-8 shrink-0 items-center justify-center self-center text-ink-soft transition-colors hover:text-saffron-text"
         aria-label="Dark theme"
       >
         <svg
@@ -145,15 +148,10 @@ const isActive = (href: string) =>
   const navTrigger = document.getElementById('nav-trigger');
   const wide = window.matchMedia('(width >= 48rem)');
 
-  function setMenu(open: boolean) {
-    if (!menu) return;
-    menu.open = open;
-    root.classList.toggle('nav-open', open);
-  }
-
-  menu?.addEventListener('openchange', (e) => {
-    root.classList.toggle('nav-open', (e as CustomEvent<{ value: boolean }>).detail.value);
-  });
+  // The panel's data-open attribute carries the state, so CSS needs no class from here.
+  const setMenu = (open: boolean) => {
+    if (menu) menu.open = open;
+  };
 
   wide.addEventListener('change', () => setMenu(wide.matches));
   setMenu(wide.matches);
