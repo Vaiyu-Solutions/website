@@ -267,7 +267,7 @@ Tailwind defaults, used selectively. These ten sizes cover the entire site.
 
 Two responsive headline patterns, applied consistently:
 
-- **Page h1:** `text-[2.6rem] md:text-6xl` (home, sector pages, announcements index) or
+- **Page h1:** `text-[2.6rem] md:text-6xl` (home, sector pages, blog index) or
   `text-4xl md:text-6xl` (interior pages).
 - **Section h2:** `text-3xl md:text-4xl` for standard sections, `text-4xl md:text-5xl` for the
   closing bands.
@@ -768,7 +768,7 @@ CTABand
 Sources & attribution
 ```
 
-Used by `/services`, `/work`, `/about`, `/contact`, `/announcements`.
+Used by `/services`, `/work`, `/about`, `/contact`, `/blog`.
 
 ### 9.2 Sector page
 
