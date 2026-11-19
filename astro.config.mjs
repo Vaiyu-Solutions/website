@@ -9,6 +9,7 @@ const wrapLinks = {
   name: 'wrap-links-in-ui-button',
   element: {
     filter: ['a'],
+    /** @param {any} node @param {any} ctx */
     visit(node, ctx) {
       ctx.wrapNode(node, { type: 'element', tagName: 'ui-button', properties: {}, children: [] });
     },
